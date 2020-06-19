@@ -30,7 +30,7 @@ paths:
 components:
   securitySchemes:
     basicAuth:
-      type: http
+      type: https
       scheme: basic
 security:
   - basicAuth: []  # <-- use the same name here
