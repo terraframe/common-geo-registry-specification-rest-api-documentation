@@ -24,9 +24,6 @@ get:
       type: array
       items:
         type: string
-  security:
-    - main_auth:
-      - 'read:users'
   responses:
     '200':
       description: Success
