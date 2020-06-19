@@ -10,7 +10,7 @@ info:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
   x-logo:
-    url: '../docs/cgr_logo.png'
+    url: './cgr_logo.png'
   description: >
     TODO: this************
 externalDocs:
