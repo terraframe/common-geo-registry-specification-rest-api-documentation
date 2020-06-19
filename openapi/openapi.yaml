@@ -4,6 +4,7 @@ info:
   title: Common Geo-Registry REST API
   termsOfService: 'https://example.com/terms/'
   contact:
+    name: Contact
     email: contact@example.com
     url: 'http://example.com/contact'
   license:
@@ -30,7 +31,7 @@ paths:
 components:
   securitySchemes:
     basicAuth:
-      type: https
+      type: http
       scheme: basic
 security:
   - basicAuth: []  # <-- use the same name here

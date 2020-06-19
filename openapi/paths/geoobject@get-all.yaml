@@ -8,8 +8,7 @@ get:
   tags:
     - GeoObject
   summary: Get all GeoObjects for a given GeoObjectType and Hierarchy.
-  description: |
-    Get all GeoObjects for a given GeoObjectType and Hierarchy.
+  description: Get all GeoObjects for a given GeoObjectType and Hierarchy.
   operationId: getGeoObject
   parameters:
     - name: typeCode
@@ -42,7 +41,7 @@ get:
       required: false
       schema:
         type: string
-      enum: [JSON_REVEAL, JSON_CGR]
+        enum: [JSON_REVEAL, JSON_CGR]
     - name: pageNumber
       in: query
       description: Page number used for pagination.
