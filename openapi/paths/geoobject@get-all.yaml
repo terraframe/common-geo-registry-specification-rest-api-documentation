@@ -23,6 +23,12 @@ get:
       required: true
       schema:
         type: string
+    - name: externalSystemId
+      in: query
+      description: The id of the external system registered in the CGR.
+      required: true
+      schema:
+        type: string
     - name: includeGeographicLevel
       in: query
       description: TRUE to return the level in the hierarchy the GeoObjectType resides.
