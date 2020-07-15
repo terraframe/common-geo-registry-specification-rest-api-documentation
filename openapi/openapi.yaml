@@ -20,14 +20,16 @@ externalDocs:
 tags:
   - name: GeoObject
     description: Operations to interact with GeoObjects in the CGR.
+  - name: GeoObjectType
+    description: Operations to interact with GeoObjectTypes in the CGR.
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
   '/geoobject/get-all':
-    $ref: 'paths/geoobject@get-all.yaml'
-  '/geoobjecttype/get-all':
     $ref: 'paths/geoobjecttype@get-all.yaml'
+  '/geoobjecttype/get-all':
+    $ref: 'paths/geoobject@get-all.yaml'
 components:
   securitySchemes:
     basicAuth:
