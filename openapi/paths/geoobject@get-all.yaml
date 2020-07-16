@@ -8,8 +8,7 @@ get:
   tags:
     - GeoObject
   summary: Get all GeoObjects for a given GeoObjectType and Hierarchy.
-  description: |
-    Get all GeoObjects for a given GeoObjectType and Hierarchy.
+  description: Get all GeoObjects for a given GeoObjectType and Hierarchy.
   operationId: getGeoObject
   parameters:
     - name: typeCode
@@ -21,6 +20,12 @@ get:
     - name: hierarchyCode
       in: query
       description: The code of the Hierarchy that the GeoObjectType belongs to. Default is FALSE.
+      required: true
+      schema:
+        type: string
+    - name: externalSystemId
+      in: query
+      description: The id of the external system registered in the CGR.
       required: true
       schema:
         type: string
@@ -42,7 +47,7 @@ get:
       required: false
       schema:
         type: string
-      enum: [JSON_REVEAL, JSON_CGR]
+        enum: [JSON_REVEAL, JSON_CGR]
     - name: pageNumber
       in: query
       description: Page number used for pagination.

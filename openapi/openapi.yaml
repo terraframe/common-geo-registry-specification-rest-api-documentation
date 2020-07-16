@@ -2,10 +2,11 @@ openapi: 3.0.2
 info:
   version: 1.0.0
   title: Common Geo-Registry REST API
-  # termsOfService: 'https://example.com/terms/'
-  # contact:
-  #   email: contact@example.com
-  #   url: 'http://example.com/contact'
+  termsOfService: 'https://example.com/terms/'
+  contact:
+    name: Contact
+    email: contact@example.com
+    url: 'http://example.com/contact'
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
@@ -19,13 +20,15 @@ externalDocs:
 tags:
   - name: GeoObject
     description: Operations to interact with GeoObjects in the CGR.
+  - name: GeoObjectType
+    description: Operations to interact with GeoObjectTypes in the CGR.
 servers:
   - url: 'https://example.com/api/v1'
 paths:
   '/geoobject/get-all':
-    $ref: 'paths/geoobject@get-all.yaml'
-  '/geoobjecttype/get-all':
     $ref: 'paths/geoobjecttype@get-all.yaml'
+  '/geoobjecttype/get-all':
+    $ref: 'paths/geoobject@get-all.yaml'
 components:
   securitySchemes:
     basicAuth:

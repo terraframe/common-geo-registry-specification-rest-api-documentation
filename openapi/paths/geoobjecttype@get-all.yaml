@@ -1,29 +1,30 @@
-# parameters:
-#   - name: pretty_print
-#     in: query
-#     description: Pretty print response
-#     schema:
-#       type: boolean
+#
 get:
   tags:
     - GeoObjectType
   summary: Return GeoOjectType objects that define the given list of types.
+  description: Return GeoOjectType objects that define the given list of types.
   operationId: getGeoObjectTypes
   parameters:
     - name: types
       in: query
       description: An array of GeoObjectType codes. If blank then all GeoObjectType objects are returned.
       required: false
-      type: array
-      items:
-        type: string
+      schema:
+        type: array
+        items:
+          type: string
     - name: hierarchies
       in: query
       description: An array of Hierarchy codes. If blank then all Hierarchy objects are returned.
       required: false
-      type: array
-      items:
-        type: string
+      schema:
+        type: array
+        items:
+          type: string
+  security:
+    - main_auth:
+      - 'read:users'
   responses:
     '200':
       description: Success
