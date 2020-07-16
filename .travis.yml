@@ -4,7 +4,7 @@ node_js:
 deploy:
   - skip_cleanup: true
     provider: script
-    script: openapi bundle -o dist
+    script: npm run deploy
     on:
       branch: master
   - skip_cleanup: true
