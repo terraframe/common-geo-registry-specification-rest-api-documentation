@@ -8,8 +8,8 @@ info:
     email: info@terraframe.com
     url: 'https://terraframe.com'
   license:
-    name: MIT
-    url: 'https://opensource.org/licenses/MIT'
+    name: GPL
+    url: 'https://opensource.org/licenses/gpl-license'
   x-logo:
     url: './cgr_logo.png'
   description: >
