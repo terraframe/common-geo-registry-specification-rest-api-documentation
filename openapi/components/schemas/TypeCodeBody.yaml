@@ -1,0 +1,5 @@
+type: object
+description: Geo-Object Type code.
+properties:
+  typeCode:
+    type: string

@@ -1,0 +1,31 @@
+type: object
+properties:
+  name:
+    type: string
+  type:
+    type: string
+  values:
+    type: array
+    items:
+      type: object
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: string
+        value:
+          type: array
+          items:
+            type: object
+            properties:
+              localizedValue:
+                type: string
+              localeValues:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    locale:
+                      type: string
+                    value:
+                      type: string

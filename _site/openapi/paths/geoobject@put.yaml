@@ -1,0 +1,90 @@
+# parameters:
+#   - name: pretty_print
+#     in: query
+#     description: Pretty print response
+#     schema:
+#       type: boolean
+post:
+  tags:
+    - Geo-Object
+  summary: Update a Geo-Object.
+  description: Update a Geo-Object.
+  operationId: updateGeoObject
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GeoObject.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            - $ref: ../components/schemas/GeoObject.yaml
+          examples:
+            JSON_CGR:
+              value:
+                type: Feature
+                geometry:
+                  type: MultiPoint
+                  coordinates:
+                    - 113.56111706249908
+                    - 0.0657243021884568
+                properties:
+                  uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                  code: sflsjdflldsfj
+                  type: health_facilities
+                  lastUpdateDate: 1592514228000
+                  createDate: 1592426785000
+                  status:
+                    - CGR:Status-Active
+                  displayLabel:
+                    localizedValue: Central Health Facility
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Central Health Facility
+                      - locale: km_KH
+                        value: ជាំ សាងុំា
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: User not found
+
+
+# post:
+#   tags:
+#     - User
+#   summary: Updated user
+#   description: This can only be done by the logged in user.
+#   operationId: updateUser
+#   parameters:
+#     - name: username
+#       in: path
+#       description: The name that needs to be updated
+#       required: true
+#       schema:
+#         type: string
+#   security:
+#     - main_auth:
+#         - 'write:users'
+#   responses:
+#     '200':
+#       description: OK
+#     '400':
+#       description: Invalid user supplied
+#     '404':
+#       description: User not found
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#       application/xml:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#     description: Updated user object
+#     required: true
