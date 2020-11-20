@@ -2,11 +2,11 @@ openapi: 3.0.2
 info:
   version: 1.0.0
   title: Common Geo-Registry REST API
-  termsOfService: 'https://example.com/terms/'
+  # termsOfService: 'https://example.com/terms/'
   contact:
     name: Contact
-    email: contact@example.com
-    url: 'https://terraframe.github.io/common-geo-registry-specification-rest-api-documentation'
+    email: info@terraframe.com
+    url: 'https://terraframe.com'
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
