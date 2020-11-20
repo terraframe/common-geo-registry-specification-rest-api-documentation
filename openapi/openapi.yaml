@@ -6,7 +6,7 @@ info:
   contact:
     name: Contact
     email: contact@example.com
-    url: 'http://example.com/contact'
+    url: 'https://terraframe.github.io/common-geo-registry-specification-rest-api-documentation'
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
