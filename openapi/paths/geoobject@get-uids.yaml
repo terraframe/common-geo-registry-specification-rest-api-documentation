@@ -17,6 +17,7 @@ get:
       required: true
       schema:
         type: integer
+      example: 5
   responses:
     '200':
       description: Success

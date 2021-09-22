@@ -17,30 +17,35 @@ get:
       required: true
       schema:
         type: string
+      example: PRO
     - name: hierarchyCode
       in: query
       description: The code of the Hierarchy that the Geo-Object Type belongs to. Default is FALSE.
       required: true
       schema:
         type: string
+      example: ADM_H
     - name: externalSystemId
       in: query
       description: The id of the external system registered in the CGR.
       required: true
       schema:
         type: string
+      example: REVEALEXTSYSTEM
     - name: includeGeographicLevel
       in: query
       description: TRUE to return the level in the hierarchy the Geo-ObjectType resides.
       required: false
       schema:
         type: boolean
+      example: true
     - name: updatedSince
       in: query
-      description: Date in UTC from wich only Geo-Objects will returned that have been updated.
+      description: Date in UTC from wich only Geo-Objects will returned that have been updated. 0 represents the beginning of UTC time.
       required: false
       schema:
         type: string
+      example: 0
     - name: format
       in: query
       description: Format in which to return the Geo-Objects. Default is JSON_CGR.
@@ -48,18 +53,21 @@ get:
       schema:
         type: string
         enum: [JSON_REVEAL, JSON_CGR]
+      example: JSON_REVEAL
     - name: pageNumber
       in: query
       description: Page number used for pagination.
       required: true
       schema:
         type: integer
+      example: 1
     - name: pageSize
       in: query
       description: Page size (number or results to return) used for pagination.
       required: true
       schema:
         type: integer
+      example: 20
   responses:
     '200':
       description: Success

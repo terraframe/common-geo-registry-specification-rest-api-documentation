@@ -8,20 +8,23 @@ get:
   parameters:
     - name: types
       in: query
-      description: An array of Geo-Object Type codes. If blank then all Geo-Object Type objects are returned.
+      description: An array of Geo-Object Type codes. If blank then all Geo-Object Type objects are returned. Example is encoded for easy texting in a web browser.
       required: false
       schema:
         type: array
         items:
           type: string
+      example: "%5B%22PRO%22%5D"
     - name: hierarchies
       in: query
-      description: An array of Hierarchy codes. If blank then all Hierarchy objects are returned.
+      description: An array of Hierarchy codes. If blank then all Hierarchy objects are returned. Example is encoded for easy texting in a web browser.
       required: false
       schema:
         type: array
         items:
           type: string
+      example: "%5B%22ADM_H%22%5D"
+      
   security:
     - main_auth:
       - 'read:users'

@@ -17,12 +17,14 @@ get:
       required: true
       schema:
         type: string
+      example: TLK01
     - name: typeCode
       in: query
       description: The code of the Geo-Object Type the Geo-Object belongs to.
       required: true
       schema:
         type: string
+      example: PRO
   responses:
     '200':
       description: Success

@@ -17,26 +17,30 @@ get:
       required: true
       schema:
         type: string
+      example: b011c739-7c8f-45ec-8963-a4b61f7edaae
     - name: childTypeCode
       in: query
       description: The code of the Geo-Object Type that the Geo-Object belongs to.
       required: true
       schema:
         type: string
+      example: PRO
     - name: parentTypes
       in: query
-      description: An array of Geo-Object Type codes of the Geo-Object Types that the parent Geo-Objects must belongs to.
+      description: An array of Geo-Object Type codes of the Geo-Object Types that the parent Geo-Objects must belongs to. Example is encoded for easy texting in a web browser.
       required: true
       schema:
         type: array
         items:
           type: string
+      example: "%5B%22REG%22%5D"
     - name: recursive
       in: query
       description: TRUE to return all parent Geo-Objects for all specified parentTypes at all levels above the child Geo-Object.
       required: true
       schema:
         type: boolean
+      example: true
   responses:
     '200':
       description: Success
