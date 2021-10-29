@@ -7,7 +7,7 @@
 get:
   tags:
     - Geo-Object
-  summary: Get a Geo-Object for a given Geo-Object Type.
+  summary: Get a Geo-Object by ID for a given Geo-Object Type.
   description: Get all Geo-Objects for a given Geo-Object Type.
   operationId: getGeoObject
   parameters:
