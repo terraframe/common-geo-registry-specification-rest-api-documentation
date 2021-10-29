@@ -7,8 +7,8 @@
 get:
   tags:
     - GeoObject
-  summary: Get all GeoObjects for a given GeoObjectType and Hierarchy.
-  description: Get all GeoObjects for a given GeoObjectType and Hierarchy.
+  summary: Get all GeoObjects for a given Geo-Object Type and Hierarchy.
+  description: Get all Geo-Objects for a given Geo-Object Type and Hierarchy.
   operationId: getGeoObject
   parameters:
     - name: typeCode
