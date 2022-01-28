@@ -1,0 +1,107 @@
+post:
+  tags:
+    - List
+  summary: Return list data in list format.
+  description: Return list data in list format where an array contans one object per row of the List. Each attribute (column value) in the array is a key value pair where the key is the name of the column and the value is the value.
+  operationId: data
+  parameters:
+    - name: oid
+      in: query
+      description: OID of the list.
+      required: true
+      schema:
+        type: string
+      example: 11fa9757-d887-461e-93f0-044be80005f1
+    - name: includeGeometries
+      in: query
+      description: Option to include geometries for each row (when they exist).
+      required: false
+      schema:
+        type: boolean
+        default: false
+      example: true
+  security:
+    - Basic Authentication: [Super Registry Administrator, (organization) Registry Administrator, (geoobjecttype) Registry Maintainer, (geoobjecttype) Registry Contributor]
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/List.yaml'
+          example:
+            - "geometry": 
+                "type": "MultiPoint"
+                "coordinates": [
+                    [
+                        120.99056,
+                        14.39887
+                    ]
+                ]
+              originalOid: "24a0cb9e-8d6b-4387-bd3b-dcbd05c8aea2"
+              education_geocty: "TLK0401"
+              HD_NA_EN : "Nataly Vasquez"
+              code: "SC0001"
+              SC_TDefaultLocale: "University"
+              COOR_ACU: "COA4"
+              education_georeg: "TLK"
+              education_geoproDefaultLocale: "Mittalmar"
+              education_geoshrDefaultLocale: "Centro"
+              SC_T: "ST2"
+              education_geoshr: "TLK0401002"
+              LD_NBR_G: "+99 96 98765432"
+              education_geopro: "TLK04"
+              displayLabelDefaultLocale: "Tolkien University"
+              COOR_ACUDefaultLocale: "High"
+              invalid: false
+              education_georegDefaultLocale: "Tolkien Region"
+              SC_OWNDefaultLocale: "Ministry of Education"
+              education_geoctyDefaultLocale: "Armenelos"
+              HD_PS_EN: "Director"
+              SC_OWN: "SO2"
+              SOUR_COORDefaultLocale: "MOE (GPS)"
+              SOUR_COOR: "SOC2"
+
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: User not found
+
+
+# post:
+#   tags:
+#     - User
+#   summary: Updated user
+#   description: This can only be done by the logged in user.
+#   operationId: updateUser
+#   parameters:
+#     - name: username
+#       in: path
+#       description: The name that needs to be updated
+#       required: true
+#       schema:
+#         type: string
+#   security:
+#     - main_auth:
+#         - 'write:users'
+#   responses:
+#     '200':
+#       description: OK
+#     '400':
+#       description: Invalid user supplied
+#     '404':
+#       description: User not found
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#       application/xml:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#     description: Updated user object
+#     required: true

@@ -1,21 +1,21 @@
 openapi: 3.0.2
 info:
   version: 1.0.0
-  title: Common Geo-Registry REST API
+  title: GeoPrism Registry REST API
   # termsOfService: 'https://example.com/terms/'
   contact:
     name: Contact
     email: info@terraframe.com
-    url: 'https://terraframe.com'
+    url: '/'
   license:
     name: GPL
     url: 'https://opensource.org/licenses/gpl-license'
   x-logo:
     url: './cgr_logo.png'
   description: >
-    The Common Geo-Registry API provides programatic access to key functionality.
+    The GeoPrism Registry API provides programatic access to key functionality.
 externalDocs:
-  description: Learn more about the Common Geo-Registry Specification.
+  description: Learn more about the GeoPrism Registry Specification.
   url: 'https://github.com/terraframe/common-geo-registry-specification'
 tags:
   - name: Geo-Object
@@ -61,11 +61,13 @@ paths:
     $ref: 'paths/geoobjecttype@get-all.yaml'
   '/cgr/hierarchytype/get-all':
     $ref: 'paths/hierarchytype@get-all.yaml'
+  '/cgr/list/data':
+    $ref: 'paths/list@data.yaml'
 components:
   securitySchemes:
     Basic Authentication:
       type: http
       scheme: basic
-      description: Geoprism Registry uses basic authentication over HTTPS. To authenticate against the API you must include a base64 encoded hash in the request header. A simple way to create the hash is to encode the username and password of an existing user as username:password using a tool like https://www.base64encode.org/.
+      description: GeoPrism Registry uses basic authentication over HTTPS. To authenticate against the API you must include a base64 encoded hash in the request header. A simple way to create the hash is to encode the username and password of an existing user as username:password using a tool like https://www.base64encode.org/.
 security:
   - Basic Authentication: [Super Registry Administrator, (organization) Registry Administrator, (geoobjecttype) Registry Maintainer, (geoobjecttype) Registry Contributor]  # <-- use the same name here

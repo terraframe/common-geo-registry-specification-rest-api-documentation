@@ -1,0 +1,12 @@
+type: object
+description: Sample List schema
+properties:
+  code:
+    type: string
+  originalId:
+    type: string
+  displayLabelDefaultLocale:
+    type: string
+  invalid:
+    type: boolean
+

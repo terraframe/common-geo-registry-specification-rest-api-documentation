@@ -1,14 +1,8 @@
-# parameters:
-#   - name: pretty_print
-#     in: query
-#     description: Pretty print response
-#     schema:
-#       type: boolean
 get:
   tags:
     - Geo-Object-Over-Time
-  summary: Get a Geo-Object Over Time for a given Geo-Object Type.
-  description: Get all Geo-Objects for a given Geo-Object Type.
+  summary: Get a Geo-Object Over Time by ID for a given Geo-Object Type.
+  description: Get a Geo-Object over time for a given Geo-Object Type. ID's are 
   operationId: getGeoObjectOverTime
   parameters:
     - name: id
