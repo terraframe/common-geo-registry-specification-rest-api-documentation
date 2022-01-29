@@ -9,6 +9,8 @@ properties:
     items:
       type: object
       properties:
+        oid: 
+          type: string
         startDate:
           type: string
         endDate:
@@ -16,6 +18,4 @@ properties:
         value:
           type: array
           items:
-            type: object
-            properties:
-              $ref: './LocalizedLabel.yaml'
+            $ref: './Geometry.yaml'

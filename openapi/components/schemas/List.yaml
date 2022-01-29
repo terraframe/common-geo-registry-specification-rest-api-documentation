@@ -1,9 +1,9 @@
 type: object
-description: Sample List schema
+description: Core List schema
 properties:
   code:
     type: string
-  originalId:
+  originalOid:
     type: string
   displayLabelDefaultLocale:
     type: string

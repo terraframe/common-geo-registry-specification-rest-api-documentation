@@ -6,9 +6,7 @@ properties:
       displayLabel:
         $ref: './DisplayLabel.yaml'
       geometry:
-        $ref: './AttributeTypeOverTime.yaml'
-      status:
-        $ref: './AttributeTypeOverTime.yaml'
+        $ref: './AttributeGeometryTypeOverTime.yaml'
       uid:
         type: string
       code:
@@ -19,3 +17,24 @@ properties:
         type: string
       createDate:
         type: integer
+      exists:
+        type: object
+        properties:
+          name: 
+            type: string
+          type: 
+            type: boolean
+          values:
+            type: array
+            items:
+              type: object
+              properties:
+                oid:
+                  type: string
+                startDate:
+                  type: string
+                endDate:
+                  type: string
+                value:
+                  type: "boolean"
+          

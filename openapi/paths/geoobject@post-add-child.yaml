@@ -16,7 +16,7 @@ post:
       content:
         application/json:
           schema:
-            - $ref: ../components/schemas/ParentTreeNode.yaml
+            $ref: ../components/schemas/ParentTreeNode.yaml
           example:
             geoObject:
               type: Feature
@@ -31,8 +31,6 @@ post:
                 type: health_facilities
                 lastUpdateDate: 1592514228000
                 createDate: 1592426785000
-                status:
-                  - CGR:Status-Active
                 displayLabel:
                   localizedValue: Central Health Facility
                   localeValues:
@@ -40,6 +38,9 @@ post:
                       value: Central Health Facility
                     - locale: km_KH
                       value: ជាំ សាងុំា
+                invalid: false
+                exists: true
+                writable: true
             hierarchyType:
               code: "Test_HF"
               label:

@@ -49,8 +49,8 @@ paths:
     $ref: 'paths/geoobject@post-remove-child.yaml'
   '/cgr/geoobject/get-uids':
     $ref: 'paths/geoobject@get-uids.yaml'
-  '/cgr/geoobject-time/get':
-    $ref: 'paths/geoobject-time@get.yaml'
+  # '/cgr/geoobject-time/get':
+  #   $ref: 'paths/geoobject-time@get.yaml'
   '/cgr/geoobject-time/get-code':
     $ref: 'paths/geoobject-time@get-code.yaml'
   '/cgr/geoobject-time/update':

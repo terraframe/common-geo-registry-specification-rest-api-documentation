@@ -3,8 +3,8 @@ description: Defines a hierarchy type and specifies which GeoObjectTypes partici
 properties:
   code:
     type: string
-  localizedLabel:
-    type: string
+  label:
+    $ref: './LocalizedLabel.yaml'
   localizedDescription:
     type: string
   rootGeoObjectTypes:

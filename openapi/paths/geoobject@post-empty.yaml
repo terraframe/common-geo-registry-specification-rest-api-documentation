@@ -16,7 +16,9 @@ post:
       content:
         application/json:
           schema:
-            - $ref: ../components/schemas/GeoObject.yaml
+            oneOf:
+              - $ref: ../components/schemas/GeoObject.yaml
+              - $ref: ../components/schemas/RevealGeoObject.yaml
           examples:
             JSON_CGR:
               value:
@@ -32,8 +34,6 @@ post:
                   type: health_facilities
                   lastUpdateDate: 1592514228000
                   createDate: 1592426785000
-                  status:
-                    - CGR:Status-Active
                   displayLabel:
                     localizedValue: ""
                     localeValues:
@@ -41,6 +41,9 @@ post:
                         value: ""
                       - locale: km_KH
                         value: ""
+                  invalid: false
+                  exists: true
+                  writable: true
     '401':
       description: Unauthorized
     '403':

@@ -25,33 +25,67 @@ get:
       content:
         application/json:
           schema:
-            - $ref: ../components/schemas/GeoObject.yaml
+            $ref: ../components/schemas/GeoObjectOverTime.yaml
           example:
             attributes:
               displayLabel:
                 name: "displayLabel"
                 type: "local"
                 values:
+                  - startDate: "2000-01-01"
+                    endDate: "2020-10-31"
+                    value:
+                      localizedValue: "older label"
+                      localeValues:
+                        - locale: "defaultLocale"
+                          value: "older label"
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
                   - startDate: "2020-11-01"
                     endDate: "5000-12-31"
                     value:
-                      localizedValue: "newtest"
+                      localizedValue: "new label"
                       localeValues:
                         - locale: "defaultLocale"
-                          value: "newtest"
+                          value: "new label"
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
               geometry:
                 name: "geometry"
                 type: "geometry"
                 values:
-                  - null
-              status:
-                name: "status"
-                type: "term"
-                values:
-                  startDate: "2020-11-01"
-                  endDate: "5000-12-31"
-                  value:
-                    - "CGR:Status-Active"
+                  - oid: "0f6c55d0-ea59-4c65-8027-68f463f43500"
+                    startDate: "2000-01-01"
+                    endDate: "2007-04-19"
+                    value: 
+                      type: "MultiPoint"
+                      coordinates: 
+                        -
+                          - 121.01288997250000
+                          - 14.42262481649999
+                        -
+                          - 121.01288997250037
+                          - 14.42262481649999
+                  - oid: "0f6c55d0-ea59-4c65-8027-68f463f43593"
+                    startDate: "2007-04-20"
+                    endDate: "5000-12-31"
+                    value: 
+                      type: "MultiPoint"
+                      coordinates: 
+                        -
+                          - 121.01288997250000
+                          - 14.42262481649999
+                        -
+                          - 121.01288997250037
+                          - 14.42262481649999
+              exists:
+                name: "exists"
+                type: boolean
+                values: 
+                  - oid: "505ddd70-4bca-46ed-8868-32337f5c1b16"
+                    startDate: "2000-01-01"
+                    endDate: "5000-12-31"
+                    value: true
               uid: "838c1d75-eb9f-47e8-b4ea-38e5b7a5b456"
               code: "newtest"
               lastUpdateDate: 1605852438290

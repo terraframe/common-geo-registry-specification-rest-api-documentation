@@ -1,5 +1,5 @@
 type: object
-description: GeoJSon geometry
+description: GeoJson geometry
 required:
   - type
 externalDocs:
@@ -8,10 +8,13 @@ properties:
   type:
     type: string
     enum:
-    - Point
-    - LineString
-    - Polygon
     - MultiPoint
     - MultiLineString
     - MultiPolygon
-    description: the geometry type
+  coordinates:
+    type: array
+    items:
+      oneOf:
+        - $ref: './MultiPoint.yaml'
+        - $ref: './MultiPolygon.yaml'
+        - $ref: './MultiLine.yaml'

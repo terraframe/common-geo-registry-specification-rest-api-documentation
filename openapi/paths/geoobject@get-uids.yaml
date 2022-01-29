@@ -18,9 +18,7 @@ get:
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: ../components/schemas/GeoObject.yaml
-              - $ref: ../components/schemas/RevealGeoObject.yaml
+            $ref: ../components/schemas/GeoObjectIDs.yaml
           example:
             - "9975976c-1243-478c-850b-9176e2a7f57e"
     '401':

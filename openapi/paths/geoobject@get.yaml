@@ -33,7 +33,9 @@ get:
       content:
         application/json:
           schema:
-            - $ref: ../components/schemas/GeoObject.yaml
+            oneOf:
+              - $ref: ../components/schemas/GeoObject.yaml
+              - $ref: ../components/schemas/RevealGeoObject.yaml
           examples:
             JSON_CGR:
               value:
@@ -49,8 +51,6 @@ get:
                   type: health_facilities
                   lastUpdateDate: 1592514228000
                   createDate: 1592426785000
-                  status:
-                    - CGR:Status-Active
                   displayLabel:
                     localizedValue: Central Health Facility
                     localeValues:
@@ -58,6 +58,9 @@ get:
                         value: Central Health Facility
                       - locale: km_KH
                         value: ជាំ សាងុំា
+                  invalid: false
+                  exists: true
+                  writable: true
     '401':
       description: Unauthorized
     '403':

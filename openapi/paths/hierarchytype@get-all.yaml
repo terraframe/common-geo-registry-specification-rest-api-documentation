@@ -30,6 +30,10 @@ get:
               progress: ""
               acknowledgement: ""
               contact: ""
+              phoneNumber: ""
+              email: ""
+              accessConstraints: ""
+              useConstraints: ""
               rootGeoObjectTypes:
                 code: health_facility
                 label:
