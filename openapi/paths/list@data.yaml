@@ -1,7 +1,7 @@
 get:
   tags:
     - List
-  summary: Return list data in list format.
+  summary: Get list data in list format.
   description: Return list data in list format where an array contans one object per row of the List. Each attribute (column value) in the array is a key value pair where the key is the name of the column and the value is the value.
   operationId: data
   parameters:
