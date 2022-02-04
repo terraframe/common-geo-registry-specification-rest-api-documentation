@@ -1,9 +1,9 @@
 get:
   tags:
     - Geo-Object
-  summary: Get parent Geo-Objects of a Geo-Object.
-  description: Get parent Geo-Objects of a Geo-Object.
-  operationId: getParentGeoObjects
+  summary: Get parent Geo-Objects of a Geo-Object as defined by a Directed Graph Relationship.
+  description: Get parent Geo-Objects of a Geo-Object as defined by a Directed Graph Relationship.
+  operationId: getGraphParent
   parameters:
     - name: childId
       in: query
@@ -19,15 +19,13 @@ get:
       schema:
         type: string
       example: PRO
-    - name: parentTypes
+    - name: directedGraphCode
       in: query
-      description: An array of Geo-Object Type codes of the Geo-Object Types that the parent Geo-Objects must belongs to. Example is encoded for easy texting in a web browser.
+      description: The code of the Directed Graph Relationship.
       required: true
       schema:
-        type: array
-        items:
-          type: string
-      example: "%5B%22REG%22%5D"
+        type: string
+      example: CTY
     - name: recursive
       in: query
       description: TRUE to return all parent Geo-Objects for all specified parentTypes at all levels above the child Geo-Object.

@@ -1,0 +1,13 @@
+type: object
+description: Remove related Geo-Object params.
+properties:
+  sourceId:
+    type: string
+  sourceTypeCode:
+    type: string
+  targetId:
+    type: string
+  targetTypeCode:
+    type: string
+  undirectedRelationshipCode:
+    type: string

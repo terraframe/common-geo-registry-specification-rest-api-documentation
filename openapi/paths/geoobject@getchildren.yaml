@@ -42,21 +42,21 @@ get:
         application/json:
           schema:
             oneOf:
-              - $ref: ../components/schemas/GeoObject.yaml
-              - $ref: ../components/schemas/RevealGeoObject.yaml
+              - $ref: ../components/schemas/ChildTreeNode.yaml
           example:
-            - type: Feature
-              geometry:
-                type: MultiPoint
-                coordinates:
-                  - 113.56111706249908
-                  - 0.0657243021884568
-              properties:
-                uid: 9975976c-1243-478c-850b-9176e2a7f57e
-                code: sflsjdflldsfj
-                type: health_facilities
-                lastUpdateDate: 1592514228000
-                createDate: 1592426785000
+            - geoObject:
+                type: Feature
+                geometry:
+                  type: MultiPoint
+                  coordinates:
+                    - 113.56111706249908
+                    - 0.0657243021884568
+                properties:
+                  uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                  code: sflsjdflldsfj
+                  type: health_facilities
+                  lastUpdateDate: 1592514228000
+                  createDate: 1592426785000
                 displayLabel:
                   localizedValue: Central Health Facility
                   localeValues:
@@ -67,6 +67,8 @@ get:
                 invalid: false
                 exists: true
                 writable: true
+              hierarchyType: PRO    
+              children: []
     '401':
       description: Unauthorized
     '403':

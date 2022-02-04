@@ -1,36 +1,34 @@
 get:
   tags:
     - Geo-Object
-  summary: Get parent Geo-Objects of a Geo-Object.
-  description: Get parent Geo-Objects of a Geo-Object.
-  operationId: getParentGeoObjects
+  summary: Get child Geo-Objects of a Geo-Object as defined by a Directed Graph Relationship.
+  description: Get child Geo-Objects of a Geo-Object as defined by a Directed Graph Relationship.
+  operationId: getGraphChildren
   parameters:
-    - name: childId
+    - name: parentId
       in: query
-      description: The id of the Geo-Object for which the parents will be requested.
+      description: The id of the Geo-Object for which the children will be requested.
       required: true
       schema:
         type: string
       example: b011c739-7c8f-45ec-8963-a4b61f7edaae
-    - name: childTypeCode
+    - name: parentTypeCode
       in: query
       description: The code of the Geo-Object Type that the Geo-Object belongs to.
       required: true
       schema:
         type: string
       example: PRO
-    - name: parentTypes
+    - name: directedGraphCode
       in: query
-      description: An array of Geo-Object Type codes of the Geo-Object Types that the parent Geo-Objects must belongs to. Example is encoded for easy texting in a web browser.
+      description: The code of the Directed Graph Relationship.
       required: true
       schema:
-        type: array
-        items:
-          type: string
-      example: "%5B%22REG%22%5D"
+        type: string
+      example: CTY
     - name: recursive
       in: query
-      description: TRUE to return all parent Geo-Objects for all specified parentTypes at all levels above the child Geo-Object.
+      description: TRUE to return all child Geo-Objects for the specified graph type at all levels below the parent Geo-Object.
       required: true
       schema:
         type: boolean
@@ -42,7 +40,7 @@ get:
         application/json:
           schema:
             oneOf:
-              - $ref: ../components/schemas/ParentTreeNode.yaml
+              - $ref: ../components/schemas/ChildTreeNode.yaml
           example:
             - geoObject:
                 type: Feature
@@ -68,7 +66,7 @@ get:
                 exists: true
                 writable: true
               hierarchyType: PRO    
-              parents: []
+              children: []
     '401':
       description: Unauthorized
     '403':

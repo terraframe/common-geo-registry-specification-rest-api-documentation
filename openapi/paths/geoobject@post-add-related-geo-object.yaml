@@ -1,15 +1,15 @@
 post:
   tags:
     - Geo-Object
-  summary: Add child Geo-Object.
-  description: Add child Geo-Object.
-  operationId: addChildGeoObject
+  summary: Add Geo-Object to a undirected relationship.
+  description: Add Geo-Object to a undirected relationship.
+  operationId: addRelatedGeoObject
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/AddChildBody.yaml
+          $ref: ../components/schemas/AddRelatedGeoObjectBody.yaml
   responses:
     '200':
       description: Success
@@ -46,6 +46,7 @@ post:
               -  geoObject: "..."
                  hierarchyType: "Test_HF"
                  parents: []
+
     '401':
       description: Unauthorized
     '403':

@@ -1,0 +1,13 @@
+type: object
+description: Add child params.
+properties:
+  parentId:
+    type: string
+  parentTypeCode:
+    type: string
+  childId:
+    type: string
+  childTypeCode:
+    type: string
+  directedGraphCode:
+    type: string

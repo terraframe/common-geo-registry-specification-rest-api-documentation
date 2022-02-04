@@ -6,4 +6,6 @@ properties:
   hierarchyType:
     type: string
   parents:
-    $ref: './ParentTreeNode.yaml'
+    type : array
+    items :
+      $ref: './ParentTreeNode.yaml'

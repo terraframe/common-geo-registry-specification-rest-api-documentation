@@ -39,14 +39,28 @@ paths:
     $ref: 'paths/geoobject@get-code.yaml'
   '/geoobject/get-all':
     $ref: 'paths/geoobject@get-all.yaml'
-  '/cgr/geoobject/getchildren':
+  '/geoobject/getchildren':
     $ref: 'paths/geoobject@getchildren.yaml'
+  '/geoobject/get-graph-children':
+    $ref: 'paths/geoobject@get-graph-children.yaml'    
+  '/geoobject/get-related-geo-objects':
+    $ref: 'paths/geoobject@get-related-geo-objects.yaml'        
   '/cgr/geoobject/get-parent-geoobjects':
     $ref: 'paths/geoobject@get-parent-geoobjects.yaml'
-  '/cgr/geoobject/addchild':
+  '/cgr/geoobject/get-graph-parents':
+    $ref: 'paths/geoobject@get-graph-parents.yaml'    
+  '/geoobject/addchild':
     $ref: 'paths/geoobject@post-add-child.yaml'
-  '/cgr/geoobject/removechild':
+  '/geoobject/add-graph-child':
+    $ref: 'paths/geoobject@post-add-graph-child.yaml'    
+  '/geoobject/add-related-geo-object':
+    $ref: 'paths/geoobject@post-add-related-geo-object.yaml'        
+  '/geoobject/removechild':
     $ref: 'paths/geoobject@post-remove-child.yaml'
+  '/geoobject/remove-graph-child':
+    $ref: 'paths/geoobject@post-remove-graph-child.yaml'    
+  '/geoobject/remove-related-geo-object':
+    $ref: 'paths/geoobject@post-remove-related-geo-object.yaml'        
   '/cgr/geoobject/get-uids':
     $ref: 'paths/geoobject@get-uids.yaml'
   # '/cgr/geoobject-time/get':
