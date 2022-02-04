@@ -4,5 +4,7 @@ required:
 externalDocs:
   url: http://geojson.org/geojson-spec.html#geometry-objects
 items:
-    - type: number
-    - type: number
+  type: array
+  items:
+    type: number
+

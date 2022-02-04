@@ -66,4 +66,4 @@ get:
     '403':
       description: Forbidden
     '404':
-      description: User not found
+      description: Not found

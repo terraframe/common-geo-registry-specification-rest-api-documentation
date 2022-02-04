@@ -1,4 +1,4 @@
-post:
+get:
   tags:
     - List
   summary: Return list data in list format.
@@ -20,8 +20,6 @@ post:
         type: boolean
         default: false
       example: true
-  security:
-    - Basic Authentication: [Super Registry Administrator, (organization) Registry Administrator, (geoobjecttype) Registry Maintainer, (geoobjecttype) Registry Contributor]
   responses:
     '200':
       description: Success
@@ -69,7 +67,7 @@ post:
     '403':
       description: Forbidden
     '404':
-      description: User not found
+      description: Not found
 
 
 # post:
