@@ -11,3 +11,7 @@ properties:
     type: string
   directedGraphCode:
     type: string
+  startDate:
+    type: string
+  endDate:
+    type: string

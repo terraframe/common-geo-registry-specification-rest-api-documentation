@@ -2,7 +2,7 @@ post:
   tags:
     - Geo-Object
   summary: Remove Directed Graph Relationsihp child Geo-Object.
-  description: Remove Directed Graph Relationsihp child Geo-Object.
+  description: PROPOSED METHOD. Currently unsupported. Remove Directed Graph Relationsihp child Geo-Object.
   operationId: removeGraphChild
   requestBody:
     required: true

@@ -2,7 +2,7 @@ get:
   tags:
     - Geo-Object
   summary: Get parent Geo-Objects of a Geo-Object as defined by a Directed Graph Relationship.
-  description: Get parent Geo-Objects of a Geo-Object as defined by a Directed Graph Relationship.
+  description: PROPOSED METHOD. Currently unsupported. Get parent Geo-Objects of a Geo-Object as defined by a Directed Graph Relationship.
   operationId: getGraphParent
   parameters:
     - name: childId
@@ -26,6 +26,13 @@ get:
       schema:
         type: string
       example: CTY
+    - name: date
+      in: query
+      description: The temporal date to check against. Must in the the format of YYYY-MM-DD.
+      required: false
+      schema:
+        type: string
+      example: "2021-02-20"            
     - name: recursive
       in: query
       description: TRUE to return all parent Geo-Objects for all specified parentTypes at all levels above the child Geo-Object.

@@ -2,7 +2,7 @@ post:
   tags:
     - Geo-Object
   summary: Add Geo-Object to a undirected relationship.
-  description: Add Geo-Object to a undirected relationship.
+  description: PROPOSED METHOD. Currently unsupported. Add Geo-Object to a undirected relationship.
   operationId: addRelatedGeoObject
   requestBody:
     required: true

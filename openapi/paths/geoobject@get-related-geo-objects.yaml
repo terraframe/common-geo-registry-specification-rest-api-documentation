@@ -2,7 +2,7 @@ get:
   tags:
     - Geo-Object
   summary: Get the related Geo-Objects of a Geo-Object as defined by a undirected relationship.
-  description: Get child Geo-Objects of a Geo-Object as defined by a undirected relationship.
+  description: PROPOSED METHOD. Currently unsupported. Get child Geo-Objects of a Geo-Object as defined by a undirected relationship.
   operationId: getRelatedGeoObjects
   parameters:
     - name: source
@@ -26,6 +26,13 @@ get:
       schema:
         type: string
       example: CTY
+    - name: date
+      in: query
+      description: The temporal date to check against. Must in the the format of YYYY-MM-DD.
+      required: false
+      schema:
+        type: string
+      example: "2021-02-20"            
     - name: recursive
       in: query
       description: TRUE to return all child Geo-Objects for the specified graph type at all levels below the parent Geo-Object.

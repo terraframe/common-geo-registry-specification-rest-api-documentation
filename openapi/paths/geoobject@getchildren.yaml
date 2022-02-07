@@ -19,6 +19,13 @@ get:
       schema:
         type: string
       example: PRO
+    - name: date
+      in: query
+      description: The temporal date to check against. Must in the the format of YYYY-MM-DD.
+      required: false
+      schema:
+        type: string
+      example: "2021-02-20"      
     - name: childrenTypes
       in: query
       description: An array of Geo-Object Type codes of the Geo-Object Types that the child Geo-Objects must belongs to.
