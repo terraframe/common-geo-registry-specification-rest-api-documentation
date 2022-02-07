@@ -24,6 +24,14 @@ tags:
     description: Operations to interact with Geo-Objects-Over-Time in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
   - name: Geo-Object Type
     description: Operations to interact with Geo-Object Types in the CGR.
+  - name: List
+    description: Operations to interact with List definitions and entries in the CGR.    
+  - name: Hierarchy
+    description: Operations to interact with Hierarchical relationship type definitions in the CGR.            
+  - name: Directed Graph
+    description: Operations to interact with Directed Graph Type definitions in the CGR.    
+  - name: Undirected relationship
+    description: Operations to interact with Undirected Relationship Type definitions in the CGR.    
 servers:
   - url: 'https://demo-georegistry.geoprism.net/'
 paths:
@@ -77,6 +85,10 @@ paths:
     $ref: 'paths/hierarchytype@get-all.yaml'
   '/cgr/list/data':
     $ref: 'paths/list@data.yaml'
+  '/directed-graph-type/get-all':
+    $ref: 'paths/directed-graph-type@get-all.yaml'
+  '/related-type/get-all':
+    $ref: 'paths/related-type@get-all.yaml'    
 components:
   securitySchemes:
     Basic Authentication:

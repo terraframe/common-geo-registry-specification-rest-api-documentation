@@ -1,0 +1,11 @@
+type: object
+description: Defines a directed graph relationship.
+properties:
+  code:
+    type: string
+  label:
+    $ref: './LocalizedLabel.yaml'
+  description:
+    $ref: './LocalizedLabel.yaml'
+  organizationCode:
+    type: string
