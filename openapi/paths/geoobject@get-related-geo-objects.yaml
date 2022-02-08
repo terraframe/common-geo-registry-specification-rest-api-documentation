@@ -1,8 +1,8 @@
 get:
   tags:
     - Geo-Object
-  summary: Get the related Geo-Objects of a Geo-Object as defined by a undirected relationship.
-  description: PROPOSED METHOD. Currently unsupported. Get child Geo-Objects of a Geo-Object as defined by a undirected relationship.
+  summary: Get the related Geo-Objects of a Geo-Object as defined by an Undirected Graph.
+  description: PROPOSED METHOD. Currently unsupported. Get child Geo-Objects of a Geo-Object as defined by an Undirected Graph.
   operationId: getRelatedGeoObjects
   parameters:
     - name: source

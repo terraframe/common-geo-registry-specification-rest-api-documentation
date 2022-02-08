@@ -1,8 +1,8 @@
 get:
   tags:
-    - Directed Graph
-  summary: Get all Directed Graph Type definitions.
-  description: PROPOSED METHOD. Currently unsupported. Get Directed Graph Type definitions.
+    - Directed Asynchronous Graph
+  summary: Get all Directed Asynchronous Graph Type definitions.
+  description: PROPOSED METHOD. Currently unsupported. Get Directed Asynchronous Graph Type definitions.
   operationId: getDirectedGraphTypes
   responses:
     '200':

@@ -1,8 +1,8 @@
 get:
   tags:
-    - Undirected relationship
-  summary: Get all Undirected Relationship Type definitions.
-  description: PROPOSED METHOD. Currently unsupported. Get all Undirected Relationship Type definitions.
+    - Undirected Graph
+  summary: Get all Undirected Graph Type definitions.
+  description: PROPOSED METHOD. Currently unsupported. Get all Undirected Graph Type definitions.
   operationId: getUndirectedRelationshipTypes
   responses:
     '200':
