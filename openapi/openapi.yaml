@@ -28,8 +28,8 @@ tags:
     description: Operations to interact with List definitions and entries in the CGR.    
   - name: Hierarchy
     description: Operations to interact with Hierarchical relationship type definitions in the CGR.            
-  - name: Directed Asynchronous Graph
-    description: Operations to interact with Directed Asynchronous Graph Type definitions in the CGR.    
+  - name: Directed Acyclic Graph
+    description: Operations to interact with Directed Acyclic Graph Type definitions in the CGR.    
   - name: Undirected Graph
     description: Operations to interact with Undirected Graph Type definitions in the CGR.    
 servers:

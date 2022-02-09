@@ -1,8 +1,8 @@
 post:
   tags:
     - Geo-Object
-  summary: Remove a child Geo-Object from a Directed Asynchronous Graph.
-  description: PROPOSED METHOD. Currently unsupported. Remove a child Geo-Object from a Directed Asynchronous Graph.
+  summary: Remove a child Geo-Object from a Directed Acyclic Graph.
+  description: PROPOSED METHOD. Currently unsupported. Remove a child Geo-Object from a Directed Acyclic Graph.
   operationId: removeGraphChild
   requestBody:
     required: true

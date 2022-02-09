@@ -1,8 +1,8 @@
 get:
   tags:
     - Geo-Object
-  summary: Get parent Geo-Objects of a Geo-Object as defined by a Directed Asynchronous Graph.
-  description: PROPOSED METHOD. Currently unsupported. Get parent Geo-Objects of a Geo-Object as defined by a Directed Asynchronous Graph.
+  summary: Get parent Geo-Objects of a Geo-Object as defined by a Directed Acyclic Graph.
+  description: PROPOSED METHOD. Currently unsupported. Get parent Geo-Objects of a Geo-Object as defined by a Directed Acyclic Graph.
   operationId: getGraphParent
   parameters:
     - name: childId
