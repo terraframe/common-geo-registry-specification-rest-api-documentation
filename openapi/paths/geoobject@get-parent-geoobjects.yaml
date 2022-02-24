@@ -5,13 +5,13 @@ get:
   description: Get parent Geo-Objects of a Geo-Object.
   operationId: getParentGeoObjects
   parameters:
-    - name: childId
+    - name: childCode
       in: query
-      description: The id of the Geo-Object for which the parents will be requested.
+      description: The code of the Geo-Object for which the parents will be requested.
       required: true
       schema:
         type: string
-      example: b011c739-7c8f-45ec-8963-a4b61f7edaae
+      example: PRO_1
     - name: childTypeCode
       in: query
       description: The code of the Geo-Object Type that the Geo-Object belongs to.

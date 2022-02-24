@@ -1,7 +1,7 @@
 type: object
 description: Add child params.
 properties:
-  parentId:
+  parentCode:
     type: string
   parentTypeCode:
     type: string
@@ -10,4 +10,8 @@ properties:
   childTypeCode:
     type: string
   hierarchyCode:
+    type: string
+  startDate:
+    type: string
+  endDate:
     type: string

@@ -87,8 +87,8 @@ paths:
     $ref: 'paths/list@data.yaml'
   '/directed-graph-type/get-all':
     $ref: 'paths/directed-graph-type@get-all.yaml'
-  '/related-type/get-all':
-    $ref: 'paths/related-type@get-all.yaml'    
+  '/undirected-graph-type/get-all':
+    $ref: 'paths/undirected-graph-type@get-all.yaml'    
 components:
   securitySchemes:
     Basic Authentication:
