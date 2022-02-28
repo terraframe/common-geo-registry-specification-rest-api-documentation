@@ -18,20 +18,22 @@ externalDocs:
   description: Learn more about the GeoPrism Registry Specification.
   url: 'https://github.com/terraframe/common-geo-registry-specification'
 tags:
-  - name: Geo-Object
-    description: Operations to interact with Geo-Objects in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
-  - name: Geo-Object-Over-Time
-    description: Operations to interact with Geo-Objects-Over-Time in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+  - name: Organization
+    description: Operations to interact with Organization definitions in the CGR.        
   - name: Geo-Object Type
-    description: Operations to interact with Geo-Object Types in the CGR.
-  - name: List
-    description: Operations to interact with List definitions and entries in the CGR.    
+    description: Operations to interact with Geo-Object Types in the CGR.    
   - name: Hierarchy
     description: Operations to interact with Hierarchical relationship type definitions in the CGR.            
   - name: Directed Acyclic Graph
     description: Operations to interact with Directed Acyclic Graph Type definitions in the CGR.    
   - name: Undirected Graph
-    description: Operations to interact with Undirected Graph Type definitions in the CGR.    
+    description: Operations to interact with Undirected Graph Type definitions in the CGR.        
+  - name: Geo-Object
+    description: Operations to interact with Geo-Objects in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+  - name: Geo-Object-Over-Time
+    description: Operations to interact with Geo-Objects-Over-Time in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+  - name: List
+    description: Operations to interact with List definitions and entries in the CGR.    
 servers:
   - url: 'https://demo-georegistry.geoprism.net/'
 paths:
@@ -79,8 +81,12 @@ paths:
     $ref: 'paths/geoobject-time@post-update.yaml'
   '/cgr/geoobject-time/create':
     $ref: 'paths/geoobject-time@post-create.yaml'
+  '/geoobject-editor/createGeoObject':
+    $ref: 'paths/geoobject-time@post-create-geo-object.yaml'    
   '/cgr/geoobjecttype/get-all':
     $ref: 'paths/geoobjecttype@get-all.yaml'
+  '/cgr/import-types':
+    $ref: 'paths/geoobjecttype@import-types.yaml'    
   '/cgr/hierarchytype/get-all':
     $ref: 'paths/hierarchytype@get-all.yaml'
   '/cgr/list/data':
@@ -89,6 +95,14 @@ paths:
     $ref: 'paths/directed-graph-type@get-all.yaml'
   '/undirected-graph-type/get-all':
     $ref: 'paths/undirected-graph-type@get-all.yaml'    
+  '/cgr/orgainizations/get-all':
+    $ref: 'paths/organization@get-all.yaml'            
+  '/cgr/orgainization/create':
+    $ref: 'paths/organization@post-create.yaml'        
+  '/cgr/orgainization/update':
+    $ref: 'paths/organization@post-update.yaml'        
+  '/cgr/orgainization/delete':
+    $ref: 'paths/organization@post-delete.yaml'        
 components:
   securitySchemes:
     Basic Authentication:
