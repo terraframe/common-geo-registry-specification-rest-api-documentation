@@ -5,9 +5,9 @@ get:
   description: PROPOSED METHOD. Currently unsupported. Get child Geo-Objects of a Geo-Object as defined by a Directed Acyclic Graph.
   operationId: getGraphChildren
   parameters:
-    - name: parentId
+    - name: parentCode
       in: query
-      description: The id of the Geo-Object for which the children will be requested.
+      description: The code of the Geo-Object for which the children will be requested.
       required: true
       schema:
         type: string

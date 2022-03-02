@@ -1,11 +1,11 @@
 type: object
 description: Remove Directed Graph Relationship child params.
 properties:
-  parentId:
+  parentCode:
     type: string
   parentTypeCode:
     type: string
-  childId:
+  childCode:
     type: string
   childTypeCode:
     type: string

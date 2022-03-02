@@ -1,11 +1,11 @@
 type: object
 description: Remove related Geo-Object params.
 properties:
-  sourceId:
+  sourceCode:
     type: string
   sourceTypeCode:
     type: string
-  targetId:
+  targetCode:
     type: string
   targetTypeCode:
     type: string
