@@ -5,21 +5,21 @@ get:
   description: PROPOSED METHOD. Currently unsupported. Get child Geo-Objects of a Geo-Object as defined by an Undirected Graph.
   operationId: getRelatedGeoObjects
   parameters:
-    - name: source
+    - name: sourceCode
       in: query
-      description: The id of the source Geo-Object.
+      description: The code of the source Geo-Object.
       required: true
       schema:
         type: string
       example: b011c739-7c8f-45ec-8963-a4b61f7edaae
-    - name: parentTypeCode
+    - name: sourceTypeCode
       in: query
-      description: The code of the Geo-Object Type that the Geo-Object belongs to.
+      description: The code of the Geo-Object Type that the source Geo-Object belongs to.
       required: true
       schema:
         type: string
       example: PRO
-    - name: relationshipCode
+    - name: undirectedRelationshipCode
       in: query
       description: The type code of the Undirected Relationship.
       required: true
