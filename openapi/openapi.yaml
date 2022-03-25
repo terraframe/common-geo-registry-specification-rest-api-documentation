@@ -84,9 +84,25 @@ paths:
 
   '/directed-graph-type/get-all':
     $ref: 'paths/directed-graph-type@get-all.yaml'
+  '/directed-graph-type/create':
+    $ref: 'paths/directed-graph-type@create.yaml'
+  '/directed-graph-type/update':
+    $ref: 'paths/directed-graph-type@update.yaml'
+  '/directed-graph-type/remove':
+    $ref: 'paths/directed-graph-type@remove.yaml'
+  '/directed-graph-type/get':
+    $ref: 'paths/directed-graph-type@get.yaml'
 
   '/undirected-graph-type/get-all':
     $ref: 'paths/undirected-graph-type@get-all.yaml'    
+  '/undirected-graph-type/create':
+    $ref: 'paths/undirected-graph-type@create.yaml'
+  '/undirected-graph-type/update':
+    $ref: 'paths/undirected-graph-type@update.yaml'
+  '/undirected-graph-type/remove':
+    $ref: 'paths/undirected-graph-type@remove.yaml'
+  '/undirected-graph-type/get':
+    $ref: 'paths/undirected-graph-type@get.yaml'
 
   '/cgr/orgainizations/get-all':
     $ref: 'paths/organization@get-all.yaml'            

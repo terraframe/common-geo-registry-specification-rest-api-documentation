@@ -7,5 +7,3 @@ properties:
     $ref: './LocalizedLabel.yaml'
   description:
     $ref: './LocalizedLabel.yaml'
-  organizationCode:
-    type: string

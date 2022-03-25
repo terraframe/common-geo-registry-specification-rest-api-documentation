@@ -1,18 +1,25 @@
 get:
   tags:
     - Directed Acyclic Graph
-  summary: Get all Directed Acyclic Graph Type definitions.
-  description: PROPOSED METHOD. Currently unsupported. Get Directed Acyclic Graph Type definitions.
-  operationId: getDirectedGraphTypes
+  summary: Get a Directed Acyclic Graph Type definition.
+  description: PROPOSED METHOD. Currently unsupported. Get a Directed Acyclic Graph Type definition.
+  operationId: getDirectedGraphType
+  parameters:
+    - name: code
+      in: query
+      description: The code of the Directed Acyclic Graph Type to get.
+      required: true
+      schema:
+        type: string
+      example: TLK01  
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '../components/schemas/DirectedGraphType.yaml'
+            oneOf:
+              - $ref: ../components/schemas/DirectedGraphType.yaml
           example:
             - code: "Test_DAG"
               label:

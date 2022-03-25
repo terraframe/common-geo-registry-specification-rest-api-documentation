@@ -1,18 +1,25 @@
 get:
   tags:
     - Undirected Graph
-  summary: Get all Undirected Graph Type definitions.
-  description: PROPOSED METHOD. Currently unsupported. Get all Undirected Graph Type definitions.
-  operationId: getUndirectedRelationshipTypes
+  summary: Get a Undirected Graph Type definition.
+  description: PROPOSED METHOD. Currently unsupported. Get a Undirected Graph Type definition.
+  operationId: getUndirectedRelationshipType
+  parameters:
+    - name: code
+      in: query
+      description: The code of the Undirected Graph Type to get.
+      required: true
+      schema:
+        type: string
+      example: TLK01  
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '../components/schemas/RelatedType.yaml'
+            oneOf:
+              - $ref: ../components/schemas/RelatedType.yaml
           example:
             - code: "Test_UND"
               label:
