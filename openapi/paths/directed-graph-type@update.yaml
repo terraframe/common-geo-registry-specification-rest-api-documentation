@@ -1,8 +1,8 @@
 post:
   tags:
     - Directed Acyclic Graph
-  summary: PROPOSED METHOD. Currently unsupported. Update an existing Directed Acyclic Graph Type.
-  description: PROPOSED METHOD. Currently unsupported. Update an existing Directed Acyclic Graph Type.
+  summary: Update an existing Directed Acyclic Graph Type.
+  description: Update an existing Directed Acyclic Graph Type.
   operationId: updateDag
   requestBody:
     required: true

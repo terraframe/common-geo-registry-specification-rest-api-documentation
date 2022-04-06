@@ -2,7 +2,7 @@ get:
   tags:
     - Directed Acyclic Graph
   summary: Get all Directed Acyclic Graph Type definitions.
-  description: PROPOSED METHOD. Currently unsupported. Get Directed Acyclic Graph Type definitions.
+  description: Get Directed Acyclic Graph Type definitions.
   operationId: getDirectedGraphTypes
   responses:
     '200':

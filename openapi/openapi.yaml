@@ -127,10 +127,10 @@ paths:
 
   '/undirected/get-related-geo-objects':  
     $ref: 'paths/undirected@get-related-geo-objects.yaml'        
-  '/undirected/add-related-geo-object':
-    $ref: 'paths/undirected@post-add-related-geo-object.yaml'            
-  '/undirected/remove-related-geo-object':
-    $ref: 'paths/undirected@post-remove-related-geo-object.yaml'        
+  '/undirected/add-target':
+    $ref: 'paths/undirected@post-add-target.yaml'            
+  '/undirected/remove-target':
+    $ref: 'paths/undirected@post-remove-target.yaml'        
          
 components:
   securitySchemes:

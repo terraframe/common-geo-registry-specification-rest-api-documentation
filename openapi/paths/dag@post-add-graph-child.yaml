@@ -2,7 +2,7 @@ post:
   tags:
     - Geo-Object
   summary: Add child Geo-Object to a Directed Acyclic Graph.
-  description: PROPOSED METHOD. Currently unsupported. Add child Geo-Object to a Directed Acyclic Graph.
+  description: Add child Geo-Object to a Directed Acyclic Graph.
   operationId: addGraphChild
   requestBody:
     required: true

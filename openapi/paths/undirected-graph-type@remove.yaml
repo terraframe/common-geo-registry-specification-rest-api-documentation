@@ -1,8 +1,8 @@
 post:
   tags:
     - Undirected Graph
-  summary: PROPOSED METHOD. Currently unsupported. Delete existing Undirected Graph Type.
-  description: PROPOSED METHOD. Currently unsupported. Delete existing Undirected Graph Type.
+  summary: Delete existing Undirected Graph Type.
+  description: Delete existing Undirected Graph Type.
   operationId: removeUndirectedRelationshipType
   requestBody:
     required: true

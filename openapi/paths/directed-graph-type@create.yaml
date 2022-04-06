@@ -1,8 +1,8 @@
 post:
   tags:
     - Directed Acyclic Graph
-  summary: PROPOSED METHOD. Currently unsupported. Create a Directed Acyclic Graph Type.
-  description: PROPOSED METHOD. Currently unsupported. Create a Directed Acyclic Graph Type.
+  summary: Create a Directed Acyclic Graph Type.
+  description: Create a Directed Acyclic Graph Type.
   operationId: createDag
   requestBody:
     required: true

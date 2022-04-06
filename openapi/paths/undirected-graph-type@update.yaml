@@ -1,8 +1,8 @@
 post:
   tags:
     - Undirected Graph
-  summary: PROPOSED METHOD. Currently unsupported. Update an existing Undirected Graph Type.
-  description: PROPOSED METHOD. Currently unsupported. Update an existing Undirected Graph Type.
+  summary: Update an existing Undirected Graph Type.
+  description: Update an existing Undirected Graph Type.
   operationId: updateUndirectedRelationshipType
   requestBody:
     required: true

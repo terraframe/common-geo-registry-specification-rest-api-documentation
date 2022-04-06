@@ -2,7 +2,7 @@ get:
   tags:
     - Undirected Graph
   summary: Get a Undirected Graph Type definition.
-  description: PROPOSED METHOD. Currently unsupported. Get a Undirected Graph Type definition.
+  description: Get a Undirected Graph Type definition.
   operationId: getUndirectedRelationshipType
   parameters:
     - name: code

@@ -2,7 +2,7 @@ get:
   tags:
     - Geo-Object
   summary: Get child Geo-Objects of a Geo-Object as defined by a Directed Acyclic Graph.
-  description: PROPOSED METHOD. Currently unsupported. Get child Geo-Objects of a Geo-Object as defined by a Directed Acyclic Graph.
+  description: Get child Geo-Objects of a Geo-Object as defined by a Directed Acyclic Graph.
   operationId: getGraphChildren
   parameters:
     - name: parentCode

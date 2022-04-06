@@ -1,8 +1,8 @@
 post:
   tags:
     - Directed Acyclic Graph
-  summary: PROPOSED METHOD. Currently unsupported. Delete existing Directed Acyclic Graph Type.
-  description: PROPOSED METHOD. Currently unsupported. Delete existing Directed Acyclic Graph Type.
+  summary: Delete existing Directed Acyclic Graph Type.
+  description: Delete existing Directed Acyclic Graph Type.
   operationId: removeDag
   requestBody:
     required: true

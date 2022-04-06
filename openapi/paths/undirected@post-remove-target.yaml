@@ -2,7 +2,7 @@ post:
   tags:
     - Geo-Object
   summary: Remove a child Geo-Object from an Undirected Graph.
-  description: PROPOSED METHOD. Currently unsupported. Remove a child Geo-Object from an Undirected Graph.
+  description: Remove a child Geo-Object from an Undirected Graph.
   operationId: removeRelatedGeoObject
   requestBody:
     required: true

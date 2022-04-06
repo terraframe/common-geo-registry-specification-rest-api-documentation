@@ -2,7 +2,7 @@ post:
   tags:
     - Geo-Object
   summary: Add Geo-Object to a Undirected Graph.
-  description: PROPOSED METHOD. Currently unsupported. Add Geo-Object to a Undirected Graph.
+  description: Add Geo-Object to a Undirected Graph.
   operationId: addRelatedGeoObject
   requestBody:
     required: true
