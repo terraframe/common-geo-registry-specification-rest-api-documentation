@@ -12,6 +12,54 @@ get:
       schema:
         type: string
       example: 11fa9757-d887-461e-93f0-044be80005f1
+    - name: criteria
+      in: query
+      description: Filtering criteria of the data.
+      required: true
+      schema:
+        type: object
+        properties:
+          first:
+            type: integer
+            required: false
+          rows:
+            type: integer                    
+            required: false            
+          sortField:
+            type: string
+            required: false            
+          sortOrder:
+            type: integer
+            required: false
+          multiSortMeta:
+            type: array
+            items:
+              type: object
+              properties:
+                field:
+                  type: string
+                order:
+                  type: integer
+            required: false          
+          filters:
+            type: array
+            items:
+              type: object
+              properties:
+                matchMode:
+                  type: string
+                value:
+                  type: string
+            required: false                      
+      example: '{filters: {code: {matchMode: "equals", value: "02"}}, first: 0, multiSortMeta: [{field: "code", order: -1}], rows: 30, sortOrder: 1}'
+    - name: showInvalid
+      in: query
+      description: Option to include invalid Geo-Objects.
+      required: true
+      schema:
+        type: boolean
+        default: false
+      example: true        
     - name: includeGeometries
       in: query
       description: Option to include geometries for each row (when they exist).

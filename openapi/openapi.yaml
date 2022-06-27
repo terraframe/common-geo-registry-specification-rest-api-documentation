@@ -79,7 +79,7 @@ paths:
   '/cgr/hierarchytype/get-all':
     $ref: 'paths/hierarchytype@get-all.yaml'
 
-  '/cgr/list/data':
+  '/cgr/list-type/data':
     $ref: 'paths/list@data.yaml'
 
   '/directed-graph-type/get-all':
