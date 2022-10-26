@@ -19,15 +19,15 @@ externalDocs:
   url: 'https://terraframe-inc.gitbook.io/geoprism-registry-documentation/'
 tags:
   - name: Organization
-    description: Operations to interact with Organization definitions in the CGR.        
+    description: Operations to interact with Organization definitions.        
   - name: Geo-Object Type
-    description: Operations to interact with Geo-Object Types in the CGR.    
+    description: Operations to interact with Geo-Object Types.    
   - name: Hierarchy
-    description: Operations to interact with Hierarchical relationship type definitions in the CGR.            
+    description: Operations to interact with Hierarchical relationship type definitions.            
   - name: Directed Acyclic Graph
-    description: Operations to interact with Directed Acyclic Graph Type definitions in the CGR.    
+    description: Operations to interact with Directed Acyclic Graph Type definitions.    
   - name: Undirected Graph
-    description: Operations to interact with Undirected Graph Type definitions in the CGR.        
+    description: Operations to interact with Undirected Graph Type definitions.        
   - name: Geo-Object
     description: Operations to interact with Geo-Objects. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
   - name: Geo-Object-Over-Time
