@@ -1,0 +1,25 @@
+type: object
+properties:
+  graphTypes:
+    type: array
+    items:
+      type: object
+      properties:
+        graphTypeClass:
+          type: string
+        code:
+          type: string
+        edges:
+          type: array
+          items:
+            type: object
+            properties:
+              source:
+                type: string
+              sourceType:
+                type: string
+              target:
+                type: string
+              targetType:
+                type: string
+        

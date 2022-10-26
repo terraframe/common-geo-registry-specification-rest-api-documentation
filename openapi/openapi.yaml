@@ -3,27 +3,33 @@ info:
   version: 1.0.0
   title: GeoPrism Registry REST API
   # termsOfService: 'https://example.com/terms/'
-  contact:
-    name: Contact
-    email: info@terraframe.com
-    url: '/'
-  license:
-    name: GPL
-    url: 'https://opensource.org/licenses/gpl-license'
+  # contact:
+    # name: Contact
+    # email: info@terraframe.com
+    # url: '/'
+  # license:
+  #   name: GPL
+  #   url: 'https://opensource.org/licenses/gpl-license'
   x-logo:
     url: './cgr_logo.png'
   description: >
-    The GeoPrism Registry API provides programatic access to key functionality.
+    The GeoPrism Registry API provides programatic access to core functionality.
 externalDocs:
-  description: Learn more about the GeoPrism Registry Specification.
-  url: 'https://github.com/terraframe/common-geo-registry-specification'
+  description: User documentation
+  url: 'https://terraframe-inc.gitbook.io/geoprism-registry-documentation/'
 tags:
   - name: Geo-Object
-    description: Operations to interact with Geo-Objects in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+    description: Operations to interact with Geo-Objects. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
   - name: Geo-Object-Over-Time
-    description: Operations to interact with Geo-Objects-Over-Time in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+    description: Operations to interact with Geo-Objects-Over-Time. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
   - name: Geo-Object Type
-    description: Operations to interact with Geo-Object Types in the CGR.
+    description: Operations to interact with Geo-Object Types.
+  - name: Hierarchy
+    description: Operations to interact with hierarchies.
+  - name: List
+    description: Operations to interact with Lists.
+  - name: ETL
+    description: Operations for bulk importing data.
 servers:
   - url: 'https://demo-georegistry.geoprism.net/'
 paths:
@@ -63,6 +69,8 @@ paths:
     $ref: 'paths/hierarchytype@get-all.yaml'
   '/cgr/list/data':
     $ref: 'paths/list@data.yaml'
+  '/etl/import-edge-json':
+    $ref: 'paths/etl@import-edge-json.yaml'
 components:
   securitySchemes:
     Basic Authentication:
