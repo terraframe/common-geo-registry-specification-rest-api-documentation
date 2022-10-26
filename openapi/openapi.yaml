@@ -18,6 +18,16 @@ externalDocs:
   description: User documentation
   url: 'https://terraframe-inc.gitbook.io/geoprism-registry-documentation/'
 tags:
+  - name: Organization
+    description: Operations to interact with Organization definitions in the CGR.        
+  - name: Geo-Object Type
+    description: Operations to interact with Geo-Object Types in the CGR.    
+  - name: Hierarchy
+    description: Operations to interact with Hierarchical relationship type definitions in the CGR.            
+  - name: Directed Acyclic Graph
+    description: Operations to interact with Directed Acyclic Graph Type definitions in the CGR.    
+  - name: Undirected Graph
+    description: Operations to interact with Undirected Graph Type definitions in the CGR.        
   - name: Geo-Object
     description: Operations to interact with Geo-Objects. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
   - name: Geo-Object-Over-Time
@@ -43,8 +53,6 @@ paths:
     $ref: 'paths/geoobject@post-empty.yaml'
   '/cgr/geoobject/get-code':
     $ref: 'paths/geoobject@get-code.yaml'
-  '/geoobject/get-all':
-    $ref: 'paths/geoobject@get-all.yaml'
   '/cgr/geoobject/getchildren':
     $ref: 'paths/geoobject@getchildren.yaml'
   '/cgr/geoobject/get-parent-geoobjects':
@@ -55,6 +63,7 @@ paths:
     $ref: 'paths/geoobject@post-remove-child.yaml'
   '/cgr/geoobject/get-uids':
     $ref: 'paths/geoobject@get-uids.yaml'
+
   # '/cgr/geoobject-time/get':
   #   $ref: 'paths/geoobject-time@get.yaml'
   '/cgr/geoobject-time/get-code':
@@ -63,14 +72,73 @@ paths:
     $ref: 'paths/geoobject-time@post-update.yaml'
   '/cgr/geoobject-time/create':
     $ref: 'paths/geoobject-time@post-create.yaml'
+
+  '/geoobject-editor/createGeoObject':
+    $ref: 'paths/geoobject-time@post-create-geo-object.yaml'    
+
   '/cgr/geoobjecttype/get-all':
     $ref: 'paths/geoobjecttype@get-all.yaml'
+
+  '/cgr/import-types':
+    $ref: 'paths/geoobjecttype@import-types.yaml'    
+
   '/cgr/hierarchytype/get-all':
     $ref: 'paths/hierarchytype@get-all.yaml'
-  '/cgr/list/data':
+
+  '/cgr/list-type/data':
     $ref: 'paths/list@data.yaml'
   '/etl/import-edge-json':
     $ref: 'paths/etl@import-edge-json.yaml'
+  '/directed-graph-type/get-all':
+    $ref: 'paths/directed-graph-type@get-all.yaml'
+  '/directed-graph-type/create':
+    $ref: 'paths/directed-graph-type@create.yaml'
+  '/directed-graph-type/update':
+    $ref: 'paths/directed-graph-type@update.yaml'
+  '/directed-graph-type/remove':
+    $ref: 'paths/directed-graph-type@remove.yaml'
+  '/directed-graph-type/get':
+    $ref: 'paths/directed-graph-type@get.yaml'
+
+  '/undirected-graph-type/get-all':
+    $ref: 'paths/undirected-graph-type@get-all.yaml'    
+  '/undirected-graph-type/create':
+    $ref: 'paths/undirected-graph-type@create.yaml'
+  '/undirected-graph-type/update':
+    $ref: 'paths/undirected-graph-type@update.yaml'
+  '/undirected-graph-type/remove':
+    $ref: 'paths/undirected-graph-type@remove.yaml'
+  '/undirected-graph-type/get':
+    $ref: 'paths/undirected-graph-type@get.yaml'
+
+  '/cgr/orgainizations/get-all':
+    $ref: 'paths/organization@get-all.yaml'            
+  '/cgr/orgainization/create':
+    $ref: 'paths/organization@post-create.yaml'        
+  '/cgr/orgainization/update':
+    $ref: 'paths/organization@post-update.yaml'        
+  '/cgr/orgainization/delete':
+    $ref: 'paths/organization@post-delete.yaml'   
+
+  '/geoobject/get-all':
+    $ref: 'paths/geoobject@get-all.yaml'
+
+  '/dag/get-children':
+    $ref: 'paths/dag@get-graph-children.yaml'            
+  '/dag/get-parents':
+    $ref: 'paths/dag@get-graph-parents.yaml'    
+  '/dag/add-child':
+    $ref: 'paths/dag@post-add-graph-child.yaml'    
+  '/dag/remove-child':  
+    $ref: 'paths/dag@post-remove-graph-child.yaml'    
+
+  '/undirected/get-related-geo-objects':  
+    $ref: 'paths/undirected@get-related-geo-objects.yaml'        
+  '/undirected/add-target':
+    $ref: 'paths/undirected@post-add-target.yaml'            
+  '/undirected/remove-target':
+    $ref: 'paths/undirected@post-remove-target.yaml'        
+  
 components:
   securitySchemes:
     Basic Authentication:

@@ -1,24 +1,31 @@
 get:
   tags:
     - Geo-Object
-  summary: Get parent Geo-Objects of a Geo-Object.
-  description: Get parent Geo-Objects of a Geo-Object.
-  operationId: getParentGeoObjects
+  summary: Get the related Geo-Objects of a Geo-Object as defined by an Undirected Graph.
+  description: Get child Geo-Objects of a Geo-Object as defined by an Undirected Graph.
+  operationId: getRelatedGeoObjects
   parameters:
-    - name: childCode
+    - name: sourceCode
       in: query
-      description: The code of the Geo-Object for which the parents will be requested.
+      description: The code of the source Geo-Object.
       required: true
       schema:
         type: string
-      example: PRO_1
-    - name: childTypeCode
+      example: b011c739-7c8f-45ec-8963-a4b61f7edaae
+    - name: sourceTypeCode
       in: query
-      description: The code of the Geo-Object Type that the Geo-Object belongs to.
+      description: The code of the Geo-Object Type that the source Geo-Object belongs to.
       required: true
       schema:
         type: string
       example: PRO
+    - name: undirectedRelationshipCode
+      in: query
+      description: The type code of the Undirected Relationship.
+      required: true
+      schema:
+        type: string
+      example: CTY
     - name: date
       in: query
       description: The temporal date to check against. Must in the the format of YYYY-MM-DD.
@@ -26,18 +33,9 @@ get:
       schema:
         type: string
       example: "2021-02-20"            
-    - name: parentTypes
-      in: query
-      description: An array of Geo-Object Type codes of the Geo-Object Types that the parent Geo-Objects must belongs to. Example is encoded for easy texting in a web browser.
-      required: true
-      schema:
-        type: array
-        items:
-          type: string
-      example: "%5B%22REG%22%5D"
     - name: recursive
       in: query
-      description: TRUE to return all parent Geo-Objects for all specified parentTypes at all levels above the child Geo-Object.
+      description: TRUE to return all child Geo-Objects for the specified graph type at all levels below the parent Geo-Object.
       required: true
       schema:
         type: boolean

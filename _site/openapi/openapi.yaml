@@ -41,12 +41,24 @@ paths:
     $ref: 'paths/geoobject@get-all.yaml'
   '/geoobject/getchildren':
     $ref: 'paths/geoobject@getchildren.yaml'
+  '/geoobject/get-graph-children':
+    $ref: 'paths/geoobject@get-graph-children.yaml'    
+  '/geoobject/get-related-geo-objects':
+    $ref: 'paths/geoobject@get-related-geo-objects.yaml'        
   '/geoobject/getparents':
-    $ref: 'paths/geoobject@getparents.yaml'
+    $ref: 'paths/geoobject@get-parent-geoobjects.yaml'
   '/geoobject/addchild':
     $ref: 'paths/geoobject@post-add-child.yaml'
+  '/geoobject/add-graph-child':
+    $ref: 'paths/geoobject@post-add-graph-child.yaml'    
+  '/geoobject/add-related-geo-object':
+    $ref: 'paths/geoobject@post-add-related-geo-object.yaml'        
   '/geoobject/removechild':
     $ref: 'paths/geoobject@post-remove-child.yaml'
+  '/geoobject/remove-graph-child':
+    $ref: 'paths/geoobject@post-remove-graph-child.yaml'    
+  '/geoobject/remove-related-geo-object':
+    $ref: 'paths/geoobject@post-remove-related-geo-object.yaml'        
   '/geoobject/get-uids':
     $ref: 'paths/geoobject@get-uids.yaml'
   '/geoobject-time/get':

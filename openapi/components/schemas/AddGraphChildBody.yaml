@@ -9,7 +9,7 @@ properties:
     type: string
   childTypeCode:
     type: string
-  hierarchyCode:
+  directedGraphCode:
     type: string
   startDate:
     type: string

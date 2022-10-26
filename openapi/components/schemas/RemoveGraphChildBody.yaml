@@ -1,5 +1,5 @@
 type: object
-description: Add child params.
+description: Remove Directed Graph Relationship child params.
 properties:
   parentCode:
     type: string
@@ -9,7 +9,7 @@ properties:
     type: string
   childTypeCode:
     type: string
-  hierarchyCode:
+  directedGraphCode:
     type: string
   startDate:
     type: string

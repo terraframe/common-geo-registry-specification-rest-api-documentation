@@ -1,13 +1,17 @@
 type: object
 description: Remove child params.
 properties:
-  parentId:
+  parentCode:
     type: string
   parentTypeCode:
     type: string
-  childId:
+  childCode:
     type: string
   childTypeCode:
     type: string
   hierarchyCode:
+    type: string
+  startDate:
+    type: string
+  endDate:
     type: string

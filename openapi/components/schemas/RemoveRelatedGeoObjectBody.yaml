@@ -1,15 +1,15 @@
 type: object
-description: Add child params.
+description: Remove related Geo-Object params.
 properties:
-  parentCode:
+  sourceCode:
     type: string
-  parentTypeCode:
+  sourceTypeCode:
     type: string
-  childCode:
+  targetCode:
     type: string
-  childTypeCode:
+  targetTypeCode:
     type: string
-  hierarchyCode:
+  undirectedRelationshipCode:
     type: string
   startDate:
     type: string
