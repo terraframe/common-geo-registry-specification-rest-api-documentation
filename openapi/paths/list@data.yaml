@@ -14,7 +14,7 @@ get:
       example: 11fa9757-d887-461e-93f0-044be80005f1
     - name: criteria
       in: query
-      description: Filtering criteria of the data. Attribute matchMode options for Text types can utilize "contains" or "equals". Attribute matchMode options for Boolean types must use "". Attribute matchMode options for Integer types must use "equals". Attribute matchMode options for Decimal types must use "equals". Attribute matchMode options for Date types must use "{startDate?string, endDate?:string}".
+      description: Filtering criteria of the data. Attribute matchMode options for Text types can utilize "contains" or "equals". Attribute matchMode options for Boolean types must use "". Attribute matchMode options for number types (integer or decimal) must use "equals". Attribute matchMode options for Date types must use "{startDate?string, endDate?:string}".
       required: true
       schema:
         type: object
