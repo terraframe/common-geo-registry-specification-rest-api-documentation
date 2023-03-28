@@ -14,7 +14,7 @@ get:
       example: 11fa9757-d887-461e-93f0-044be80005f1
     - name: criteria
       in: query
-      description: Filtering criteria of the data. Attribute matchMode options for Text types can utilize "contains" or "equals". Attribute matchMode options for Boolean types must use "". Attribute matchMode options for number types (integer or decimal) must use "equals". Attribute matchMode options for Date types must use "{startDate?string, endDate?:string}".
+      description: Filtering criteria of the data. 
       required: true
       schema:
         type: object
@@ -25,13 +25,16 @@ get:
             description: Row number to start the response from. Used with pagination.
           rows:
             type: integer                    
-            required: false            
+            required: false
+            description: How many rows to include in the response. Used with pagination.
           sortField:
             type: string
-            required: false            
+            required: false  
+            description: Field to sort on. You can use multiSortOrder instead of this parameter.
           sortOrder:
             type: integer
             required: false
+            description: Sort oder for the sortField. 1 is ascending and -1 is descending. You can use multiSortOrder instead of this parameter.
           multiSortMeta:
             type: array
             items:
@@ -39,8 +42,10 @@ get:
               properties:
                 field:
                   type: string
+                  description: code of the field to sort on.
                 order:
                   type: integer
+                  description: Sort oder for the sortField. 1 is ascending and -1 is descending.
             required: false          
           filters:
             type: array
@@ -49,8 +54,10 @@ get:
               properties:
                 matchMode:
                   type: string
+                  description: Strategy for matching field values. Options for Text types can utilize "contains" or "equals". Options for Boolean types must use "". Options for number types (integer or decimal) must use "equals". Options for Date types must use "{startDate:string, endDate:string}".
                 value:
                   type: string
+                  description: Value to filter on.
             required: false                      
       example: '{filters: {code: {matchMode: "equals", value: "02"}}, first: 0, multiSortMeta: [{field: "code", order: -1}], rows: 30, sortOrder: 1}'
     - name: showInvalid
