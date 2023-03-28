@@ -22,6 +22,7 @@ get:
           first:
             type: integer
             required: false
+            description: Row number to start the response from. Used with pagination.
           rows:
             type: integer                    
             required: false            
