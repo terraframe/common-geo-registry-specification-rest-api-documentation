@@ -43,25 +43,25 @@ tags:
 servers:
   - url: 'https://demo-georegistry.geoprism.net/'
 paths:
-  '/cgr/geoobject/get':
+  '/api/geoobject/get':
     $ref: 'paths/geoobject@get.yaml'
-  '/cgr/geoobject/update':
+  '/api/geoobject/update':
     $ref: 'paths/geoobject@put.yaml'
-  '/cgr/geoobject/create':
+  '/api/geoobject/create':
     $ref: 'paths/geoobject@post.yaml'
-  '/cgr/geoobject/newGeoObjectInstance':
+  '/api/geoobject/newGeoObjectInstance':
     $ref: 'paths/geoobject@post-empty.yaml'
-  '/cgr/geoobject/get-code':
+  '/api/geoobject/get-code':
     $ref: 'paths/geoobject@get-code.yaml'
-  '/cgr/geoobject/getchildren':
+  '/api/geoobject/getchildren':
     $ref: 'paths/geoobject@getchildren.yaml'
-  '/cgr/geoobject/get-parent-geoobjects':
+  '/api/geoobject/get-parent-geoobjects':
     $ref: 'paths/geoobject@get-parent-geoobjects.yaml'
-  '/cgr/geoobject/addchild':
+  '/api/geoobject/addchild':
     $ref: 'paths/geoobject@post-add-child.yaml'
-  '/cgr/geoobject/removechild':
+  '/api/geoobject/removechild':
     $ref: 'paths/geoobject@post-remove-child.yaml'
-  '/cgr/geoobject/get-uids':
+  '/api/geoobject/get-uids':
     $ref: 'paths/geoobject@get-uids.yaml'
 
   # '/cgr/geoobject-time/get':
@@ -73,70 +73,70 @@ paths:
   '/cgr/geoobject-time/create':
     $ref: 'paths/geoobject-time@post-create.yaml'
 
-  '/geoobject-editor/createGeoObject':
+  '/api/geoobject-editor/createGeoObject':
     $ref: 'paths/geoobject-time@post-create-geo-object.yaml'    
 
-  '/cgr/geoobjecttype/get-all':
+  '/api/geoobjecttype/get-all':
     $ref: 'paths/geoobjecttype@get-all.yaml'
 
-  '/cgr/import-types':
+  '/api/cgr/import-types':
     $ref: 'paths/geoobjecttype@import-types.yaml'    
 
-  '/cgr/hierarchytype/get-all':
+  '/api/hierarchytype/get-all':
     $ref: 'paths/hierarchytype@get-all.yaml'
 
-  '/cgr/list-type/data':
+  '/api/list-type/data':
     $ref: 'paths/list@data.yaml'
-  '/etl/import-edge-json':
+  '/api/etl/import-edge-json':
     $ref: 'paths/etl@import-edge-json.yaml'
-  '/directed-graph-type/get-all':
+  '/api/directed-graph-type/get-all':
     $ref: 'paths/directed-graph-type@get-all.yaml'
-  '/directed-graph-type/create':
+  '/api/directed-graph-type/create':
     $ref: 'paths/directed-graph-type@create.yaml'
-  '/directed-graph-type/update':
+  '/api/directed-graph-type/update':
     $ref: 'paths/directed-graph-type@update.yaml'
-  '/directed-graph-type/remove':
+  '/api/directed-graph-type/remove':
     $ref: 'paths/directed-graph-type@remove.yaml'
-  '/directed-graph-type/get':
+  '/api/directed-graph-type/get':
     $ref: 'paths/directed-graph-type@get.yaml'
 
-  '/undirected-graph-type/get-all':
+  '/api/undirected-graph-type/get-all':
     $ref: 'paths/undirected-graph-type@get-all.yaml'    
-  '/undirected-graph-type/create':
+  '/api/undirected-graph-type/create':
     $ref: 'paths/undirected-graph-type@create.yaml'
-  '/undirected-graph-type/update':
+  '/api/undirected-graph-type/update':
     $ref: 'paths/undirected-graph-type@update.yaml'
-  '/undirected-graph-type/remove':
+  '/api/undirected-graph-type/remove':
     $ref: 'paths/undirected-graph-type@remove.yaml'
-  '/undirected-graph-type/get':
+  '/api/undirected-graph-type/get':
     $ref: 'paths/undirected-graph-type@get.yaml'
 
-  '/cgr/orgainizations/get-all':
+  '/api/organization/get-all':
     $ref: 'paths/organization@get-all.yaml'            
-  '/cgr/orgainization/create':
+  '/api/orgainization/create':
     $ref: 'paths/organization@post-create.yaml'        
-  '/cgr/orgainization/update':
+  '/api/orgainization/update':
     $ref: 'paths/organization@post-update.yaml'        
-  '/cgr/orgainization/delete':
+  '/api/orgainization/delete':
     $ref: 'paths/organization@post-delete.yaml'   
 
-  '/geoobject/get-all':
+  '/api/geoobject/get-all':
     $ref: 'paths/geoobject@get-all.yaml'
 
-  '/dag/get-children':
+  '/api/dag/get-children':
     $ref: 'paths/dag@get-graph-children.yaml'            
-  '/dag/get-parents':
+  '/api/dag/get-parents':
     $ref: 'paths/dag@get-graph-parents.yaml'    
-  '/dag/add-child':
+  '/api/dag/add-child':
     $ref: 'paths/dag@post-add-graph-child.yaml'    
-  '/dag/remove-child':  
+  '/api/dag/remove-child':  
     $ref: 'paths/dag@post-remove-graph-child.yaml'    
 
-  '/undirected/get-related-geo-objects':  
+  '/api/undirected/get-related-geo-objects':  
     $ref: 'paths/undirected@get-related-geo-objects.yaml'        
-  '/undirected/add-target':
+  '/api/undirected/add-target':
     $ref: 'paths/undirected@post-add-target.yaml'            
-  '/undirected/remove-target':
+  '/api/undirected/remove-target':
     $ref: 'paths/undirected@post-remove-target.yaml'        
   
 components:
