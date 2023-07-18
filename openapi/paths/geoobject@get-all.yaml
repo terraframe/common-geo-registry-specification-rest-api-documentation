@@ -22,7 +22,7 @@ get:
     - name: externalSystemId
       in: query
       description: The id of the external system registered in the CGR.
-      required: true
+      required: false
       schema:
         type: string
       example: REVEALEXTSYSTEM

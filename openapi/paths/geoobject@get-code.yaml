@@ -1,8 +1,8 @@
 get:
   tags:
     - Geo-Object
-  summary: Get a Geo-Object by CODE for a given Geo-Object Type.
-  description: Get all Geo-Objects for a given Geo-Object Type.
+  summary: Get a Geo-Object by its code and type code.
+  description: Gets a single Geo-Object by code.
   operationId: getGeoObjectByCode
   parameters:
     - name: code
@@ -14,7 +14,7 @@ get:
       example: TLK01
     - name: typeCode
       in: query
-      description: The code of the Geo-Object Type the Geo-Object belongs to.
+      description: The code of the defining Geo-Object Type.
       required: true
       schema:
         type: string

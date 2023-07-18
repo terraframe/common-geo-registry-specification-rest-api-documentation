@@ -4,6 +4,22 @@ get:
   summary: Get all Hierarchies.
   description: Get all Hierarchies.
   operationId: getHierarchies
+  parameters:
+    - name: types
+      in: query
+      description: A serialized JSON array of hierarchy codes. This example is HTTP URL encoded.
+      required: false
+      schema:
+        type: string
+      example: "%5B%22ADM_H%22%2C%22Health_geo%22%5D"
+    - name: context
+      in: query
+      description: Can be either 'READ' or 'WRITE'. If set to WRITE, the system will only return hierarchies for which you have permission to write. READ context will return all hierarchies that you have permission to read.
+      required: true
+      schema:
+        type: string
+        enum: [READ, WRITE]
+      example: "READ"
   responses:
     '200':
       description: Success

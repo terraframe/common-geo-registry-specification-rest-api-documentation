@@ -28,13 +28,13 @@ get:
       example: "2021-02-20"      
     - name: childrenTypes
       in: query
-      description: An array of Geo-Object Type codes of the Geo-Object Types that the child Geo-Objects must belongs to.
+      description: A serialized JSON array of Geo-Object Type codes of the Geo-Object Types that the child Geo-Objects must belongs to. Example is HTTP URL encoded.
       required: true
       schema:
         type: array
         items:
           type: string
-      example: CTY
+      example: "%5B%22CTY%22%5D"
     - name: recursive
       in: query
       description: TRUE to return all child Geo-Objects for all specified childrenTypes at all levels below the parent Geo-Object.
