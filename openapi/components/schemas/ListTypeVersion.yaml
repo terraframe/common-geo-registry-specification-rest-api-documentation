@@ -1,0 +1,158 @@
+type: object
+description: Core List Type entry schema.
+properties:
+  oid:
+    type: string
+  displayLabel:
+    type: string
+  typeCode:
+    type: string
+  orgCode:
+    type: string
+  listType:
+    type: string
+  forDate:
+    type: string
+  createDate:
+    type: string
+  versionNumber:
+    type: integer
+  working:
+    type: boolean
+  geometryType:
+    type: string
+  isGeometryEditable:
+    type: boolean
+  isAbstract:
+    type: boolean
+  shapefile:
+    type: boolean
+  isMember:
+    type: boolean
+  period:
+    type: object
+    properties:
+      type:
+        type: string
+      value:
+        type: string
+  listMetadata:
+    type: object
+    properties:
+      label:
+        $ref: './DisplayLabel.yaml'
+      description:
+        $ref: './DisplayLabel.yaml'
+      process:
+        $ref: './DisplayLabel.yaml'
+      progress:
+        $ref: './DisplayLabel.yaml'
+      accessConstraints:
+        $ref: './DisplayLabel.yaml'
+      useConstraints:
+        $ref: './DisplayLabel.yaml'
+      acknowledgements:
+        $ref: './DisplayLabel.yaml'
+      disclaimer:
+        $ref: './DisplayLabel.yaml'
+      collectionDate:
+        type: string
+      organization:
+        type: string
+      contactName:
+        type: string
+      telephoneNumber:
+        type: string
+      email:
+        type: string
+      originator:
+        type: string
+  geospatialMetadata:
+    type: object
+    properties:
+      label:
+        $ref: './DisplayLabel.yaml'
+      description:
+        $ref: './DisplayLabel.yaml'
+      process:
+        $ref: './DisplayLabel.yaml'
+      progress:
+        $ref: './DisplayLabel.yaml'
+      accessConstraints:
+        $ref: './DisplayLabel.yaml'
+      useConstraints:
+        $ref: './DisplayLabel.yaml'
+      acknowledgements:
+        $ref: './DisplayLabel.yaml'
+      disclaimer:
+        $ref: './DisplayLabel.yaml'
+      collectionDate:
+        type: string
+      organization:
+        type: string
+      contactName:
+        type: string
+      telephoneNumber:
+        type: string
+      email:
+        type: string
+      originator:
+        type: string
+      topicCategories:
+        type: string
+      placeKeywords:
+        type: string
+      updateFrequency:
+        type: string
+      lineage:
+        type: string
+      languages:
+        type: string
+      scaleResolution:
+        type: string
+      spatialRepresentation:
+        type: string
+      referenceSystem:
+        type: string
+      reportSpecification:
+        type: string
+      distributionFormat:
+        type: string
+  subtypes:
+    type: array
+    items:
+      type: object
+      properties:
+        code:
+          type: string
+        label:
+          type: string
+  publishDate:
+    type: string
+  attributes:
+    type: array
+    items:
+      type: object
+      properties:
+        label:
+          type: string
+        colspan:
+          type: integer
+        rowspan:
+          type: integer
+        columns:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              label:
+                type: string
+              type:
+                type: string
+              rowspan:
+                type: integer
+  curation:
+    type: boolean
+

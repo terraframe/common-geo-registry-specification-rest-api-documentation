@@ -1,6 +1,10 @@
 openapi: 3.0.2
 info:
   version: 1.0.0
+  contact: 
+    name: TerraFrame
+    url: test
+    email: test
   title: GeoPrism Registry REST API
   # termsOfService: 'https://example.com/terms/'
   # contact:
@@ -87,6 +91,13 @@ paths:
 
   '/api/list-type/data':
     $ref: 'paths/list@data.yaml'
+  '/api/list-type/list-for-type':
+    $ref: 'paths/list@list-for-type.yaml'
+  '/api/list-type/entries':
+    $ref: 'paths/list@entries.yaml'
+  '/api/list-type/version':
+    $ref: 'paths/list@version.yaml'
+
   '/api/etl/import-edge-json':
     $ref: 'paths/etl@import-edge-json.yaml'
   '/api/directed-graph-type/get-all':

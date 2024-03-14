@@ -1,0 +1,136 @@
+type: object
+description: Core List Type configuration schema.
+properties:
+  orgCode: 
+    type: string
+  orgLabel: 
+    type: string
+  typeCode: 
+    type: string
+  typeLabel: 
+    type: string
+  geometryType: 
+    type: string
+  write: 
+    type: boolean
+  lists:
+    type: array
+    items:
+      type: object
+      properties:
+        oid: 
+          type: string
+        organization: 
+          type: string
+        write: 
+          type: boolean
+        read: 
+          type: boolean
+        exploratory: 
+          type: boolean
+        typeLabel: 
+          type: string
+        typePrivate: 
+          type: boolean
+        typeCode: 
+          type: string
+        displayLabel: 
+          $ref: './DisplayLabel.yaml'
+        description:
+          $ref: './DisplayLabel.yaml'
+        code: 
+          type: string
+        hierarchies:
+          type: array
+        subtypeHierarchies:
+          type: array
+        includeLatLong: 
+          type: boolean
+        listMetadata:
+          type: object
+          properties:
+            label:
+              $ref: './DisplayLabel.yaml'
+            description:
+              $ref: './DisplayLabel.yaml'
+            process:
+              $ref: './DisplayLabel.yaml'
+            progress:
+              $ref: './DisplayLabel.yaml'
+            accessConstraints:
+              $ref: './DisplayLabel.yaml'
+            useConstraints:
+              $ref: './DisplayLabel.yaml'
+            acknowledgements:
+              $ref: './DisplayLabel.yaml'
+            disclaimer:
+              $ref: './DisplayLabel.yaml'
+            collectionDate:
+              type: string
+            organization:
+              type: string
+            contactName:
+              type: string
+            telephoneNumber:
+              type: string
+            email:
+              type: string
+            originator:
+              type: string
+        geospatialMetadata:
+          type: object
+          properties:
+            label:
+              $ref: './DisplayLabel.yaml'
+            description:
+              $ref: './DisplayLabel.yaml'
+            process:
+              $ref: './DisplayLabel.yaml'
+            progress:
+              $ref: './DisplayLabel.yaml'
+            accessConstraints:
+              $ref: './DisplayLabel.yaml'
+            useConstraints:
+              $ref: './DisplayLabel.yaml'
+            acknowledgements:
+              $ref: './DisplayLabel.yaml'
+            disclaimer:
+              $ref: './DisplayLabel.yaml'
+            collectionDate:
+              type: string
+            organization:
+              type: string
+            contactName:
+              type: string
+            telephoneNumber:
+              type: string
+            email:
+              type: string
+            originator:
+              type: string
+            topicCategories:
+              type: string
+            placeKeywords:
+              type: string
+            updateFrequency:
+              type: string
+            lineage:
+              type: string
+            languages:
+              type: string
+            scaleResolution:
+              type: string
+            spatialRepresentation:
+              type: string
+            referenceSystem:
+              type: string
+            reportSpecification:
+              type: string
+            distributionFormat:
+              type: string
+        frequency:
+          type: string
+        publishingStartDate: 
+          type: string
+        listType: 
+          type: string
