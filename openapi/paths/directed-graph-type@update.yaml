@@ -1,0 +1,37 @@
+post:
+  tags:
+    - Directed Acyclic Graph
+  summary: Update an existing Directed Acyclic Graph Type.
+  description: Update an existing Directed Acyclic Graph Type.
+  operationId: updateDag
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DirectedGraphType.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DirectedGraphType.yaml
+          example:
+            - code: "Test_DAG"
+              label:
+                localizedValue: "Flows into"
+                localeValues:
+                   - locale: "defaultLocale"
+                     value: "Flows into"
+              description:
+                localizedValue: ""
+                localeValues:
+                  - locale: "defaultLocale"
+                    value: "Denotes bodies of water which flow into one another"
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

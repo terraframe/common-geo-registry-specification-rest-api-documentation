@@ -1,0 +1,21 @@
+type: object
+properties:
+  attributes:
+    type: object
+    properties:
+      displayLabel:
+        $ref: './DisplayLabel.yaml'
+      geometry:
+        $ref: './AttributeTypeOverTime.yaml'
+      status:
+        $ref: './AttributeTypeOverTime.yaml'
+      uid:
+        type: string
+      code:
+        type: string
+      lastUpdateDate:
+        type: integer
+      type:
+        type: string
+      createDate:
+        type: integer

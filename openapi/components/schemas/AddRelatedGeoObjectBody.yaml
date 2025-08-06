@@ -1,0 +1,17 @@
+type: object
+description: Add child params.
+properties:
+  sourceCode:
+    type: string
+  sourceTypeCode:
+    type: string
+  targetCode:
+    type: string
+  targetTypeCode:
+    type: string
+  undirectedRelationshipCode:
+    type: string
+  startDate:
+    type: string
+  endDate:
+    type: string

@@ -1,0 +1,24 @@
+post:
+  tags:
+    - Organization
+  summary: Deletes an Organization
+  description: Deletes an Organization
+  operationId: deleteOrganization
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              type: string
+  responses:
+    '200':
+      description: Success
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

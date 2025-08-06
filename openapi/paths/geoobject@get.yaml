@@ -1,0 +1,69 @@
+get:
+  tags:
+    - Geo-Object
+  summary: Get a Geo-Object by ID for a given Geo-Object Type.
+  description: Get all Geo-Objects for a given Geo-Object Type.
+  operationId: getGeoObject
+  parameters:
+    - name: id
+      in: query
+      description: The id of the Geo-Object to get.
+      required: true
+      schema:
+        type: string
+      example: b011c739-7c8f-45ec-8963-a4b61f7edaae
+    - name: typeCode
+      in: query
+      description: The code of the Geo-Object Type the Geo-Object belongs to.
+      required: true
+      schema:
+        type: string
+      example: PRO
+    - name: date
+      in: query
+      description: The date in UTC. Defaults to 5000-12-31 which represents the most current date possible.
+      required: false
+      schema:
+        type: string
+        default: "5000-12-31"
+      example: "2016-04-20"
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../components/schemas/GeoObject.yaml
+              - $ref: ../components/schemas/RevealGeoObject.yaml
+          examples:
+            JSON_CGR:
+              value:
+                type: Feature
+                geometry:
+                  type: MultiPoint
+                  coordinates:
+                    - 113.56111706249908
+                    - 0.0657243021884568
+                properties:
+                  uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                  code: sflsjdflldsfj
+                  type: health_facilities
+                  lastUpdateDate: 1592514228000
+                  createDate: 1592426785000
+                  displayLabel:
+                    localizedValue: Central Health Facility
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Central Health Facility
+                      - locale: km_KH
+                        value: ជាំ សាងុំា
+                  invalid: false
+                  exists: true
+                  writable: true
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

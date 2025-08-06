@@ -1,69 +1,72 @@
-# parameters:
-#   - name: pretty_print
-#     in: query
-#     description: Pretty print response
-#     schema:
-#       type: boolean
 get:
   tags:
-    - GeoObject
-  summary: Get all GeoObjects for a given Geo-Object Type and Hierarchy.
-  description: Get all Geo-Objects for a given Geo-Object Type and Hierarchy.
-  operationId: getGeoObject
+    - Geo-Object
+  summary: Get all Geo-Objects for a given Geo-ObjectType and Hierarchy.
+  description: Get all Geo-Objects for a given Geo-ObjectType and Hierarchy.
+  operationId: getAllGeoObject
   parameters:
     - name: typeCode
       in: query
-      description: The code of the GeoObjectType that defines the GeoObjects.
+      description: The code of the Geo-Object Type that defines the Geo-Objects.
       required: true
       schema:
         type: string
+      example: PRO
     - name: hierarchyCode
       in: query
-      description: The code of the Hierarchy that the GeoObjectType belongs to. Default is FALSE.
+      description: The code of the Hierarchy that the Geo-Object Type belongs to. Default is FALSE.
       required: true
       schema:
         type: string
+      example: ADM_H
     - name: externalSystemId
       in: query
       description: The id of the external system registered in the CGR.
-      required: true
+      required: false
       schema:
         type: string
+      example: REVEALEXTSYSTEM
     - name: includeGeographicLevel
       in: query
-      description: TRUE to return the level in the hierarchy the GeoObjectType resides.
+      description: TRUE to return the level in the hierarchy the Geo-ObjectType resides.
       required: false
       schema:
         type: boolean
+        default: false
+      example: true
     - name: updatedSince
       in: query
-      description: Date in UTC from wich only GeoObjects will returned that have been updated.
+      description: Date in UTC from wich only Geo-Objects will returned that have been updated. 0 represents the beginning of UTC time.
       required: false
       schema:
         type: string
+        default: 0
+      example: 0
     - name: format
       in: query
-      description: Format in which to return the GeoObjects. Default is JSON_CGR.
+      description: Format in which to return the Geo-Objects. Default is JSON_CGR.
       required: false
       schema:
         type: string
         enum: [JSON_REVEAL, JSON_CGR]
+        default: JSON_CGR
+      example: JSON_REVEAL
     - name: pageNumber
       in: query
       description: Page number used for pagination.
       required: true
       schema:
         type: integer
+        default: 1
+      example: 1
     - name: pageSize
       in: query
       description: Page size (number or results to return) used for pagination.
       required: true
       schema:
         type: integer
-  security:
-    - main_auth:
-      - 'read:users'
-    - api_key: []
+        default: 100
+      example: 20
   responses:
     '200':
       description: Success
@@ -76,57 +79,56 @@ get:
           examples:
             JSON_CGR:
               value:
-                type: Feature
-                geometry:
-                  type: MultiPoint
-                  coordinates:
-                    -
+                - type: Feature
+                  geometry:
+                    type: MultiPoint
+                    coordinates:
                       - 113.56111706249908
-                        0.0657243021884568
-                properties:
-                  uid: 9975976c-1243-478c-850b-9176e2a7f57e
-                  code: sflsjdflldsfj
-                  type: health_facilities
-                  lastUpdateDate: 1592514228000
-                  createDate: 1592426785000
-                  status:
-                    - CGR:Status-Active
-                  displayLabel:
-                    localizedValue: Central Health Facility
-                    localeValues:
-                      - locale: defaultLocale
-                        value: Central Health Facility
-                      - locale: km_KH
-                        value: ជាំ សាងុំា
+                      - 0.0657243021884568
+                  properties:
+                    uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                    code: sflsjdflldsfj
+                    type: health_facilities
+                    lastUpdateDate: 1592514228000
+                    createDate: 1592426785000
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
             JSON_REVEAL:
               value:
-                type: Feature
-                geometry:
-                  type: MultiPoint
-                  coordinates:
-                    -
+                - type: Feature
+                  geometry:
+                    type: MultiPoint
+                    coordinates:
                       - 113.56111706249908
-                        0.0657243021884568
-                properties:
-                  uid: 9975976c-1243-478c-850b-9176e2a7f57e
-                  code: sflsjdflldsfj
-                  type: health_facilities
-                  name: Central Health Facility
-                  name_en: Central Health Facility
-                  version: 0
-                  OpenMRS_Id: 0
-                  externalId: 999999
-                  parentId: 63160720-239c-4347-ae93-b89ab781602d
-                  geographiLevel: 2
-                  lastUpdateDate: 1592514228000
-                  createDate: 1592426785000
-                  status: Active
+                      - 0.0657243021884568
+                  properties:
+                    uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                    code: sflsjdflldsfj
+                    type: health_facilities
+                    name: Central Health Facility
+                    name_en: Central Health Facility
+                    version: 0
+                    OpenMRS_Id: 0
+                    externalId: 999999
+                    parentId: 63160720-239c-4347-ae93-b89ab781602d
+                    geographiLevel: 2
+                    lastUpdateDate: 1592514228000
+                    createDate: 1592426785000
+                    status: Active
     '401':
       description: Unauthorized
     '403':
       description: Forbidden
     '404':
-      description: User not found
+      description: Not found
 
 
 # post:

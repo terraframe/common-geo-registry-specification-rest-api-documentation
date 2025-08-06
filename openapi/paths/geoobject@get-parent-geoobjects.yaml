@@ -1,0 +1,119 @@
+get:
+  tags:
+    - Geo-Object
+  summary: Get parent Geo-Objects of a Geo-Object.
+  description: Get parent Geo-Objects of a Geo-Object.
+  operationId: getParentGeoObjects
+  parameters:
+    - name: childCode
+      in: query
+      description: The code of the Geo-Object for which the parents will be requested.
+      required: true
+      schema:
+        type: string
+      example: PRO_1
+    - name: childTypeCode
+      in: query
+      description: The code of the Geo-Object Type that the Geo-Object belongs to.
+      required: true
+      schema:
+        type: string
+      example: PRO
+    - name: date
+      in: query
+      description: The temporal date to check against. Must in the the format of YYYY-MM-DD.
+      required: false
+      schema:
+        type: string
+      example: "2021-02-20"            
+    - name: parentTypes
+      in: query
+      description: A serialized JSON array of Geo-Object Type codes of the Geo-Object Types that the parent Geo-Objects must belongs to. Example is HTTP URL encoded.
+      required: true
+      schema:
+        type: array
+        items:
+          type: string
+      example: "%5B%22REG%22%5D"
+    - name: recursive
+      in: query
+      description: TRUE to return all parent Geo-Objects for all specified parentTypes at all levels above the child Geo-Object.
+      required: true
+      schema:
+        type: boolean
+      example: true
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../components/schemas/ParentTreeNode.yaml
+          example:
+            - geoObject:
+                type: Feature
+                geometry:
+                  type: MultiPoint
+                  coordinates:
+                    - 113.56111706249908
+                    - 0.0657243021884568
+                properties:
+                  uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                  code: sflsjdflldsfj
+                  type: health_facilities
+                  lastUpdateDate: 1592514228000
+                  createDate: 1592426785000
+                displayLabel:
+                  localizedValue: Central Health Facility
+                  localeValues:
+                    - locale: defaultLocale
+                      value: Central Health Facility
+                    - locale: km_KH
+                      value: ជាំ សាងុំា
+                invalid: false
+                exists: true
+                writable: true
+              hierarchyType: PRO    
+              parents: []
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found
+
+
+# post:
+#   tags:
+#     - User
+#   summary: Updated user
+#   description: This can only be done by the logged in user.
+#   operationId: updateUser
+#   parameters:
+#     - name: username
+#       in: path
+#       description: The name that needs to be updated
+#       required: true
+#       schema:
+#         type: string
+#   security:
+#     - main_auth:
+#         - 'write:users'
+#   responses:
+#     '200':
+#       description: OK
+#     '400':
+#       description: Invalid user supplied
+#     '404':
+#       description: User not found
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#       application/xml:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#     description: Updated user object
+#     required: true

@@ -6,9 +6,8 @@
   },
   "private": true,
   "scripts": {
-    "start": "openapi preview-docs",
+    "start": "openapi preview-docs -p 8888",
     "build": "openapi bundle -o dist",
-    "test": "openapi validate",
-    "deploy": "npm --version"
+    "test": "openapi validate"
   }
 }

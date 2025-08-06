@@ -1,0 +1,82 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Common Geo-Registry REST API
+  termsOfService: 'https://example.com/terms/'
+  contact:
+    name: Contact
+    email: contact@example.com
+    url: 'https://terraframe.github.io/common-geo-registry-specification-rest-api-documentation'
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+  x-logo:
+    url: './cgr_logo.png'
+  description: >
+    The Common Geo-Registry API provides programatic access to key functionality.
+externalDocs:
+  description: Learn more about the Common Geo-Registry Specification.
+  url: 'https://github.com/terraframe/common-geo-registry-specification'
+tags:
+  - name: Geo-Object
+    description: Operations to interact with Geo-Objects in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+  - name: Geo-Object-Over-Time
+    description: Operations to interact with Geo-Objects-Over-Time in the CGR. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+  - name: Geo-Object Type
+    description: Operations to interact with Geo-Object Types in the CGR.
+servers:
+  - url: 'https://example.com/api/v1'
+paths:
+  '/geoobject/get':
+    $ref: 'paths/geoobject@get.yaml'
+  '/geoobject/update':
+    $ref: 'paths/geoobject@put.yaml'
+  '/geoobject/create':
+    $ref: 'paths/geoobject@post.yaml'
+  '/geoobject/newGeoObjectInstance':
+    $ref: 'paths/geoobject@post-empty.yaml'
+  '/geoobject/get-code':
+    $ref: 'paths/geoobject@get-code.yaml'
+  '/geoobject/get-all':
+    $ref: 'paths/geoobject@get-all.yaml'
+  '/geoobject/getchildren':
+    $ref: 'paths/geoobject@getchildren.yaml'
+  '/geoobject/get-graph-children':
+    $ref: 'paths/geoobject@get-graph-children.yaml'    
+  '/geoobject/get-related-geo-objects':
+    $ref: 'paths/geoobject@get-related-geo-objects.yaml'        
+  '/geoobject/getparents':
+    $ref: 'paths/geoobject@get-parent-geoobjects.yaml'
+  '/geoobject/addchild':
+    $ref: 'paths/geoobject@post-add-child.yaml'
+  '/geoobject/add-graph-child':
+    $ref: 'paths/geoobject@post-add-graph-child.yaml'    
+  '/geoobject/add-related-geo-object':
+    $ref: 'paths/geoobject@post-add-related-geo-object.yaml'        
+  '/geoobject/removechild':
+    $ref: 'paths/geoobject@post-remove-child.yaml'
+  '/geoobject/remove-graph-child':
+    $ref: 'paths/geoobject@post-remove-graph-child.yaml'    
+  '/geoobject/remove-related-geo-object':
+    $ref: 'paths/geoobject@post-remove-related-geo-object.yaml'        
+  '/geoobject/get-uids':
+    $ref: 'paths/geoobject@get-uids.yaml'
+  '/geoobject-time/get':
+    $ref: 'paths/geoobject-time@get.yaml'
+  '/geoobject-time/get-code':
+    $ref: 'paths/geoobject-time@get-code.yaml'
+  '/geoobject-time/update':
+    $ref: 'paths/geoobject-time@post-update.yaml'
+  '/geoobject-time/create':
+    $ref: 'paths/geoobject-time@post-create.yaml'
+  '/geoobjecttype/get-all':
+    $ref: 'paths/geoobjecttype@get-all.yaml'
+  '/hierarchytype/get-all':
+    $ref: 'paths/hierarchytype@get-all.yaml'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+security:
+  - basicAuth: [Super Registry Administrator, (organization) Registry Administrator, (geoobjecttype) Registry Maintainer, (geoobjecttype) Registry Contributor]  # <-- use the same name here

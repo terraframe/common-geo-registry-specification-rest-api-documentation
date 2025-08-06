@@ -1,0 +1,29 @@
+get:
+  tags:
+    - Geo-Object
+  summary: Get UIDs that can be used as UIDs for new Geo-Object creation.
+  description: Get UIDs that can be used as UIDs for new Geo-Object creation.
+  operationId: getUIDS
+  parameters:
+    - name: amount
+      in: query
+      description: The amount of UIDs to return.
+      required: true
+      schema:
+        type: integer
+      example: 5
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GeoObjectIDs.yaml
+          example:
+            - "9975976c-1243-478c-850b-9176e2a7f57e"
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

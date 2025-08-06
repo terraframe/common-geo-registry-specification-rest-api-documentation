@@ -1,27 +1,29 @@
-#
 get:
   tags:
-    - GeoObjectType
+    - Geo-Object Type
   summary: Return GeoOjectType objects that define the given list of types.
   description: Return GeoOjectType objects that define the given list of types.
   operationId: getGeoObjectTypes
   parameters:
     - name: types
       in: query
-      description: An array of GeoObjectType codes. If blank then all GeoObjectType objects are returned.
+      description: An array of Geo-Object Type codes. If blank then all Geo-Object Type objects are returned. Example is encoded for easy texting in a web browser.
       required: false
       schema:
         type: array
         items:
           type: string
+      example: "%5B%22PRO%22%5D"
     - name: hierarchies
       in: query
-      description: An array of Hierarchy codes. If blank then all Hierarchy objects are returned.
+      description: An array of Hierarchy codes. If blank then all Hierarchy objects are returned. Example is encoded for easy texting in a web browser.
       required: false
       schema:
         type: array
         items:
           type: string
+      example: "%5B%22ADM_H%22%5D"
+      
   security:
     - main_auth:
       - 'read:users'
@@ -31,184 +33,136 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/GeoObjectType.yaml'
+            type: array
+            items:
+              $ref: '../components/schemas/GeoObjectType.yaml'
           example:
-            code: health_facility
-            label:
-              localizedValue: Health health_facility
-              localeValues:
-                - locale: defaultLocale
-                  value: Health Facility
-                - locale: km_KH
-                  value: មណ្ឌលសុខភាព
-            description: Health facilities for ...
-            geometryType: Polygon
-            isGeometryEditable: TRUE
-            organizationCode: moh
-            attributes:
-              - code: uid
-                type: character
-                label:
-                  localizedValue: UID
-                  localValues:
-                    -
-                description:
-                  localizedValue: The internal globally unique identifier ID
-                  localeValues:
-                    -
-                isDefault: TRUE
-                required: TRUE
-                isChangeOverTime: FALSE
-              - code: displayLabel
-                type: local
-                label:
-                  localizedValue: Display Label
-                  localValues:
-                    -
-                description:
-                  localizedValue: Label of the location
-                  localeValues:
-                    -
-                isDefault: TRUE
-                required: TRUE
-                isChangeOverTime: FALSE
-              - code: code
-                type: character
-                label:
-                  localizedValue: Code
-                  localValues:
-                    - local: defaultLocale
-                      value: Code
-                description:
-                  localizedValue: Human readable unique identified
-                  localeValues:
-                    - locale: defaultLocale
-                      value: Human readable unique identified
-                isDefault: TRUE
-                required: TRUE
-                isChangeOverTime: FALSE
-              - code: lastUpdateDate
-                type: date
-                label:
-                  localizedValue: Date Last Updated
-                  localValues:
-                    -
-                description:
-                  localizedValue: The date the object was updated
-                  localeValues:
-                    -
-                isDefault: TRUE
-                required: FALSE
-                isChangeOverTime: FALSE
-              - code: createDate
-                type: date
-                label:
-                  localizedValue: Date Created
-                  localValues:
-                    -
-                description:
-                  localizedValue: The date the object was created
-                  localeValues:
-                    -
-                isDefault: TRUE
-                required: FALSE
-                isChangeOverTime: FALSE
-              - code: type
-                type: character
-                label:
-                  localizedValue: Type
-                  localValues:
-                    -
-                description:
-                  localizedValue: The type of the GeoObject
-                  localeValues:
-                    -
-                isDefault: TRUE
-                required: FALSE
-                isChangeOverTime: FALSE
-              - code: sequence
-                type: integer
-                label:
-                  localizedValue: Sequence
-                  localValues:
-                    -
-                description:
-                  localizedValue: The sequence number of the GeoObject that is incremented when the object is updated
-                  localeValues:
-                    -
-                isDefault: TRUE
-                required: FALSE
-                isChangeOverTime: FALSE
-              - code: status
-                type: term
-                label:
-                  localizedValue: Status
-                  localValues:
-                    - local: defaultLocale
-                      value: Status
-                description:
-                  localizedValue: The status of the GeoObject
-                  localeValues:
-                    - local: defaultLocale
-                      value: The status of the GeoObject
-                isDefault: TRUE
-                required: TRUE
-                isChangeOverTime: TRUE
-                rootTerm:
-                  code: CGR:Status-Root
+            - code: health_facility
+              label:
+                localizedValue: Health Facility
+                localeValues:
+                  - locale: defaultLocale
+                    value: Health Facility
+                  - locale: km_KH
+                    value: មណ្ឌលសុខភាព
+              description: Health facilities for ...
+              geometryType: MultiPolygon
+              isGeometryEditable: TRUE
+              organizationCode: moh
+              superTypeCode: ""
+              attributes:
+                - code: uid
+                  type: character
                   label:
-                    localizedValue: GeoObject Status
+                    localizedValue: UID
+                    localValues:
+                      - 
+                  description:
+                    localizedValue: The internal globally unique identifier ID
                     localeValues:
                       -
-                  description:
-                    localizedValue: The status of a GeoObject changes during the governance lifecycle.
+                  isDefault: TRUE
+                  required: FALSE
+                  unique: FALSE
+                  isChangeOverTime: FALSE
+                - code: displayLabel
+                  type: local
+                  label:
+                    localizedValue: Display Label
                     localValues:
                       -
-                  children:
-                    - code: CGR:Status-New
-                      label:
-                        localizedValue: New
-                        localeValues:
-                          -
-                      description:
-                        localizedValue: A newly created GeoObject that has not been submitted for approval.
-                        localValues:
-                          -
-                    - code: CGR:Status-Active
-                      label:
-                        localizedValue: Active
-                        localeValues:
-                          -
-                      description:
-                        localizedValue: The GeoObject is a part of the master list.
-                        localValues:
-                          -
-                    - code: CGR:Status-Pending
-                      label:
-                        localizedValue: Pending
-                        localeValues:
-                          -
-                      description:
-                        localizedValue: Edits to the GeoObject are pending approval.
-                        localValues:
-                          -
-                    - code: CGR:Status-Inactive
-                      label:
-                        localizedValue: Inactive
-                        localeValues:
-                          -
-                      description:
-                        localizedValue: The object is not considered a source of truth.
-                        localValues:
-                          -
-
+                  description:
+                    localizedValue: Label of the location
+                    localeValues:
+                      -
+                  isDefault: TRUE
+                  required: FALSE
+                  unique: FALSE
+                  isChangeOverTime: FALSE
+                - code: code
+                  type: character
+                  label:
+                    localizedValue: Code
+                    localValues:
+                      - local: defaultLocale
+                        value: Code
+                  description:
+                    localizedValue: Human readable unique identified
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Human readable unique identified
+                  isDefault: TRUE
+                  required: FALSE
+                  unique: FALSE
+                  isChangeOverTime: FALSE
+                - code: lastUpdateDate
+                  type: date
+                  label:
+                    localizedValue: Date Last Updated
+                    localValues:
+                      -
+                  description:
+                    localizedValue: The date the object was updated
+                    localeValues:
+                      -
+                  isDefault: TRUE
+                  required: FALSE
+                  unique: FALSE
+                  isChangeOverTime: FALSE
+                - code: createDate
+                  type: date
+                  label:
+                    localizedValue: Date Created
+                    localValues:
+                      -
+                  description:
+                    localizedValue: The date the object was created
+                    localeValues:
+                      -
+                  isDefault: TRUE
+                  required: FALSE
+                  unique: FALSE
+                  isChangeOverTime: FALSE
+                - code: type
+                  type: character
+                  label:
+                    localizedValue: Type
+                    localValues:
+                      -
+                  description:
+                    localizedValue: The type of the Geo-Object
+                    localeValues:
+                      -
+                  isDefault: TRUE
+                  required: FALSE
+                  isChangeOverTime: FALSE
+                - code: sequence
+                  type: integer
+                  label:
+                    localizedValue: Sequence
+                    localValues:
+                      -
+                  description:
+                    localizedValue: The sequence number of the Geo-Object that is incremented when the object is updated
+                    localeValues:
+                      -
+                  isDefault: TRUE
+                  required: FALSE
+                  unique: FALSE
+                  isChangeOverTime: FALSE
+              permissions:
+                - CREATE
+                - READ
+                - DELETE
+                - WRITE
+                    
 
     '401':
       description: Unauthorized
     '403':
       description: Forbidden
     '404':
-      description: User not found
+      description: Not found
 
 
 # post:

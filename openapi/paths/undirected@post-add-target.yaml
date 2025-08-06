@@ -1,0 +1,55 @@
+post:
+  tags:
+    - Geo-Object
+  summary: Add Geo-Object to a Undirected Graph.
+  description: Add Geo-Object to a Undirected Graph.
+  operationId: addRelatedGeoObject
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AddRelatedGeoObjectBody.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ParentTreeNode.yaml
+          example:
+            geoObject:
+              type: Feature
+              geometry:
+                type: MultiPoint
+                coordinates:
+                  - 113.56111706249908
+                  - 0.0657243021884568
+              properties:
+                uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                code: sflsjdflldsfj
+                type: health_facilities
+                lastUpdateDate: 1592514228000
+                createDate: 1592426785000
+                displayLabel:
+                  localizedValue: Central Health Facility
+                  localeValues:
+                    - locale: defaultLocale
+                      value: Central Health Facility
+                    - locale: km_KH
+                      value: ជាំ សាងុំា
+                invalid: false
+                exists: true
+                writable: true
+            hierarchyType: "Test_HF"
+            parents: 
+              -  geoObject: "..."
+                 hierarchyType: "Test_HF"
+                 parents: []
+
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

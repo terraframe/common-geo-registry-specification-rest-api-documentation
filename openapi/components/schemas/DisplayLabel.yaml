@@ -1,0 +1,21 @@
+type: object
+properties:
+  name:
+    type: string
+  type:
+    type: string
+  values:
+    type: array
+    items:
+      type: object
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: string
+        value:
+          type: array
+          items:
+            type: object
+            properties:
+              $ref: './LocalizedLabel.yaml'

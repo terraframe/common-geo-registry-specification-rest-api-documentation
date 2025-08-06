@@ -1,0 +1,201 @@
+get:
+  tags:
+    - List
+  summary: Get the list type version for a list type entry.
+  description: Get the list type version for a list type entry. A list type version contains all the metadata for a list. See list-type/data for an endpoint that returns the instance data of a list. List configurations contain list entries which contain list versions.
+  operationId: version
+  parameters:
+    - name: oid
+      in: query
+      description: Object ID of the List Type version.
+      required: true
+      schema:
+        type: string
+      example: df63be86-f4ba-4616-83de-ee6df70007cc
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/ListTypeVersion.yaml'
+          example:
+            oid: "df63be86-f4ba-4616-83de-ee6df70007cc"
+            displayLabel: "Health facility master list and geographic coordinates"
+            typeCode: "Health_facility"
+            orgCode: "MOH"
+            listType: "117cca3c-bb8c-467d-bba0-bada110007de"
+            forDate: "2022-01-01"
+            createDate: "2022-11-09"
+            versionNumber: 1
+            working: false
+            geometryType: "MULTIPOINT"
+            isGeometryEditable: true
+            isAbstract: true
+            shapefile: false
+            isMember: false
+            period: 
+              type: "date"
+              value: "2022-01-01"
+            listMetadata:
+              label:
+                localizedValue":
+                localeValues":
+                  - locale: "defaultLocale"
+                    value:
+              description:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              process:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              progress:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              accessConstraints:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              useConstraints:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              acknowledgements:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              disclaimer:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              collectionDate:
+              organization:
+              contactName:
+              telephoneNumber:
+              email:
+              originator:
+            geospatialMetadata:
+              label:
+                localizedValue":
+                localeValues":
+                  - locale: "defaultLocale"
+                    value:
+              description:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              process:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              progress:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              accessConstraints:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              useConstraints:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              acknowledgements:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              disclaimer:
+                localizedValue:
+                localeValue:
+                  locale: "defaultLocale"
+                  value: ""
+              collectionDate: null
+              organization: ""
+              contactName: "Ariela Antonio"
+              telephoneNumber: "+99 877-0000"
+              email: "a.antonio@moh.gov.tlk"
+              originator: "Ministry of Health (MOH)"
+              topicCategories: "Health infrastructure"
+              placeKeywords: "Tolkien Region"
+              updateFrequency: "Annual"
+              lineage: "Geographic coordinates are collected by the MOH county officer each time a new health facility opens"
+              languages: "English"
+              scaleResolution: "1:50,000"
+              spatialRepresentation: "vector"
+              referenceSystem: "EPSG4326"
+              reportSpecification: "Quality checks are performed during field data collection as well as after it using high resolution imagery as ground reference. The method used to collect the coordinates as well a qualitative indication of the coordinates accuracy are provided in the list"
+              distributionFormat: "SHAPEFILE"
+            subtypes: 
+              - code: "Health_post"
+                label: "Health Post (MOH)"
+            publishDate: "2022-11-09"
+            attributes:
+              - label: "Health Facility (MOH)"
+                colspan: 16
+                rowspan: 1
+                columns:
+                  - name: code
+                    label: Code
+                    type: "list"
+                    rowspan: 2
+            curation:
+
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found
+
+
+# post:
+#   tags:
+#     - User
+#   summary: Updated user
+#   description: This can only be done by the logged in user.
+#   operationId: updateUser
+#   parameters:
+#     - name: username
+#       in: path
+#       description: The name that needs to be updated
+#       required: true
+#       schema:
+#         type: string
+#   security:
+#     - main_auth:
+#         - 'write:users'
+#   responses:
+#     '200':
+#       description: OK
+#     '400':
+#       description: Invalid user supplied
+#     '404':
+#       description: User not found
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#       application/xml:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#     description: Updated user object
+#     required: true

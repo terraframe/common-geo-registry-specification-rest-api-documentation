@@ -1,0 +1,42 @@
+type: object
+description: GeoJSon Feature. Reference - https://tools.ietf.org/html/rfc7946#section-3.2
+required:
+ - type
+ - id
+ - geometry
+ - properties
+externalDocs:
+  url: https://tools.ietf.org/html/rfc7946
+properties:
+  type:
+    type: string
+    enum:
+      - Feature
+  id:
+    type: string
+  geometry:
+    $ref: './Geometry.yaml'
+  properties:
+    type: object
+    required:
+      - uid
+      - code
+      - type
+      - status
+    properties:
+      status:
+        type: string
+      name:
+        type: string
+      version:
+        type: integer
+      OpenMRS_Id:
+        type: integer
+      externalId:
+        type: string
+      name_en:
+        type: string
+      geographiLevel:
+        type: integer
+      parentId:
+        type: string

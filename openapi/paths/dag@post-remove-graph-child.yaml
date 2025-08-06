@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Geo-Object
+  summary: Remove a child Geo-Object from a Directed Acyclic Graph.
+  description: Remove a child Geo-Object from a Directed Acyclic Graph.
+  operationId: removeGraphChild
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RemoveGraphChildBody.yaml
+  responses:
+    '200':
+      description: Success
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

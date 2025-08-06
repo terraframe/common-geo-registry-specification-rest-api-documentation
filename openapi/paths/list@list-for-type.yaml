@@ -1,0 +1,202 @@
+get:
+  tags:
+    - List
+  summary: Get all the list configurations for the list type.
+  description: Return all the list configurations for the list type. List configurations contain list entries which contain list versions.
+  operationId: list-for-type
+  parameters:
+    - name: typeCode
+      in: query
+      description: Code of the List Type.
+      required: true
+      schema:
+        type: string
+      example: Health_facility
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/ListTypeConfiguration.yaml'
+          example:
+            orgCode: "MOH"
+            orgLabel: "Ministry of Health"
+            typeCode: "Health_facility"
+            typeLabel: "Health facility (MOH)"
+            geometryType: "MULTIPOINT"
+            write: false
+            lists:
+              oid: "117cca3c-bb8c-467d-bba0-bada110007de"
+              organization: MOH
+              write: false
+              read: false
+              exploratory: false
+              typeLabel: "Health facility (MOH)"
+              typePrivate: false
+              typeCode: "Health_facility"
+              displayLabel:
+                localizedValue: "Health facility master list and geographic coordinates"
+                localeValue:
+                  locale: "defaultLocale"
+                  value: "Health facility master list and geographic coordinates"
+              description:
+                localizedValue: "Master list and geographic coordinates for the health facilities located within the Tolkien Region"
+                localeValue:
+                  locale: "defaultLocale"
+                  value: "Master list and geographic coordinates for the health facilities located within the Tolkien Region"
+              code: "Health_facility_Set"
+              hierarchies:
+              subtypeHierarchies:
+              includeLatLong: true
+              listMetadata:
+                label:
+                  localizedValue":
+                  localeValues":
+                    - locale: "defaultLocale"
+                      value:
+                description:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                process:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                progress:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                accessConstraints:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                useConstraints:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                acknowledgements:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                disclaimer:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                collectionDate:
+                organization:
+                contactName:
+                telephoneNumber:
+                email:
+                originator:
+              geospatialMetadata:
+                label:
+                  localizedValue":
+                  localeValues":
+                    - locale: "defaultLocale"
+                      value:
+                description:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                process:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                progress:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                accessConstraints:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                useConstraints:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                acknowledgements:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                disclaimer:
+                  localizedValue:
+                  localeValue:
+                    locale: "defaultLocale"
+                    value: ""
+                collectionDate:
+                organization:
+                contactName:
+                telephoneNumber:
+                email:
+                originator:
+                topicCategories:
+                placeKeywords:
+                updateFrequency:
+                lineage:
+                languages:
+                scaleResolution:
+                spatialRepresentation:
+                referenceSystem:
+                reportSpecification:
+                distributionFormat:
+              frequency: "ANNUAL"
+              publishingStartDate: "2000-01-01"
+              listType: "incremental"
+
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found
+
+
+# post:
+#   tags:
+#     - User
+#   summary: Updated user
+#   description: This can only be done by the logged in user.
+#   operationId: updateUser
+#   parameters:
+#     - name: username
+#       in: path
+#       description: The name that needs to be updated
+#       required: true
+#       schema:
+#         type: string
+#   security:
+#     - main_auth:
+#         - 'write:users'
+#   responses:
+#     '200':
+#       description: OK
+#     '400':
+#       description: Invalid user supplied
+#     '404':
+#       description: User not found
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#       application/xml:
+#         schema:
+#           $ref: ../components/schemas/User.yaml
+#     description: Updated user object
+#     required: true

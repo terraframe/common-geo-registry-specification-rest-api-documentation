@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Directed Acyclic Graph
+  summary: Get a Directed Acyclic Graph Type definition.
+  description: Get a Directed Acyclic Graph Type definition.
+  operationId: getDirectedGraphType
+  parameters:
+    - name: code
+      in: query
+      description: The code of the Directed Acyclic Graph Type to get.
+      required: true
+      schema:
+        type: string
+      example: TLK01  
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../components/schemas/DirectedGraphType.yaml
+          example:
+            - code: "Test_DAG"
+              label:
+                localizedValue: "Flows into"
+                localeValues:
+                   - locale: "defaultLocale"
+                     value: "Flows into"
+              description:
+                localizedValue: ""
+                localeValues:
+                  - locale: "defaultLocale"
+                    value: "Denotes bodies of water which flow into one another"
+
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

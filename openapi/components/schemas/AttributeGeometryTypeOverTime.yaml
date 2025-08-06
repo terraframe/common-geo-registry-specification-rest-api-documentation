@@ -1,0 +1,21 @@
+type: object
+properties:
+  name:
+    type: string
+  type:
+    type: string
+  values:
+    type: array
+    items:
+      type: object
+      properties:
+        oid: 
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        value:
+          type: array
+          items:
+            $ref: './Geometry.yaml'

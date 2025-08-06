@@ -1,0 +1,40 @@
+type: object
+properties:
+  attributes:
+    type: object
+    properties:
+      displayLabel:
+        $ref: './DisplayLabel.yaml'
+      geometry:
+        $ref: './AttributeGeometryTypeOverTime.yaml'
+      uid:
+        type: string
+      code:
+        type: string
+      lastUpdateDate:
+        type: integer
+      type:
+        type: string
+      createDate:
+        type: integer
+      exists:
+        type: object
+        properties:
+          name: 
+            type: string
+          type: 
+            type: boolean
+          values:
+            type: array
+            items:
+              type: object
+              properties:
+                oid:
+                  type: string
+                startDate:
+                  type: string
+                endDate:
+                  type: string
+                value:
+                  type: "boolean"
+          

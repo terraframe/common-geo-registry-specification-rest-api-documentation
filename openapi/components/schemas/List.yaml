@@ -1,0 +1,12 @@
+type: object
+description: Core List schema
+properties:
+  code:
+    type: string
+  originalOid:
+    type: string
+  displayLabelDefaultLocale:
+    type: string
+  invalid:
+    type: boolean
+

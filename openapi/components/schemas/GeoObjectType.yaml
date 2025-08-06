@@ -1,13 +1,26 @@
 type: object
-description: test
 properties:
   code:
     type: string
-  localizedLabel:
+  label:
+    $ref: './LocalizedLabel.yaml'
+  geometryType:
     type: string
-  localizedDescription:
+  isGeometryEditable:
+    type: boolean
+  isPrivate:
+    type: boolean
+  organizationCode:
     type: string
+  superTypeCode:
+    type: string
+  description:
+    $ref: './LocalizedLabel.yaml'
   attributes:
     type: array
     items:
       $ref: './AttributeType.yaml'
+  permissions:
+    type: array
+    items:
+      type: string

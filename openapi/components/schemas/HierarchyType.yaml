@@ -1,0 +1,13 @@
+type: object
+description: Defines a hierarchy type and specifies which GeoObjectTypes participate in that hierarchy.
+properties:
+  code:
+    type: string
+  label:
+    $ref: './LocalizedLabel.yaml'
+  localizedDescription:
+    type: string
+  rootGeoObjectTypes:
+    type: array
+    items:
+      $ref: './HierarchyNode.yaml'

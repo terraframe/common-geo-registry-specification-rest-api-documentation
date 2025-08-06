@@ -1,0 +1,9 @@
+type: object
+description: A HierarchyNode is an object used by HierarchyType that models the tree of GeoObjectTypes that participate in the hierarchy.
+properties:
+  geoObjectType:
+    type: string
+  children:
+    type: array
+    items:
+      $ref: 'HierarchyNode.yaml'
