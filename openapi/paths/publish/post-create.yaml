@@ -1,0 +1,25 @@
+post:
+  tags:
+    - Publish Graph
+  summary: Publish a graph
+  description: Publish the events and metadata corresponding to a sub set of the data in the graph repository.
+  operationId: publish-create
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Publish.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Publish.yaml
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

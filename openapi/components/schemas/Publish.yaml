@@ -1,0 +1,35 @@
+type: object
+description: Defines data to publish.
+properties:
+  uid: 
+    type: string
+    description: Globally unique uid of the published graph
+    example: a15afe34-d789-407e-8aba-5055149c439e    
+  date: 
+    type: string
+    format: date
+    description: The date to use when determing values of the published graph
+    example: "2020-04-04"
+  startDate: 
+    type: string
+    format: date
+    description: The start date of the period of validity for the published graph
+    example: "2020-04-04"
+  endDate: 
+    type: string
+    format: date
+    description: The end date of the period of validity for the published graph
+    example: "2021-04-04"
+  origin: 
+    type: string
+    example: "https://demo-georegistry.geoprism.net/"
+  types: 
+    type: array
+    items :
+      $ref: './TypeAndCode.yaml'
+    description: List of (type, code) pairings to include in the published graph
+  exclusions: 
+    type: array
+    items: 
+      $ref: './TypeAndCode.yaml'
+    description: List of (type, code) pairings to exclude from the published graph.  This should only be used when the types in the graph overlap with the types in a different graph with the same period of validity.

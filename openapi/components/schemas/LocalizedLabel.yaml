@@ -2,6 +2,7 @@ type: object
 properties:
   localizedValue:
     type: string
+    example: Object Label
   localeValues:
     type: array
     items:
@@ -9,5 +10,7 @@ properties:
       properties:
         locale:
           type: string
+          example: en
         value:
           type: string
+          example: Object Label

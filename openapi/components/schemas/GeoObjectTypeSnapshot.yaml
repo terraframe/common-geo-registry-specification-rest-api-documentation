@@ -1,0 +1,46 @@
+type: object
+description: Geo object type metadata snapshot
+properties:
+  code: 
+    type: string
+    example: HealthCenter
+    description: Globally unique identifier of the geo object type metadata
+  orgCode: 
+    type: string
+    example: MOHA
+    description: Organization responsible for the metadata definition
+  origin: 
+    type: string
+    example: "https://demo-georegistry.geoprism.net/"
+    description: Origin of the metadata
+  sequence: 
+    type: integer
+    format: int32
+    example: 0
+    description: Change sequence number of the metadata
+  displayLabel: 
+    $ref: './LocalizedLabel.yaml'
+  geometryType: 
+    type: string
+    example: MULTIPOLYGON
+    description: Geometry type 
+  isAbstract: 
+    type: boolean
+    description: Flag indicating if the type is abstract
+  isRoot: 
+    type: boolean
+    description: Flag indicating if the type is the root type placeholder of the graph
+  isPrivate: 
+    type: boolean
+    description: Flag indicating if the type is private to the organization
+  parent: 
+    type: string
+    example: HealthFacility
+    description: Optional code of the parent type from which this type inherits
+  attributes: 
+    type: array
+    items:
+      $ref: './AttributeTypeSnapshot.yaml'
+    description: List of attribute metadata
+
+

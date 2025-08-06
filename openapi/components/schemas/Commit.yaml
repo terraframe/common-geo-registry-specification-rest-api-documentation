@@ -1,0 +1,17 @@
+type: object
+description: Defines data to publish.
+properties:
+  uid: 
+    type: string
+    example: d02047a4-72e2-4e0d-b447-1b64d2b125c7
+  publishId: 
+    type: string
+    example: a15afe34-d789-407e-8aba-5055149c439e
+  versionNumber: 
+    type: integer
+    format: int32
+    example: 1
+  lastOriginGlobalIndex: 
+    type: integer
+    format: int32
+    example: 8806

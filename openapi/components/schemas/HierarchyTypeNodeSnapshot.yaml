@@ -1,0 +1,11 @@
+type: object
+description: A tree node describing the structure of Geo Object Types participating in the hierarchy
+properties:
+  code: 
+    type: string
+    example: HealthCenter
+    description: Code of a Geo Object Type
+  nodes:
+    type: array
+    items:
+      $ref: 'HierarchyTypeNodeSnapshot.yaml'

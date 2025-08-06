@@ -44,6 +44,8 @@ tags:
     description: Operations to interact with Lists.
   - name: ETL
     description: Operations for bulk importing data.
+  - name: Publish Graph
+    description: Operations for publishing and pulling graph data.
 servers:
   - url: 'https://demo-georegistry.geoprism.net/'
 paths:
@@ -149,7 +151,30 @@ paths:
     $ref: 'paths/undirected@post-add-target.yaml'            
   '/api/undirected/remove-target':
     $ref: 'paths/undirected@post-remove-target.yaml'        
-  
+
+  '/api/publish/create':
+    $ref: 'paths/publish/post-create.yaml'
+  '/api/publish/create-new-version':
+    $ref: 'paths/publish/post-create-new-version.yaml'
+  '/api/publish/get-all':
+    $ref: 'paths/publish/get-get-all.yaml'
+  '/api/publish/get':
+    $ref: 'paths/publish/get-get.yaml'
+  '/api/commit/get-all':
+    $ref: 'paths/commit/get-get-all.yaml'
+  '/api/commit/get-latest':
+    $ref: 'paths/commit/get-get-latest.yaml'
+  '/api/commit/get-dependencies':
+    $ref: 'paths/commit/get-get-dependencies.yaml'
+  '/api/commit/business-types':
+    $ref: 'paths/commit/get-business-types.yaml'
+  '/api/commit/geo-object-types':
+    $ref: 'paths/commit/get-geo-object-types.yaml'
+  '/api/commit/hierarchy-types':
+    $ref: 'paths/commit/get-hierarchy-types.yaml'
+
+
+
 components:
   securitySchemes:
     Basic Authentication:

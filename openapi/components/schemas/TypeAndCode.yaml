@@ -1,0 +1,16 @@
+type: object
+description: Add child params.
+properties:
+  type:
+    type: string
+    enum: 
+      - GEO_OBJECT
+      - HIERARCHY
+      - DAG
+      - UNDIRECTED
+      - BUSINESS
+      - BUSINESS_EDGE
+    example: GEO_OBJECT
+  code:
+    type: string
+    example: USATestDataCountry

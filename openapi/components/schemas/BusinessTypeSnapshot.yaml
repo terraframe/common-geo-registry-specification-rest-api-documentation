@@ -1,0 +1,33 @@
+type: object
+description: Business type metadata snapshot
+properties:
+  code: 
+    type: string
+    example: POPULATION
+    description: Globally unique identifier of the business type metadata
+  orgCode: 
+    type: string
+    example: MOHA
+    description: Organization responsible for the metadata definition
+  origin: 
+    type: string
+    example: "https://demo-georegistry.geoprism.net/"
+    description: Origin of the metadata
+  sequence: 
+    type: integer
+    format: int32
+    example: 0
+    description: Change sequence number of the metadata
+  labelAttribute: 
+    type: string
+    example: 
+    description: Default attribute to use when displaying a label of an instance business object
+  displayLabel: 
+    $ref: './LocalizedLabel.yaml'
+  attributes: 
+    type: array
+    items:
+      $ref: 'AttributeTypeSnapshot.yaml'
+    description: List of attribute metadata
+
+

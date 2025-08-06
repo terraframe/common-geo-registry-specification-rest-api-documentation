@@ -1,0 +1,29 @@
+get:
+  tags:
+    - Publish Graph
+  summary: Get the details of a published graph.
+  description: Get the details of a published graph
+  operationId: publish-get
+  parameters:
+    - name: uid
+      in: query
+      description: The uid of the publish graph
+      required: true
+      schema:
+        type: string
+      example: f356acf7-63cd-4874-82db-c32dc42d4874  
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../../components/schemas/Publish.yaml
+
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

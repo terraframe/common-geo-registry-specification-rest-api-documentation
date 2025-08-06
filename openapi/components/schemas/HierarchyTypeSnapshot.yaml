@@ -1,0 +1,29 @@
+type: object
+description: Snapshot of Hierarchy Type metadata
+properties:
+  code: 
+    type: string
+    example: HealthCenter
+    description: Globally unique identifier of the geo object type metadata
+  orgCode: 
+    type: string
+    example: MOHA
+    description: Organization responsible for the metadata definition
+  origin: 
+    type: string
+    example: "https://demo-georegistry.geoprism.net/"
+    description: Origin of the metadata
+  sequence: 
+    type: integer
+    format: int32
+    example: 0
+    description: Change sequence number of the metadata
+  displayLabel: 
+    $ref: './LocalizedLabel.yaml'
+  nodes: 
+    type: array
+    items:
+      $ref: './HierarchyTypeNodeSnapshot.yaml'
+    description: List of Geo Object types in the hierarchy
+
+
