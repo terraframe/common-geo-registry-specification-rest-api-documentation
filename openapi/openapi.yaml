@@ -156,6 +156,10 @@ paths:
     $ref: 'paths/publish/post-create.yaml'
   '/api/publish/create-new-version':
     $ref: 'paths/publish/post-create-new-version.yaml'
+  '/api/publish/post-get-conflicts':
+    $ref: 'paths/publish/post-get-conflicts.yaml'
+  '/api/publish/pull':
+    $ref: 'paths/publish/post-pull.yaml'
   '/api/publish/get-all':
     $ref: 'paths/publish/get-get-all.yaml'
   '/api/publish/get':
@@ -172,6 +176,10 @@ paths:
     $ref: 'paths/commit/get-geo-object-types.yaml'
   '/api/commit/hierarchy-types':
     $ref: 'paths/commit/get-hierarchy-types.yaml'
+  '/api/commit/directed-acyclic-graph-types':
+    $ref: 'paths/commit/get-directed-acyclic-graph-types.yaml'
+  '/api/commit/undirected-graph-types':
+    $ref: 'paths/commit/get-undirected-graph-types.yaml'
 
 
 

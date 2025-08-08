@@ -1,10 +1,10 @@
 type: object
-description: Snapshot of Hierarchy Type metadata
+description: Snapshot of Undirected Graph Type metadata
 properties:
   code: 
     type: string
-    example: ReportsTo
-    description: Globally unique identifier of the Hierarchy type metadata
+    example: FlowsThrough
+    description: Globally unique identifier of the Undirected graph type metadata
   orgCode: 
     type: string
     example: MOHA
@@ -20,10 +20,3 @@ properties:
     description: Change sequence number of the metadata
   displayLabel: 
     $ref: './LocalizedLabel.yaml'
-  nodes: 
-    type: array
-    items:
-      $ref: './HierarchyTypeNodeSnapshot.yaml'
-    description: List of Geo Object types in the hierarchy
-
-

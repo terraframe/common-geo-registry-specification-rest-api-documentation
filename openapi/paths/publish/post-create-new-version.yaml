@@ -1,8 +1,8 @@
 post:
   tags:
     - Publish Graph
-  summary: Create a new commit of an existing publish with the events starting from the previous commit
-  description: Create a new commit of an existing publish with the events starting from the previous commit.
+  summary: Generate a new commit
+  description: Creates a new commit of an existing published graph with the events starting from the previous commit.
   operationId: publish-create-new-version
   requestBody:
     required: true

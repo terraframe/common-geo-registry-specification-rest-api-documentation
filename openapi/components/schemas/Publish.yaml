@@ -27,9 +27,9 @@ properties:
     type: array
     items :
       $ref: './TypeAndCode.yaml'
-    description: List of (type, code) pairings to include in the published graph
+    description: List of (type, code) pairings of the repository types to include in the published graph
   exclusions: 
     type: array
     items: 
       $ref: './TypeAndCode.yaml'
-    description: List of (type, code) pairings to exclude from the published graph.  This should only be used when the types in the graph overlap with the types in a different graph with the same period of validity.
+    description: List of (type, code) pairings of the repository types to exclude from the published graph.  This can only be used when the types in the graph overlap with the types in a different graph with the same period of validity.

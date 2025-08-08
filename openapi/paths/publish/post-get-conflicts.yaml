@@ -1,0 +1,34 @@
+post:
+  tags:
+    - Publish Graph
+  summary: Get conflicting types
+  description: Returns a list of (type, code) pairings of the repository types which have already been imported into the system for the same period of validity and will conflict with the pulled graph
+  operationId: publish-get-conflicts
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            source:
+              type: string
+              description: Source URL of the server to pull the graph data from
+            publishId:
+              type: string
+              description: uid of the publish to pull
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items: 
+              $ref: '../../components/schemas/TypeAndCode.yaml'
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

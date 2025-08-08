@@ -1,0 +1,30 @@
+get:
+  tags:
+    - Publish Graph
+  summary: Get the directed acyclic graph type metadata of a commit
+  description: Get a list of all the directed acyclic graph type metadata defined by published graph for this commit
+  operationId: commit-get-directed-acyclic-graph-types
+  parameters:
+    - name: uid
+      in: query
+      description: The uid of the commit
+      required: true
+      schema:
+        type: string
+      example: f356acf7-63cd-4874-82db-c32dc42d4874  
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../components/schemas/DirectedAcyclicGraphTypeSnapshot.yaml'
+
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found
