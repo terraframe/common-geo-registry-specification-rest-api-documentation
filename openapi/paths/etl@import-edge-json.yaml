@@ -4,8 +4,9 @@ post:
   summary: Create relationships between Geo-Objects for a specific relationship type.
   description: Create relationships between Geo-Objects for a specific relationship type.
   operationId: importEdgeJson
-  security: 
-    - Basic Authentication: [Super Registry Administrator]
+  security:
+    - Basic Authentication:
+        - Super Registry Administrator
   requestBody:
     required: true
     content:
@@ -38,17 +39,9 @@ post:
                   }
                 ]}
         example:
-          startDate: "2000-10-31"
-          endDate: "2020-10-31"
+          startDate: '2000-10-31'
+          endDate: '2020-10-31'
           file: <binary>
-          # graphTypes:
-          #   - graphTypeClass: "net.geoprism.registry.UndirectedGraphType"
-          #     code: "AdjacentTo"
-          #     edges:
-          #       - source: "06S4"
-          #         sourceType: "Structure"
-          #         target: "11PS"
-          #         targetType: "Structure"
   responses:
     '200':
       description: Success

@@ -41,11 +41,11 @@ post:
                 invalid: false
                 exists: true
                 writable: true
-            hierarchyType: "Test_HF"
-            parents: 
-              -  geoObject: "..."
-                 hierarchyType: "Test_HF"
-                 parents: []
+            hierarchyType: Test_HF
+            parents:
+              - geoObject: ...
+                hierarchyType: Test_HF
+                parents: []
     '401':
       description: Unauthorized
     '403':

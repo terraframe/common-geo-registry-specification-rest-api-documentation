@@ -29,18 +29,18 @@ post:
                     - 0
                     - 0
                 properties:
-                  uid: ""
-                  code: ""
+                  uid: ''
+                  code: ''
                   type: health_facilities
                   lastUpdateDate: 1592514228000
                   createDate: 1592426785000
                   displayLabel:
-                    localizedValue: ""
+                    localizedValue: ''
                     localeValues:
-                      - locale: ""
-                        value: ""
+                      - locale: ''
+                        value: ''
                       - locale: km_KH
-                        value: ""
+                        value: ''
                   invalid: false
                   exists: true
                   writable: true
@@ -50,38 +50,3 @@ post:
       description: Forbidden
     '404':
       description: Not found
-
-
-# post:
-#   tags:
-#     - User
-#   summary: Updated user
-#   description: This can only be done by the logged in user.
-#   operationId: updateUser
-#   parameters:
-#     - name: username
-#       in: path
-#       description: The name that needs to be updated
-#       required: true
-#       schema:
-#         type: string
-#   security:
-#     - main_auth:
-#         - 'write:users'
-#   responses:
-#     '200':
-#       description: OK
-#     '400':
-#       description: Invalid user supplied
-#     '404':
-#       description: User not found
-#   requestBody:
-#     content:
-#       application/json:
-#         schema:
-#           $ref: ../components/schemas/User.yaml
-#       application/xml:
-#         schema:
-#           $ref: ../components/schemas/User.yaml
-#     description: Updated user object
-#     required: true

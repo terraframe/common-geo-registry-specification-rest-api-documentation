@@ -9,7 +9,7 @@ properties:
     items:
       type: object
       properties:
-        oid: 
+        oid:
           type: string
         startDate:
           type: string
@@ -18,4 +18,4 @@ properties:
         value:
           type: array
           items:
-            $ref: './Geometry.yaml'
+            $ref: ./Geometry.yaml

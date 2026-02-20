@@ -2,7 +2,7 @@ type: array
 required:
   - type
 externalDocs:
-  url: http://geojson.org/geojson-spec.html#geometry-objects
+  url: 'http://geojson.org/geojson-spec.html#geometry-objects'
 items:
   type: array
   items:

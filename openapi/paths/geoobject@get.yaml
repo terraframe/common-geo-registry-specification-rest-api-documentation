@@ -21,12 +21,14 @@ get:
       example: PRO
     - name: date
       in: query
-      description: The date in UTC. Defaults to 5000-12-31 which represents the most current date possible.
+      description: >-
+        The date in UTC. Defaults to 5000-12-31 which represents the most
+        current date possible.
       required: false
       schema:
         type: string
-        default: "5000-12-31"
-      example: "2016-04-20"
+        default: '5000-12-31'
+      example: '2016-04-20'
   responses:
     '200':
       description: Success

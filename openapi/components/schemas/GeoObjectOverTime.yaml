@@ -4,9 +4,9 @@ properties:
     type: object
     properties:
       displayLabel:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       geometry:
-        $ref: './AttributeGeometryTypeOverTime.yaml'
+        $ref: ./AttributeGeometryTypeOverTime.yaml
       uid:
         type: string
       code:
@@ -20,9 +20,9 @@ properties:
       exists:
         type: object
         properties:
-          name: 
+          name:
             type: string
-          type: 
+          type:
             type: boolean
           values:
             type: array
@@ -36,5 +36,4 @@ properties:
                 endDate:
                   type: string
                 value:
-                  type: "boolean"
-          
+                  type: boolean

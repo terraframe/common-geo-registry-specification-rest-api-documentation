@@ -2,7 +2,10 @@ post:
   tags:
     - Publish Graph
   summary: Get conflicting types
-  description: Returns a list of (type, code) pairings of the repository types which have already been imported into the system for the same period of validity and will conflict with the pulled graph
+  description: >-
+    Returns a list of (type, code) pairings of the repository types which have
+    already been imported into the system for the same period of validity and
+    will conflict with the pulled graph
   operationId: publish-get-conflicts
   requestBody:
     required: true
@@ -24,8 +27,8 @@ post:
         application/json:
           schema:
             type: array
-            items: 
-              $ref: '../../components/schemas/TypeAndCode.yaml'
+            items:
+              $ref: ../../components/schemas/TypeAndCode.yaml
     '401':
       description: Unauthorized
     '403':

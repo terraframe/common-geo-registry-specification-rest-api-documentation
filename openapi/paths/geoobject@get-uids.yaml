@@ -20,7 +20,7 @@ get:
           schema:
             $ref: ../components/schemas/GeoObjectIDs.yaml
           example:
-            - "9975976c-1243-478c-850b-9176e2a7f57e"
+            - 9975976c-1243-478c-850b-9176e2a7f57e
     '401':
       description: Unauthorized
     '403':

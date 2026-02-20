@@ -3,7 +3,7 @@ description: Add child params.
 properties:
   type:
     type: string
-    enum: 
+    enum:
       - GEO_OBJECT
       - HIERARCHY
       - DAG

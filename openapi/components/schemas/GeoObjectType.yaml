@@ -3,7 +3,7 @@ properties:
   code:
     type: string
   label:
-    $ref: './LocalizedLabel.yaml'
+    $ref: ./LocalizedLabel.yaml
   geometryType:
     type: string
   isGeometryEditable:
@@ -15,11 +15,11 @@ properties:
   superTypeCode:
     type: string
   description:
-    $ref: './LocalizedLabel.yaml'
+    $ref: ./LocalizedLabel.yaml
   attributes:
     type: array
     items:
-      $ref: './AttributeType.yaml'
+      $ref: ./AttributeType.yaml
   permissions:
     type: array
     items:

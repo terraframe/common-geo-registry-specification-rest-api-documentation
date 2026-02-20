@@ -2,10 +2,10 @@ type: object
 description: Add child params.
 properties:
   geoObject:
-    $ref: './GeoObject.yaml'
+    $ref: ./GeoObject.yaml
   hierarchyType:
     type: string
   parents:
-    type : array
-    items :
-      $ref: './ParentTreeNode.yaml'
+    type: array
+    items:
+      $ref: ./ParentTreeNode.yaml

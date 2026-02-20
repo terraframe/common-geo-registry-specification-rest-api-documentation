@@ -1,29 +1,27 @@
 type: object
 description: Snapshot of Hierarchy Type metadata
 properties:
-  code: 
+  code:
     type: string
     example: ReportsTo
     description: Globally unique identifier of the Hierarchy type metadata
-  orgCode: 
+  orgCode:
     type: string
     example: MOHA
     description: Organization responsible for the metadata definition
-  origin: 
+  origin:
     type: string
-    example: "https://demo-georegistry.geoprism.net/"
+    example: 'https://demo-georegistry.geoprism.net/'
     description: Origin of the metadata
-  sequence: 
+  sequence:
     type: integer
     format: int32
     example: 0
     description: Change sequence number of the metadata
-  displayLabel: 
-    $ref: './LocalizedLabel.yaml'
-  nodes: 
+  displayLabel:
+    $ref: ./LocalizedLabel.yaml
+  nodes:
     type: array
     items:
-      $ref: './HierarchyTypeNodeSnapshot.yaml'
+      $ref: ./HierarchyTypeNodeSnapshot.yaml
     description: List of Geo Object types in the hierarchy
-
-

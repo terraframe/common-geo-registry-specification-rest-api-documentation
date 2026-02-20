@@ -2,7 +2,9 @@ post:
   tags:
     - Publish Graph
   summary: Publish a graph
-  description: Publish the events and metadata corresponding to a sub set of the data in the graph repository.
+  description: >-
+    Publish the events and metadata corresponding to a sub set of the data in
+    the graph repository.
   operationId: publish-create
   requestBody:
     required: true

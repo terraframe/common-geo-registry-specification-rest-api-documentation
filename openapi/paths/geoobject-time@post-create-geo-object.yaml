@@ -2,7 +2,10 @@ post:
   tags:
     - Geo-Object-Over-Time
   summary: Create a Geo-Object Over Time or a corresponding Change Request
-  description: Create a Geo-Object Over Time or a corresponding Change Request depending on the users role and permissions.  If the user does not have permissions to directly create the GeoObject then a Change Request will be created instead.
+  description: >-
+    Create a Geo-Object Over Time or a corresponding Change Request depending on
+    the users role and permissions.  If the user does not have permissions to
+    directly create the GeoObject then a Change Request will be created instead.
   operationId: createGeoObjectOverTimeOrChangeRequest
   requestBody:
     required: true

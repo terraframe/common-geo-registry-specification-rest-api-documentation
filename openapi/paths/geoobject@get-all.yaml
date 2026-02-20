@@ -1,8 +1,8 @@
 get:
   tags:
     - Geo-Object
-  summary: Get all Geo-Objects for a given Geo-ObjectType and Hierarchy.
-  description: Get all Geo-Objects for a given Geo-ObjectType and Hierarchy.
+  summary: Get all Geo-Objects for a given Geo-Object Type and Hierarchy.
+  description: Get all Geo-Objects for a given Geo-Object Type and Hierarchy.
   operationId: getAllGeoObject
   parameters:
     - name: typeCode
@@ -14,7 +14,9 @@ get:
       example: PRO
     - name: hierarchyCode
       in: query
-      description: The code of the Hierarchy that the Geo-Object Type belongs to. Default is FALSE.
+      description: >-
+        The code of the Hierarchy that the Geo-Object Type belongs to. Default
+        is FALSE.
       required: true
       schema:
         type: string
@@ -36,7 +38,9 @@ get:
       example: true
     - name: updatedSince
       in: query
-      description: Date in UTC from wich only Geo-Objects will returned that have been updated. 0 represents the beginning of UTC time.
+      description: >-
+        Date in UTC from wich only Geo-Objects will returned that have been
+        updated. 0 represents the beginning of UTC time.
       required: false
       schema:
         type: string
@@ -48,7 +52,9 @@ get:
       required: false
       schema:
         type: string
-        enum: [JSON_REVEAL, JSON_CGR]
+        enum:
+          - JSON_REVEAL
+          - JSON_CGR
         default: JSON_CGR
       example: JSON_REVEAL
     - name: pageNumber
@@ -129,38 +135,3 @@ get:
       description: Forbidden
     '404':
       description: Not found
-
-
-# post:
-#   tags:
-#     - User
-#   summary: Updated user
-#   description: This can only be done by the logged in user.
-#   operationId: updateUser
-#   parameters:
-#     - name: username
-#       in: path
-#       description: The name that needs to be updated
-#       required: true
-#       schema:
-#         type: string
-#   security:
-#     - main_auth:
-#         - 'write:users'
-#   responses:
-#     '200':
-#       description: OK
-#     '400':
-#       description: Invalid user supplied
-#     '404':
-#       description: User not found
-#   requestBody:
-#     content:
-#       application/json:
-#         schema:
-#           $ref: ../components/schemas/User.yaml
-#       application/xml:
-#         schema:
-#           $ref: ../components/schemas/User.yaml
-#     description: Updated user object
-#     required: true

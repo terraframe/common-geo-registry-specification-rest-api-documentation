@@ -1,70 +1,70 @@
 type: object
 description: Core List Type configuration schema.
 properties:
-  orgCode: 
+  orgCode:
     type: string
-  orgLabel: 
+  orgLabel:
     type: string
-  typeCode: 
+  typeCode:
     type: string
-  typeLabel: 
+  typeLabel:
     type: string
-  geometryType: 
+  geometryType:
     type: string
-  write: 
+  write:
     type: boolean
   lists:
     type: array
     items:
       type: object
       properties:
-        oid: 
+        oid:
           type: string
-        organization: 
+        organization:
           type: string
-        write: 
+        write:
           type: boolean
-        read: 
+        read:
           type: boolean
-        exploratory: 
+        exploratory:
           type: boolean
-        typeLabel: 
+        typeLabel:
           type: string
-        typePrivate: 
+        typePrivate:
           type: boolean
-        typeCode: 
+        typeCode:
           type: string
-        displayLabel: 
-          $ref: './DisplayLabel.yaml'
+        displayLabel:
+          $ref: ./DisplayLabel.yaml
         description:
-          $ref: './DisplayLabel.yaml'
-        code: 
+          $ref: ./DisplayLabel.yaml
+        code:
           type: string
         hierarchies:
           type: array
         subtypeHierarchies:
           type: array
-        includeLatLong: 
+        includeLatLong:
           type: boolean
         listMetadata:
           type: object
           properties:
             label:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             description:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             process:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             progress:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             accessConstraints:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             useConstraints:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             acknowledgements:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             disclaimer:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             collectionDate:
               type: string
             organization:
@@ -81,21 +81,21 @@ properties:
           type: object
           properties:
             label:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             description:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             process:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             progress:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             accessConstraints:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             useConstraints:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             acknowledgements:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             disclaimer:
-              $ref: './DisplayLabel.yaml'
+              $ref: ./DisplayLabel.yaml
             collectionDate:
               type: string
             organization:
@@ -130,7 +130,7 @@ properties:
               type: string
         frequency:
           type: string
-        publishingStartDate: 
+        publishingStartDate:
           type: string
-        listType: 
+        listType:
           type: string

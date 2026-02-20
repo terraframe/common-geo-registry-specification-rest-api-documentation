@@ -11,7 +11,7 @@ get:
       required: true
       schema:
         type: string
-      example: f356acf7-63cd-4874-82db-c32dc42d4874  
+      example: f356acf7-63cd-4874-82db-c32dc42d4874
   responses:
     '200':
       description: Success
@@ -20,8 +20,7 @@ get:
           schema:
             type: array
             items:
-              $ref: '../../components/schemas/Commit.yaml'
-
+              $ref: ../../components/schemas/Commit.yaml
     '401':
       description: Unauthorized
     '403':

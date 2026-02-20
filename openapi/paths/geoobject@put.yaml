@@ -10,8 +10,8 @@ post:
       application/json:
         schema:
           oneOf:
-              - $ref: ../components/schemas/GeoObject.yaml
-              - $ref: ../components/schemas/RevealGeoObject.yaml
+            - $ref: ../components/schemas/GeoObject.yaml
+            - $ref: ../components/schemas/RevealGeoObject.yaml
   responses:
     '200':
       description: Success
@@ -52,38 +52,3 @@ post:
       description: Forbidden
     '404':
       description: Not found
-
-
-# post:
-#   tags:
-#     - User
-#   summary: Updated user
-#   description: This can only be done by the logged in user.
-#   operationId: updateUser
-#   parameters:
-#     - name: username
-#       in: path
-#       description: The name that needs to be updated
-#       required: true
-#       schema:
-#         type: string
-#   security:
-#     - main_auth:
-#         - 'write:users'
-#   responses:
-#     '200':
-#       description: OK
-#     '400':
-#       description: Invalid user supplied
-#     '404':
-#       description: User not found
-#   requestBody:
-#     content:
-#       application/json:
-#         schema:
-#           $ref: ../components/schemas/User.yaml
-#       application/xml:
-#         schema:
-#           $ref: ../components/schemas/User.yaml
-#     description: Updated user object
-#     required: true

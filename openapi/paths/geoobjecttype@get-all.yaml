@@ -7,26 +7,30 @@ get:
   parameters:
     - name: types
       in: query
-      description: An array of Geo-Object Type codes. If blank then all Geo-Object Type objects are returned. Example is encoded for easy texting in a web browser.
+      description: >-
+        An array of Geo-Object Type codes. If blank then all Geo-Object Type
+        objects are returned. Example is encoded for easy texting in a web
+        browser.
       required: false
       schema:
         type: array
         items:
           type: string
-      example: "%5B%22PRO%22%5D"
+      example: '%5B%22PRO%22%5D'
     - name: hierarchies
       in: query
-      description: An array of Hierarchy codes. If blank then all Hierarchy objects are returned. Example is encoded for easy texting in a web browser.
+      description: >-
+        An array of Hierarchy codes. If blank then all Hierarchy objects are
+        returned. Example is encoded for easy texting in a web browser.
       required: false
       schema:
         type: array
         items:
           type: string
-      example: "%5B%22ADM_H%22%5D"
-      
+      example: '%5B%22ADM_H%22%5D'
   security:
     - main_auth:
-      - 'read:users'
+        - 'read:users'
   responses:
     '200':
       description: Success
@@ -35,7 +39,7 @@ get:
           schema:
             type: array
             items:
-              $ref: '../components/schemas/GeoObjectType.yaml'
+              $ref: ../components/schemas/GeoObjectType.yaml
           example:
             - code: health_facility
               label:
@@ -47,38 +51,38 @@ get:
                     value: មណ្ឌលសុខភាព
               description: Health facilities for ...
               geometryType: MultiPolygon
-              isGeometryEditable: TRUE
+              isGeometryEditable: true
               organizationCode: moh
-              superTypeCode: ""
+              superTypeCode: ''
               attributes:
                 - code: uid
                   type: character
                   label:
                     localizedValue: UID
                     localValues:
-                      - 
+                      - null
                   description:
                     localizedValue: The internal globally unique identifier ID
                     localeValues:
-                      -
-                  isDefault: TRUE
-                  required: FALSE
-                  unique: FALSE
-                  isChangeOverTime: FALSE
+                      - null
+                  isDefault: true
+                  required: false
+                  unique: false
+                  isChangeOverTime: false
                 - code: displayLabel
                   type: local
                   label:
                     localizedValue: Display Label
                     localValues:
-                      -
+                      - null
                   description:
                     localizedValue: Label of the location
                     localeValues:
-                      -
-                  isDefault: TRUE
-                  required: FALSE
-                  unique: FALSE
-                  isChangeOverTime: FALSE
+                      - null
+                  isDefault: true
+                  required: false
+                  unique: false
+                  isChangeOverTime: false
                 - code: code
                   type: character
                   label:
@@ -91,110 +95,75 @@ get:
                     localeValues:
                       - locale: defaultLocale
                         value: Human readable unique identified
-                  isDefault: TRUE
-                  required: FALSE
-                  unique: FALSE
-                  isChangeOverTime: FALSE
+                  isDefault: true
+                  required: false
+                  unique: false
+                  isChangeOverTime: false
                 - code: lastUpdateDate
                   type: date
                   label:
                     localizedValue: Date Last Updated
                     localValues:
-                      -
+                      - null
                   description:
                     localizedValue: The date the object was updated
                     localeValues:
-                      -
-                  isDefault: TRUE
-                  required: FALSE
-                  unique: FALSE
-                  isChangeOverTime: FALSE
+                      - null
+                  isDefault: true
+                  required: false
+                  unique: false
+                  isChangeOverTime: false
                 - code: createDate
                   type: date
                   label:
                     localizedValue: Date Created
                     localValues:
-                      -
+                      - null
                   description:
                     localizedValue: The date the object was created
                     localeValues:
-                      -
-                  isDefault: TRUE
-                  required: FALSE
-                  unique: FALSE
-                  isChangeOverTime: FALSE
+                      - null
+                  isDefault: true
+                  required: false
+                  unique: false
+                  isChangeOverTime: false
                 - code: type
                   type: character
                   label:
                     localizedValue: Type
                     localValues:
-                      -
+                      - null
                   description:
                     localizedValue: The type of the Geo-Object
                     localeValues:
-                      -
-                  isDefault: TRUE
-                  required: FALSE
-                  isChangeOverTime: FALSE
+                      - null
+                  isDefault: true
+                  required: false
+                  isChangeOverTime: false
                 - code: sequence
                   type: integer
                   label:
                     localizedValue: Sequence
                     localValues:
-                      -
+                      - null
                   description:
-                    localizedValue: The sequence number of the Geo-Object that is incremented when the object is updated
+                    localizedValue: >-
+                      The sequence number of the Geo-Object that is incremented
+                      when the object is updated
                     localeValues:
-                      -
-                  isDefault: TRUE
-                  required: FALSE
-                  unique: FALSE
-                  isChangeOverTime: FALSE
+                      - null
+                  isDefault: true
+                  required: false
+                  unique: false
+                  isChangeOverTime: false
               permissions:
                 - CREATE
                 - READ
                 - DELETE
                 - WRITE
-                    
-
     '401':
       description: Unauthorized
     '403':
       description: Forbidden
     '404':
       description: Not found
-
-
-# post:
-#   tags:
-#     - User
-#   summary: Updated user
-#   description: This can only be done by the logged in user.
-#   operationId: updateUser
-#   parameters:
-#     - name: username
-#       in: path
-#       description: The name that needs to be updated
-#       required: true
-#       schema:
-#         type: string
-#   security:
-#     - main_auth:
-#         - 'write:users'
-#   responses:
-#     '200':
-#       description: OK
-#     '400':
-#       description: Invalid user supplied
-#     '404':
-#       description: User not found
-#   requestBody:
-#     content:
-#       application/json:
-#         schema:
-#           $ref: ../components/schemas/User.yaml
-#       application/xml:
-#         schema:
-#           $ref: ../components/schemas/User.yaml
-#     description: Updated user object
-#     required: true

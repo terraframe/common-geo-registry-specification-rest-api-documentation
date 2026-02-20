@@ -17,11 +17,15 @@ post:
             publishId:
               type: string
               description: uid of the publish to pull
-            exclusions: 
+            exclusions:
               type: array
-              items: 
-                $ref: '../../components/schemas/TypeAndCode.yaml'
-              description: List of (type, code) pairings of the repository types to exclude from the published graph.  This can only be used when the types in the graph overlap with the types in a different graph with the same period of validity.
+              items:
+                $ref: ../../components/schemas/TypeAndCode.yaml
+              description: >-
+                List of (type, code) pairings of the repository types to exclude
+                from the published graph.  This can only be used when the types
+                in the graph overlap with the types in a different graph with
+                the same period of validity.
   responses:
     '200':
       description: Success

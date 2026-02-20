@@ -7,4 +7,4 @@ properties:
   children:
     type: array
     items:
-      $ref: './Term.yaml' # ReDoc UI can't render circular references
+      $ref: ./Term.yaml

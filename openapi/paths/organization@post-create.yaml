@@ -22,7 +22,7 @@ post:
             label:
               localizedValue: Ministry of Home Affairs
             contactInfo:
-              localizedValue: Moha Ra (Director, Land Affairs)
+              localizedValue: 'Moha Ra (Director, Land Affairs)'
     '401':
       description: Unauthorized
     '403':

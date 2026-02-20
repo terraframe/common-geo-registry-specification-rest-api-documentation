@@ -1,12 +1,12 @@
 type: object
-description: GeoJSON Feature. Reference - https://tools.ietf.org/html/rfc7946#section-3.2
+description: 'GeoJSON Feature. Reference - https://tools.ietf.org/html/rfc7946#section-3.2'
 required:
- - type
- - id
- - geometry
- - properties
+  - type
+  - id
+  - geometry
+  - properties
 externalDocs:
-  url: https://tools.ietf.org/html/rfc7946
+  url: 'https://tools.ietf.org/html/rfc7946'
 properties:
   type:
     type: string
@@ -15,7 +15,7 @@ properties:
   id:
     type: string
   geometry:
-    $ref: './Geometry.yaml'
+    $ref: ./Geometry.yaml
   properties:
     type: object
     required:
@@ -29,7 +29,7 @@ properties:
       code:
         type: string
       type:
-        $ref: './GeoObjectType.yaml'
+        $ref: ./GeoObjectType.yaml
       invalid:
         type: boolean
       exists:

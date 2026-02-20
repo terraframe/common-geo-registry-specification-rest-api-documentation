@@ -11,7 +11,7 @@ get:
       required: true
       schema:
         type: string
-      example: TLK01  
+      example: TLK01
   responses:
     '200':
       description: Success
@@ -21,18 +21,17 @@ get:
             oneOf:
               - $ref: ../components/schemas/RelatedType.yaml
           example:
-            - code: "Test_UND"
+            - code: Test_UND
               label:
-                localizedValue: "Adjacent To"
+                localizedValue: Adjacent To
                 localeValues:
-                   - locale: "defaultLocale"
-                     value: "Adjacent To"
+                  - locale: defaultLocale
+                    value: Adjacent To
               description:
-                localizedValue: ""
+                localizedValue: ''
                 localeValues:
-                  - locale: "defaultLocale"
-                    value: ""
-
+                  - locale: defaultLocale
+                    value: ''
     '401':
       description: Unauthorized
     '403':

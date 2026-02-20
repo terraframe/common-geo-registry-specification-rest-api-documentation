@@ -1,41 +1,39 @@
 openapi: 3.0.2
 info:
   version: 1.0.0
-  contact: 
+  contact:
     name: TerraFrame
     url: test
     email: test
   title: GeoPrism Registry REST API
-  # termsOfService: 'https://example.com/terms/'
-  # contact:
-    # name: Contact
-    # email: info@terraframe.com
-    # url: '/'
-  # license:
-  #   name: GPL
-  #   url: 'https://opensource.org/licenses/gpl-license'
   x-logo:
-    url: './cgr_logo.png'
-  description: >
+    url: ./cgr_logo.png
+  description: |
     The GeoPrism Registry API provides programatic access to core functionality.
 externalDocs:
   description: User documentation
   url: 'https://terraframe-inc.gitbook.io/geoprism-registry-documentation/'
 tags:
   - name: Organization
-    description: Operations to interact with Organization definitions.        
+    description: Operations to interact with Organization definitions.
   - name: Geo-Object Type
-    description: Operations to interact with Geo-Object Types.    
+    description: Operations to interact with Geo-Object Types.
   - name: Hierarchy
-    description: Operations to interact with Hierarchical relationship type definitions.            
+    description: Operations to interact with Hierarchical relationship type definitions.
   - name: Directed Acyclic Graph
-    description: Operations to interact with Directed Acyclic Graph Type definitions.    
+    description: Operations to interact with Directed Acyclic Graph Type definitions.
   - name: Undirected Graph
-    description: Operations to interact with Undirected Graph Type definitions.        
+    description: Operations to interact with Undirected Graph Type definitions.
   - name: Geo-Object
-    description: Operations to interact with Geo-Objects. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+    description: >-
+      Operations to interact with Geo-Objects. A Geo-Object represents the most
+      current version of the object while Geo-Object-Over-Time has values for
+      all available time ranges.
   - name: Geo-Object-Over-Time
-    description: Operations to interact with Geo-Objects-Over-Time. A Geo-Object represents the most current version of the object while Geo-Object-Over-Time has values for all available time ranges.
+    description: >-
+      Operations to interact with Geo-Objects-Over-Time. A Geo-Object represents
+      the most current version of the object while Geo-Object-Over-Time has
+      values for all available time ranges.
   - name: Geo-Object Type
     description: Operations to interact with Geo-Object Types.
   - name: Hierarchy
@@ -49,145 +47,136 @@ tags:
 servers:
   - url: 'https://demo-georegistry.geoprism.net/'
 paths:
-  '/api/geoobject/get':
-    $ref: 'paths/geoobject@get.yaml'
-  '/api/geoobject/update':
-    $ref: 'paths/geoobject@put.yaml'
-  '/api/geoobject/create':
-    $ref: 'paths/geoobject@post.yaml'
-  '/api/geoobject/newGeoObjectInstance':
-    $ref: 'paths/geoobject@post-empty.yaml'
-  '/api/geoobject/get-code':
-    $ref: 'paths/geoobject@get-code.yaml'
-  '/api/geoobject/getchildren':
-    $ref: 'paths/geoobject@getchildren.yaml'
-  '/api/geoobject/get-parent-geoobjects':
-    $ref: 'paths/geoobject@get-parent-geoobjects.yaml'
-  '/api/geoobject/addchild':
-    $ref: 'paths/geoobject@post-add-child.yaml'
-  '/api/geoobject/removechild':
-    $ref: 'paths/geoobject@post-remove-child.yaml'
-  '/api/geoobject/get-uids':
-    $ref: 'paths/geoobject@get-uids.yaml'
-
-  # '/cgr/geoobject-time/get':
-  #   $ref: 'paths/geoobject-time@get.yaml'
-  '/api/geoobject-time/get-code':
-    $ref: 'paths/geoobject-time@get-code.yaml'
-  '/api/geoobject-time/update':
-    $ref: 'paths/geoobject-time@post-update.yaml'
-  '/api/geoobject-time/create':
-    $ref: 'paths/geoobject-time@post-create.yaml'
-
-  '/api/geoobject-editor/createGeoObject':
-    $ref: 'paths/geoobject-time@post-create-geo-object.yaml'    
-
-  '/api/geoobjecttype/get-all':
-    $ref: 'paths/geoobjecttype@get-all.yaml'
-
-  '/api/cgr/import-types':
-    $ref: 'paths/geoobjecttype@import-types.yaml'    
-
-  '/api/hierarchytype/get-all':
-    $ref: 'paths/hierarchytype@get-all.yaml'
-
-  '/api/list-type/data':
-    $ref: 'paths/list@data.yaml'
-  '/api/list-type/list-for-type':
-    $ref: 'paths/list@list-for-type.yaml'
-  '/api/list-type/entries':
-    $ref: 'paths/list@entries.yaml'
-  '/api/list-type/version':
-    $ref: 'paths/list@version.yaml'
-
-  '/api/etl/import-edge-json':
-    $ref: 'paths/etl@import-edge-json.yaml'
-  '/api/directed-graph-type/get-all':
-    $ref: 'paths/directed-graph-type@get-all.yaml'
-  '/api/directed-graph-type/create':
-    $ref: 'paths/directed-graph-type@create.yaml'
-  '/api/directed-graph-type/update':
-    $ref: 'paths/directed-graph-type@update.yaml'
-  '/api/directed-graph-type/remove':
-    $ref: 'paths/directed-graph-type@remove.yaml'
-  '/api/directed-graph-type/get':
-    $ref: 'paths/directed-graph-type@get.yaml'
-
-  '/api/undirected-graph-type/get-all':
-    $ref: 'paths/undirected-graph-type@get-all.yaml'    
-  '/api/undirected-graph-type/create':
-    $ref: 'paths/undirected-graph-type@create.yaml'
-  '/api/undirected-graph-type/update':
-    $ref: 'paths/undirected-graph-type@update.yaml'
-  '/api/undirected-graph-type/remove':
-    $ref: 'paths/undirected-graph-type@remove.yaml'
-  '/api/undirected-graph-type/get':
-    $ref: 'paths/undirected-graph-type@get.yaml'
-
-  '/api/organization/get-all':
-    $ref: 'paths/organization@get-all.yaml'            
-  '/api/orgainization/create':
-    $ref: 'paths/organization@post-create.yaml'        
-  '/api/orgainization/update':
-    $ref: 'paths/organization@post-update.yaml'        
-  '/api/orgainization/delete':
-    $ref: 'paths/organization@post-delete.yaml'   
-
-  '/api/geoobject/get-all':
-    $ref: 'paths/geoobject@get-all.yaml'
-
-  '/api/dag/get-children':
-    $ref: 'paths/dag@get-graph-children.yaml'            
-  '/api/dag/get-parents':
-    $ref: 'paths/dag@get-graph-parents.yaml'    
-  '/api/dag/add-child':
-    $ref: 'paths/dag@post-add-graph-child.yaml'    
-  '/api/dag/remove-child':  
-    $ref: 'paths/dag@post-remove-graph-child.yaml'    
-
-  '/api/undirected/get-related-geo-objects':  
-    $ref: 'paths/undirected@get-related-geo-objects.yaml'        
-  '/api/undirected/add-target':
-    $ref: 'paths/undirected@post-add-target.yaml'            
-  '/api/undirected/remove-target':
-    $ref: 'paths/undirected@post-remove-target.yaml'        
-
-  '/api/publish/create':
-    $ref: 'paths/publish/post-create.yaml'
-  '/api/publish/create-new-version':
-    $ref: 'paths/publish/post-create-new-version.yaml'
-  '/api/publish/post-get-conflicts':
-    $ref: 'paths/publish/post-get-conflicts.yaml'
-  '/api/publish/pull':
-    $ref: 'paths/publish/post-pull.yaml'
-  '/api/publish/get-all':
-    $ref: 'paths/publish/get-get-all.yaml'
-  '/api/publish/get':
-    $ref: 'paths/publish/get-get.yaml'
-  '/api/commit/get-all':
-    $ref: 'paths/commit/get-get-all.yaml'
-  '/api/commit/get-latest':
-    $ref: 'paths/commit/get-get-latest.yaml'
-  '/api/commit/get-dependencies':
-    $ref: 'paths/commit/get-get-dependencies.yaml'
-  '/api/commit/business-types':
-    $ref: 'paths/commit/get-business-types.yaml'
-  '/api/commit/geo-object-types':
-    $ref: 'paths/commit/get-geo-object-types.yaml'
-  '/api/commit/hierarchy-types':
-    $ref: 'paths/commit/get-hierarchy-types.yaml'
-  '/api/commit/directed-acyclic-graph-types':
-    $ref: 'paths/commit/get-directed-acyclic-graph-types.yaml'
-  '/api/commit/undirected-graph-types':
-    $ref: 'paths/commit/get-undirected-graph-types.yaml'
-
-
-
+  /api/geoobject/get:
+    $ref: paths/api@geoobject@get.yaml
+  /api/geoobject/update:
+    $ref: paths/api@geoobject@update.yaml
+  /api/geoobject/create:
+    $ref: paths/api@geoobject@create.yaml
+  /api/geoobject/newGeoObjectInstance:
+    $ref: paths/api@geoobject@newGeoObjectInstance.yaml
+  /api/geoobject/get-code:
+    $ref: paths/api@geoobject@get-code.yaml
+  /api/geoobject/getchildren:
+    $ref: paths/api@geoobject@getchildren.yaml
+  /api/geoobject/get-parent-geoobjects:
+    $ref: paths/api@geoobject@get-parent-geoobjects.yaml
+  /api/geoobject/addchild:
+    $ref: paths/api@geoobject@addchild.yaml
+  /api/geoobject/removechild:
+    $ref: paths/api@geoobject@removechild.yaml
+  /api/geoobject/get-uids:
+    $ref: paths/api@geoobject@get-uids.yaml
+  /api/geoobject-time/get-code:
+    $ref: paths/api@geoobject-time@get-code.yaml
+  /api/geoobject-time/update:
+    $ref: paths/api@geoobject-time@update.yaml
+  /api/geoobject-time/create:
+    $ref: paths/api@geoobject-time@create.yaml
+  /api/geoobject-editor/createGeoObject:
+    $ref: paths/api@geoobject-editor@createGeoObject.yaml
+  /api/geoobjecttype/get-all:
+    $ref: paths/api@geoobjecttype@get-all.yaml
+  /api/cgr/import-types:
+    $ref: paths/api@cgr@import-types.yaml
+  /api/hierarchytype/get-all:
+    $ref: paths/api@hierarchytype@get-all.yaml
+  /api/list-type/data:
+    $ref: paths/api@list-type@data.yaml
+  /api/list-type/list-for-type:
+    $ref: paths/api@list-type@list-for-type.yaml
+  /api/list-type/entries:
+    $ref: paths/api@list-type@entries.yaml
+  /api/list-type/version:
+    $ref: paths/api@list-type@version.yaml
+  /api/etl/import-edge-json:
+    $ref: paths/api@etl@import-edge-json.yaml
+  /api/directed-graph-type/get-all:
+    $ref: paths/api@directed-graph-type@get-all.yaml
+  /api/directed-graph-type/create:
+    $ref: paths/api@directed-graph-type@create.yaml
+  /api/directed-graph-type/update:
+    $ref: paths/api@directed-graph-type@update.yaml
+  /api/directed-graph-type/remove:
+    $ref: paths/api@directed-graph-type@remove.yaml
+  /api/directed-graph-type/get:
+    $ref: paths/api@directed-graph-type@get.yaml
+  /api/undirected-graph-type/get-all:
+    $ref: paths/api@undirected-graph-type@get-all.yaml
+  /api/undirected-graph-type/create:
+    $ref: paths/api@undirected-graph-type@create.yaml
+  /api/undirected-graph-type/update:
+    $ref: paths/api@undirected-graph-type@update.yaml
+  /api/undirected-graph-type/remove:
+    $ref: paths/api@undirected-graph-type@remove.yaml
+  /api/undirected-graph-type/get:
+    $ref: paths/api@undirected-graph-type@get.yaml
+  /api/organization/get-all:
+    $ref: paths/api@organization@get-all.yaml
+  /api/orgainization/create:
+    $ref: paths/api@orgainization@create.yaml
+  /api/orgainization/update:
+    $ref: paths/api@orgainization@update.yaml
+  /api/orgainization/delete:
+    $ref: paths/api@orgainization@delete.yaml
+  /api/geoobject/get-all:
+    $ref: paths/api@geoobject@get-all.yaml
+  /api/dag/get-children:
+    $ref: paths/api@dag@get-children.yaml
+  /api/dag/get-parents:
+    $ref: paths/api@dag@get-parents.yaml
+  /api/dag/add-child:
+    $ref: paths/api@dag@add-child.yaml
+  /api/dag/remove-child:
+    $ref: paths/api@dag@remove-child.yaml
+  /api/undirected/get-related-geo-objects:
+    $ref: paths/api@undirected@get-related-geo-objects.yaml
+  /api/undirected/add-target:
+    $ref: paths/api@undirected@add-target.yaml
+  /api/undirected/remove-target:
+    $ref: paths/api@undirected@remove-target.yaml
+  /api/publish/create:
+    $ref: paths/api@publish@create.yaml
+  /api/publish/create-new-version:
+    $ref: paths/api@publish@create-new-version.yaml
+  /api/publish/post-get-conflicts:
+    $ref: paths/api@publish@post-get-conflicts.yaml
+  /api/publish/pull:
+    $ref: paths/api@publish@pull.yaml
+  /api/publish/get-all:
+    $ref: paths/api@publish@get-all.yaml
+  /api/publish/get:
+    $ref: paths/api@publish@get.yaml
+  /api/commit/get-all:
+    $ref: paths/api@commit@get-all.yaml
+  /api/commit/get-latest:
+    $ref: paths/api@commit@get-latest.yaml
+  /api/commit/get-dependencies:
+    $ref: paths/api@commit@get-dependencies.yaml
+  /api/commit/business-types:
+    $ref: paths/api@commit@business-types.yaml
+  /api/commit/geo-object-types:
+    $ref: paths/api@commit@geo-object-types.yaml
+  /api/commit/hierarchy-types:
+    $ref: paths/api@commit@hierarchy-types.yaml
+  /api/commit/directed-acyclic-graph-types:
+    $ref: paths/api@commit@directed-acyclic-graph-types.yaml
+  /api/commit/undirected-graph-types:
+    $ref: paths/api@commit@undirected-graph-types.yaml
 components:
   securitySchemes:
     Basic Authentication:
       type: http
       scheme: basic
-      description: GeoPrism Registry uses basic authentication over HTTPS. To authenticate against the API you must include a base64 encoded hash in the request header. A simple way to create the hash is to encode the username and password of an existing user as username:password using a tool like https://www.base64encode.org/.
+      description: >-
+        GeoPrism Registry uses basic authentication over HTTPS. To authenticate
+        against the API you must include a base64 encoded hash in the request
+        header. A simple way to create the hash is to encode the username and
+        password of an existing user as username:password using a tool like
+        https://www.base64encode.org/.
 security:
-  - Basic Authentication: [Super Registry Administrator, (organization) Registry Administrator, (geoobjecttype) Registry Maintainer, (geoobjecttype) Registry Contributor]  # <-- use the same name here
+  - Basic Authentication:
+      - Super Registry Administrator
+      - (organization) Registry Administrator
+      - (geoobjecttype) Registry Maintainer
+      - (geoobjecttype) Registry Contributor

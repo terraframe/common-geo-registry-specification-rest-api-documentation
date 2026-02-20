@@ -40,21 +40,21 @@ properties:
     type: object
     properties:
       label:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       description:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       process:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       progress:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       accessConstraints:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       useConstraints:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       acknowledgements:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       disclaimer:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       collectionDate:
         type: string
       organization:
@@ -71,21 +71,21 @@ properties:
     type: object
     properties:
       label:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       description:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       process:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       progress:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       accessConstraints:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       useConstraints:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       acknowledgements:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       disclaimer:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       collectionDate:
         type: string
       organization:
@@ -155,4 +155,3 @@ properties:
                 type: integer
   curation:
     type: boolean
-

@@ -1,13 +1,13 @@
 {
-  "name": "common-geo-registry-rest-api",
+  "name": "geoprism-registry-rest-api",
   "version": "1.0.0",
   "dependencies": {
-    "@redocly/openapi-cli": "^0.12.16"
+    "@redocly/openapi-cli": "^1.0.0-beta.95"
   },
   "private": true,
   "scripts": {
-    "start": "openapi preview-docs -p 8888",
+    "start": "openapi preview-docs",
     "build": "openapi bundle -o dist",
-    "test": "openapi validate"
+    "test": "openapi lint"
   }
 }

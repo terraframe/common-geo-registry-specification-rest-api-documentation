@@ -1,22 +1,22 @@
 type: object
 description: Snapshot of Undirected Graph Type metadata
 properties:
-  code: 
+  code:
     type: string
     example: FlowsThrough
     description: Globally unique identifier of the Undirected graph type metadata
-  orgCode: 
+  orgCode:
     type: string
     example: MOHA
     description: Organization responsible for the metadata definition
-  origin: 
+  origin:
     type: string
-    example: "https://demo-georegistry.geoprism.net/"
+    example: 'https://demo-georegistry.geoprism.net/'
     description: Origin of the metadata
-  sequence: 
+  sequence:
     type: integer
     format: int32
     example: 0
     description: Change sequence number of the metadata
-  displayLabel: 
-    $ref: './LocalizedLabel.yaml'
+  displayLabel:
+    $ref: ./LocalizedLabel.yaml

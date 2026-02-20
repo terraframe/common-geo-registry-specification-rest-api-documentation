@@ -3,18 +3,18 @@ description: GeoJson geometry
 required:
   - type
 externalDocs:
-  url: http://geojson.org/geojson-spec.html#geometry-objects
+  url: 'http://geojson.org/geojson-spec.html#geometry-objects'
 properties:
   type:
     type: string
     enum:
-    - MultiPoint
-    - MultiLineString
-    - MultiPolygon
+      - MultiPoint
+      - MultiLineString
+      - MultiPolygon
   coordinates:
     type: array
     items:
       oneOf:
-        - $ref: './MultiPoint.yaml'
-        - $ref: './MultiPolygon.yaml'
-        - $ref: './MultiLine.yaml'
+        - $ref: ./MultiPoint.yaml
+        - $ref: ./MultiPolygon.yaml
+        - $ref: ./MultiLine.yaml

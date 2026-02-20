@@ -18,17 +18,17 @@ post:
           schema:
             $ref: ../components/schemas/DirectedGraphType.yaml
           example:
-            - code: "Test_DAG"
+            - code: Test_DAG
               label:
-                localizedValue: "Flows into"
+                localizedValue: Flows into
                 localeValues:
-                   - locale: "defaultLocale"
-                     value: "Flows into"
+                  - locale: defaultLocale
+                    value: Flows into
               description:
-                localizedValue: ""
+                localizedValue: ''
                 localeValues:
-                  - locale: "defaultLocale"
-                    value: "Denotes bodies of water which flow into one another"
+                  - locale: defaultLocale
+                    value: Denotes bodies of water which flow into one another
     '401':
       description: Unauthorized
     '403':

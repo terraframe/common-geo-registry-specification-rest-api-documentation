@@ -1,2 +1,2 @@
 type: object
-$ref: './Feature.yaml'
+$ref: ./Feature.yaml

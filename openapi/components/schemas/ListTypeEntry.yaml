@@ -1,28 +1,28 @@
 type: object
 description: Core List Type entry schema.
 properties:
-  oid: 
+  oid:
     type: string
-  code: 
+  code:
     type: string
-  organization: 
+  organization:
     type: string
-  write: 
+  write:
     type: boolean
-  read: 
+  read:
     type: boolean
-  exploratory: 
+  exploratory:
     type: boolean
   typeLabel:
     type: string
-  typePrivate: 
+  typePrivate:
     type: boolean
   typeCode:
     type: string
-  displayLabel: 
-    $ref: './DisplayLabel.yaml'
+  displayLabel:
+    $ref: ./DisplayLabel.yaml
   description:
-    $ref: './DisplayLabel.yaml'
+    $ref: ./DisplayLabel.yaml
   hierarchies:
     type: array
   subtypeHierarchies:
@@ -42,21 +42,21 @@ properties:
     type: object
     properties:
       label:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       description:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       process:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       progress:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       accessConstraints:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       useConstraints:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       acknowledgements:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       disclaimer:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       collectionDate:
         type: string
       organization:
@@ -73,21 +73,21 @@ properties:
     type: object
     properties:
       label:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       description:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       process:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       progress:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       accessConstraints:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       useConstraints:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       acknowledgements:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       disclaimer:
-        $ref: './DisplayLabel.yaml'
+        $ref: ./DisplayLabel.yaml
       collectionDate:
         type: string
       organization:
@@ -190,21 +190,21 @@ properties:
                 type: object
                 properties:
                   label:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   description:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   process:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   progress:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   accessConstraints:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   useConstraints:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   acknowledgements:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   disclaimer:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   collectionDate:
                     type: string
                   organization:
@@ -221,21 +221,21 @@ properties:
                 type: object
                 properties:
                   label:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   description:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   process:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   progress:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   accessConstraints:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   useConstraints:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   acknowledgements:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   disclaimer:
-                    $ref: './DisplayLabel.yaml'
+                    $ref: ./DisplayLabel.yaml
                   collectionDate:
                     type: string
                   organization:
@@ -287,4 +287,3 @@ properties:
     type: string
   listType:
     type: string
-

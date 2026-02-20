@@ -12,8 +12,7 @@ get:
           schema:
             type: array
             items:
-              $ref: '../../components/schemas/Publish.yaml'
-
+              $ref: ../../components/schemas/Publish.yaml
     '401':
       description: Unauthorized
     '403':

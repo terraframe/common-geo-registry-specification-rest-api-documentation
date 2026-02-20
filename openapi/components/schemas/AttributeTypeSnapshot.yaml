@@ -1,32 +1,31 @@
 type: object
 description: Attribute metadata snapshot
-properties: 
-  code: 
+properties:
+  code:
     type: string
     example: code
     description: Unique identifier/name of the attribute
-  type: 
+  type:
     type: string
     example: character
     description: Attribute type
   label:
-    $ref: './LocalizedLabel.yaml'         
-  description: 
-    $ref: './LocalizedLabel.yaml'         
-  isDefault: 
+    $ref: ./LocalizedLabel.yaml
+  description:
+    $ref: ./LocalizedLabel.yaml
+  isDefault:
     type: boolean
     example: true
     description: Flag indicating if the attribute is a default attribute of the GPR
-  required: 
+  required:
     type: boolean
     example: false
     description: Flag indicating is the attribute value is required
-  unique: 
+  unique:
     type: boolean
     example: false
     description: Flag indicating is the attribute value must be unique
-  isChangeOverTime: 
+  isChangeOverTime:
     type: boolean
     example: true
     description: Flag indicating is the attribute value will change over time
-    

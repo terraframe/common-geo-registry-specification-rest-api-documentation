@@ -1,0 +1,8 @@
+type: http
+scheme: basic
+description: >-
+  GeoPrism Registry uses basic authentication over HTTPS. To authenticate
+  against the API you must include a base64 encoded hash in the request header.
+  A simple way to create the hash is to encode the username and password of an
+  existing user as username:password using a tool like
+  https://www.base64encode.org/.
