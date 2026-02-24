@@ -1,18 +1,22 @@
-get:
+post:
   tags:
     - Organization
-  summary: Get all Organizations
-  description: Get all Organizations
-  operationId: getAllOrganizations
+  summary: Create an Organization
+  description: Create an Organization
+  operationId: createOrganization
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Organization.yaml
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Organization.yaml
+            $ref: ../components/schemas/Organization.yaml
           example:
             code: MOHA
             label:

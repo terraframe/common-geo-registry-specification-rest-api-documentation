@@ -3,6 +3,6 @@ properties:
   code:
     type: string
   label:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'
   contactInfo:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'

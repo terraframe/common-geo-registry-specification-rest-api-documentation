@@ -4,8 +4,8 @@ properties:
   code:
     type: string
   label:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'
   description:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'
   organizationCode:
     type: string

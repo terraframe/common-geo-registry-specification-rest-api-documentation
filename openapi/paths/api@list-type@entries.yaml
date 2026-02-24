@@ -1,1 +1,310 @@
-$ref: paths/list@entries.yaml
+get:
+  tags:
+    - List
+  summary: Get all the list type entries for a list type configurations.
+  description: >-
+    Get all the list type entries for a list type configurations. List
+    configurations contain list entries which contain list versions.
+  operationId: entries
+  parameters:
+    - name: oid
+      in: query
+      description: Object ID of the List Type configuration.
+      required: true
+      schema:
+        type: string
+      example: 117cca3c-bb8c-467d-bba0-bada110007de
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/ListTypeEntry.yaml
+          example:
+            oid: 117cca3c-bb8c-467d-bba0-bada110007de
+            code: Health_facility_Set
+            organization: MOH
+            write: false
+            read: false
+            exploratory: false
+            typeLabel: Health facility (MOH)
+            typePrivate: false
+            typeCode: Health_facility
+            displayLabel:
+              - localizedValue: Health facility master list and geographic coordinates
+                localeValue:
+                  locale: defaultLocale
+                  value: Health facility master list and geographic coordinates
+            description:
+              - localizedValue: An example description.
+                localeValue:
+                  locale: defaultLocale
+                  value: An example description.
+            hierarchies:
+              - null
+            subtypeHierarchies:
+              - code: CHW_HP
+                label: CHW - Health post hierarchy (MOH)
+                selected: true
+            includeLatLong: true
+            listMetadata:
+              label:
+                localizedValue": null
+                localeValues":
+                  - locale: defaultLocale
+                    value: null
+              description:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              process:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              progress:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              accessConstraints:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              useConstraints:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              acknowledgements:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              disclaimer:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              collectionDate: null
+              organization: null
+              contactName: null
+              telephoneNumber: null
+              email: null
+              originator: null
+            geospatialMetadata:
+              label:
+                localizedValue": null
+                localeValues":
+                  - locale: defaultLocale
+                    value: null
+              description:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              process:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              progress:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              accessConstraints:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              useConstraints:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              acknowledgements:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              disclaimer:
+                localizedValue: null
+                localeValue:
+                  locale: defaultLocale
+                  value: ''
+              collectionDate: null
+              organization: null
+              contactName: null
+              telephoneNumber: null
+              email: null
+              originator: null
+              topicCategories: null
+              placeKeywords: null
+              updateFrequency: null
+              lineage: null
+              languages: null
+              scaleResolution: null
+              spatialRepresentation: null
+              referenceSystem: null
+              reportSpecification: null
+              distributionFormat: null
+            entries:
+              - oid: 792754ce-3640-4fa9-9213-98ccbb0007cb
+                displayLabel: Health facility master list and geographic coordinates
+                typeCode: Health_facility
+                orgCode: MOH
+                listType: 117cca3c-bb8c-467d-bba0-bada110007de
+                forDate: '2022-01-01'
+                createDate: '2022-07-27'
+                period:
+                  type: date
+                  value: '2022-01-01'
+                versions:
+                  - oid: df63be86-f4ba-4616-83de-ee6df70007cc
+                    displayLabel: Health facility master list and geographic coordinates
+                    typeCode: Health_facility
+                    orgCode: MOH
+                    listType: 117cca3c-bb8c-467d-bba0-bada110007de
+                    forDate: '2022-01-01'
+                    createDate: '2022-11-09'
+                    versionNumber: 1
+                    working: false
+                    geometryType: MULTIPOINT
+                    isGeometryEditable: true
+                    isAbstract: true
+                    shapefile: false
+                    isMember: false
+                    period:
+                      type: date
+                      value: '2022-01-01'
+                    listMetadata:
+                      label:
+                        localizedValue": null
+                        localeValues":
+                          - locale: defaultLocale
+                            value: null
+                      description:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      process:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      progress:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      accessConstraints:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      useConstraints:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      acknowledgements:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      disclaimer:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      collectionDate: null
+                      organization: null
+                      contactName: null
+                      telephoneNumber: null
+                      email: null
+                      originator: null
+                    geospatialMetadata:
+                      label:
+                        localizedValue": null
+                        localeValues":
+                          - locale: defaultLocale
+                            value: null
+                      description:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      process:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      progress:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      accessConstraints:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      useConstraints:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      acknowledgements:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      disclaimer:
+                        localizedValue: null
+                        localeValue:
+                          locale: defaultLocale
+                          value: ''
+                      collectionDate: null
+                      organization: ''
+                      contactName: Ariela Antonio
+                      telephoneNumber: +99 877-0000
+                      email: a.antonio@moh.gov.tlk
+                      originator: Ministry of Health (MOH)
+                      topicCategories: Health infrastructure
+                      placeKeywords: Tolkien Region
+                      updateFrequency: Annual
+                      lineage: >-
+                        Geographic coordinates are collected by the MOH county
+                        officer each time a new health facility opens
+                      languages: English
+                      scaleResolution: '1:50,000'
+                      spatialRepresentation: vector
+                      referenceSystem: EPSG4326
+                      reportSpecification: >-
+                        Quality checks are performed during field data
+                        collection as well as after it using high resolution
+                        imagery as ground reference. The method used to collect
+                        the coordinates as well a qualitative indication of the
+                        coordinates accuracy are provided in the list
+                      distributionFormat: SHAPEFILE
+                    subtypes:
+                      - code: Health_post
+                        label: Health Post (MOH)
+                    publishDate: '2022-11-09'
+                    curation: null
+            frequency: ANNUAL
+            publishingStartDate: '2000-01-01'
+            listType: incremental
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not found

@@ -1,15 +1,15 @@
 post:
   tags:
     - Geo-Object
-  summary: Remove a child Geo-Object from a Directed Acyclic Graph.
-  description: Remove a child Geo-Object from a Directed Acyclic Graph.
-  operationId: removeGraphChild
+  summary: Remove a child Geo-Object from an Undirected Graph.
+  description: Remove a child Geo-Object from an Undirected Graph.
+  operationId: removeRelatedGeoObject
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/RemoveGraphChildBody.yaml
+          $ref: ../components/schemas/RemoveRelatedGeoObjectBody.yaml
   responses:
     '200':
       description: Success

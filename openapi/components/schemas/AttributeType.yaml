@@ -6,3 +6,5 @@ properties:
     type: string
   type:
     type: string
+  description:
+    $ref: "./LocalizedLabel.yaml"

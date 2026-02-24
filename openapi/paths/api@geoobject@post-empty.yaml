@@ -1,24 +1,15 @@
-get:
+post:
   tags:
     - Geo-Object
-  summary: Get a Geo-Object by its code and type code.
-  description: Gets a single Geo-Object by code.
-  operationId: getGeoObjectByCode
-  parameters:
-    - name: code
-      in: query
-      description: The code of the Geo-Object to get.
-      required: true
-      schema:
-        type: string
-      example: TLK01
-    - name: typeCode
-      in: query
-      description: The code of the defining Geo-Object Type.
-      required: true
-      schema:
-        type: string
-      example: PRO
+  summary: Create an empty Geo-Object.
+  description: Create an empty Geo-Object.
+  operationId: createNewGeoObjectInstance
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TypeCodeBody.yaml
   responses:
     '200':
       description: Success

@@ -25,7 +25,7 @@ properties:
       Default attribute to use when displaying a label of an instance business
       object
   displayLabel:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'
   attributes:
     type: array
     items:

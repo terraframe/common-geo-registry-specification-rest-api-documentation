@@ -36,3 +36,11 @@ properties:
         type: boolean
       writable:
         type: boolean
+      displayLabel:
+        $ref: ./DisplayLabel.yaml
+      lastUpdateDate: 
+        type: string
+      createDate: 
+        type: string
+      status:
+        type: string

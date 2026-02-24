@@ -1,24 +1,22 @@
-get:
+post:
   tags:
     - Geo-Object
-  summary: Get a Geo-Object by its code and type code.
-  description: Gets a single Geo-Object by code.
-  operationId: getGeoObjectByCode
-  parameters:
-    - name: code
-      in: query
-      description: The code of the Geo-Object to get.
-      required: true
-      schema:
-        type: string
-      example: TLK01
-    - name: typeCode
-      in: query
-      description: The code of the defining Geo-Object Type.
-      required: true
-      schema:
-        type: string
-      example: PRO
+  summary: Create a Geo-Object.
+  description: Create a Geo-Object.
+  operationId: createGeoObject
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: ../components/schemas/GeoObject.yaml
+            - $ref: ../components/schemas/RevealGeoObject.yaml
+          discriminator:
+            propertyName: format
+            mapping:
+              JSON_CGR: ../components/schemas/GeoObject.yaml
+              JSON_REVEAL: ../components/schemas/RevealGeoObject.yaml
   responses:
     '200':
       description: Success

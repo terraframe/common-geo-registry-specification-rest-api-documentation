@@ -16,6 +16,4 @@ properties:
         value:
           type: array
           items:
-            type: object
-            properties:
-              $ref: ./LocalizedLabel.yaml
+            $ref: './LocalizedLabel.yaml'

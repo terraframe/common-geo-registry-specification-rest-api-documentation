@@ -10,9 +10,9 @@ properties:
     example: character
     description: Attribute type
   label:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'
   description:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'
   isDefault:
     type: boolean
     example: true

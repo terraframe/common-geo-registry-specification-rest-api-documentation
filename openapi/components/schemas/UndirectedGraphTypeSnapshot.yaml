@@ -19,4 +19,4 @@ properties:
     example: 0
     description: Change sequence number of the metadata
   displayLabel:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'

@@ -6,7 +6,7 @@ properties:
   code:
     type: string
   label:
-    $ref: ./LocalizedLabel.yaml
+    $ref: './LocalizedLabel.yaml'
   localizedDescription:
     type: string
   rootGeoObjectTypes:

@@ -1,16 +1,15 @@
 post:
   tags:
-    - Directed Acyclic Graph
-  summary: Delete existing Directed Acyclic Graph Type.
-  description: Delete existing Directed Acyclic Graph Type.
-  operationId: removeDag
+    - Organization
+  summary: Deletes an Organization
+  description: Deletes an Organization
+  operationId: deleteOrganization
   requestBody:
     required: true
     content:
       application/json:
         schema:
           type: object
-          description: Removes a directed graph relationship.
           properties:
             code:
               type: string
