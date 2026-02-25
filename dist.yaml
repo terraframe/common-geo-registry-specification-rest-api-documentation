@@ -1,0 +1,5408 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  license:
+    name: GPL
+    url: https://opensource.org/licenses/gpl-license
+  contact:
+    name: TerraFrame
+    url: https://www.terraframe.com/
+    email: info@terraframe.com
+  title: GeoPrism Registry REST API
+  x-logo:
+    url: ./cgr_logo.png
+  description: |
+    The GeoPrism Registry API provides programatic access to core functionality.
+externalDocs:
+  description: User documentation
+  url: https://terraframe-inc.gitbook.io/geoprism-registry-documentation
+tags:
+  - name: Organization
+    description: Operations to interact with Organization definitions.
+  - name: Geo-Object Type
+    description: Operations to interact with Geo-Object Types.
+  - name: Hierarchy
+    description: Operations to interact with Hierarchical relationship type definitions.
+  - name: Directed Acyclic Graph
+    description: Operations to interact with Directed Acyclic Graph Type definitions.
+  - name: Undirected Graph
+    description: Operations to interact with Undirected Graph Type definitions.
+  - name: Geo-Object
+    description: >-
+      Operations to interact with Geo-Objects. A Geo-Object represents the most
+      current version of the object while Geo-Object-Over-Time has values for
+      all available time ranges.
+  - name: Geo-Object-Over-Time
+    description: >-
+      Operations to interact with Geo-Objects-Over-Time. A Geo-Object represents
+      the most current version of the object while Geo-Object-Over-Time has
+      values for all available time ranges.
+  - name: Geo-Object Type
+    description: Operations to interact with Geo-Object Types.
+  - name: Hierarchy
+    description: Operations to interact with hierarchies.
+  - name: List
+    description: Operations to interact with Lists.
+  - name: ETL
+    description: Operations for bulk importing data.
+  - name: Publish Graph
+    description: Operations for publishing and pulling graph data.
+servers:
+  - url: https://demo-georegistry.geoprism.net
+paths:
+  /api/geoobject/get:
+    get:
+      tags:
+        - Geo-Object
+      summary: Get a Geo-Object by ID for a given Geo-Object Type.
+      description: Get all Geo-Objects for a given Geo-Object Type.
+      operationId: getGeoObject
+      parameters:
+        - name: id
+          in: query
+          description: The id of the Geo-Object to get.
+          required: true
+          schema:
+            type: string
+          example: b011c739-7c8f-45ec-8963-a4b61f7edaae
+        - name: typeCode
+          in: query
+          description: The code of the Geo-Object Type the Geo-Object belongs to.
+          required: true
+          schema:
+            type: string
+          example: PRO
+        - name: date
+          in: query
+          description: >-
+            The date in UTC. Defaults to 5000-12-31 which represents the most
+            current date possible.
+          required: false
+          schema:
+            type: string
+            default: '5000-12-31'
+          example: '2016-04-20'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Feature'
+                  - $ref: '#/components/schemas/RevealGeoObject'
+              examples:
+                JSON_CGR:
+                  value:
+                    type: Feature
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - - 113.56111706249908
+                          - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                      displayLabel:
+                        localizedValue: Central Health Facility
+                        localeValues:
+                          - locale: defaultLocale
+                            value: Central Health Facility
+                          - locale: km_KH
+                            value: ជាំ សាងុំា
+                      invalid: false
+                      exists: true
+                      writable: true
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/get-all:
+    get:
+      tags:
+        - Geo-Object
+      summary: Get all Geo-Objects for a given Geo-Object Type and Hierarchy.
+      description: Get all Geo-Objects for a given Geo-Object Type and Hierarchy.
+      operationId: getAllGeoObject
+      parameters:
+        - name: typeCode
+          in: query
+          description: The code of the Geo-Object Type that defines the Geo-Objects.
+          required: true
+          schema:
+            type: string
+          example: PRO
+        - name: hierarchyCode
+          in: query
+          description: >-
+            The code of the Hierarchy that the Geo-Object Type belongs to.
+            Default is FALSE.
+          required: true
+          schema:
+            type: string
+          example: ADM_H
+        - name: externalSystemId
+          in: query
+          description: The id of the external system registered in the CGR.
+          required: false
+          schema:
+            type: string
+          example: REVEALEXTSYSTEM
+        - name: includeGeographicLevel
+          in: query
+          description: >-
+            TRUE to return the level in the hierarchy the Geo-ObjectType
+            resides.
+          required: false
+          schema:
+            type: boolean
+            default: false
+          example: true
+        - name: updatedSince
+          in: query
+          description: >-
+            Date in UTC from wich only Geo-Objects will returned that have been
+            updated. 0 represents the beginning of UTC time.
+          required: false
+          schema:
+            type: string
+            default: 0
+          example: 0
+        - name: format
+          in: query
+          description: Format in which to return the Geo-Objects. Default is JSON_CGR.
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON_REVEAL
+              - JSON_CGR
+            default: JSON_CGR
+          example: JSON_REVEAL
+        - name: pageNumber
+          in: query
+          description: Page number used for pagination.
+          required: true
+          schema:
+            type: integer
+            default: 1
+          example: 1
+        - name: pageSize
+          in: query
+          description: Page size (number or results to return) used for pagination.
+          required: true
+          schema:
+            type: integer
+            default: 100
+          example: 20
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Feature'
+                  - $ref: '#/components/schemas/RevealGeoObject'
+              examples:
+                JSON_CGR:
+                  value:
+                    - type: Feature
+                      geometry:
+                        type: MultiPoint
+                        coordinates:
+                          - 113.56111706249908
+                          - 0.0657243021884568
+                      properties:
+                        uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                        code: sflsjdflldsfj
+                        type: health_facilities
+                        lastUpdateDate: 1592514228000
+                        createDate: 1592426785000
+                        displayLabel:
+                          localizedValue: Central Health Facility
+                          localeValues:
+                            - locale: defaultLocale
+                              value: Central Health Facility
+                            - locale: km_KH
+                              value: ជាំ សាងុំា
+                        invalid: false
+                        exists: true
+                        writable: true
+                JSON_REVEAL:
+                  value:
+                    - type: Feature
+                      geometry:
+                        type: MultiPoint
+                        coordinates:
+                          - 113.56111706249908
+                          - 0.0657243021884568
+                      properties:
+                        uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                        code: sflsjdflldsfj
+                        type: health_facilities
+                        name: Central Health Facility
+                        name_en: Central Health Facility
+                        version: 0
+                        OpenMRS_Id: 0
+                        externalId: 999999
+                        parentId: 63160720-239c-4347-ae93-b89ab781602d
+                        geographiLevel: 2
+                        lastUpdateDate: 1592514228000
+                        createDate: 1592426785000
+                        status: Active
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/put:
+    post:
+      tags:
+        - Geo-Object
+      summary: Update a Geo-Object.
+      description: Update a Geo-Object.
+      operationId: updateGeoObject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/Feature'
+                - $ref: '#/components/schemas/RevealGeoObject'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Feature'
+                  - $ref: '#/components/schemas/RevealGeoObject'
+              examples:
+                JSON_CGR:
+                  value:
+                    type: Feature
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                      displayLabel:
+                        localizedValue: Central Health Facility
+                        localeValues:
+                          - locale: defaultLocale
+                            value: Central Health Facility
+                          - locale: km_KH
+                            value: ជាំ សាងុំា
+                      invalid: false
+                      exists: true
+                      writable: true
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/post:
+    post:
+      tags:
+        - Geo-Object
+      summary: Create a Geo-Object.
+      description: Create a Geo-Object.
+      operationId: createGeoObject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/Feature'
+                - $ref: '#/components/schemas/RevealGeoObject'
+              discriminator:
+                propertyName: format
+                mapping:
+                  JSON_CGR: '#/components/schemas/Feature'
+                  JSON_REVEAL: '#/components/schemas/RevealGeoObject'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Feature'
+                  - $ref: '#/components/schemas/RevealGeoObject'
+                discriminator:
+                  propertyName: format
+                  mapping:
+                    JSON_CGR: '#/components/schemas/Feature'
+                    JSON_REVEAL: '#/components/schemas/RevealGeoObject'
+              examples:
+                JSON_CGR:
+                  summary: Standard CGR GeoObject response
+                  value:
+                    type: Feature
+                    id: 9975976c-1243-478c-850b-9176e2a7f57e
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                      displayLabel:
+                        localizedValue: Central Health Facility
+                        localeValues:
+                          - locale: defaultLocale
+                            value: Central Health Facility
+                      invalid: false
+                      exists: true
+                      writable: true
+                JSON_REVEAL:
+                  summary: Reveal format response
+                  value:
+                    type: Feature
+                    id: 9975976c-1243-478c-850b-9176e2a7f57e
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      status: Active
+                      name: Central Health Facility
+                      version: 0
+                      externalId: 999999
+                      parentId: 63160720-239c-4347-ae93-b89ab781602d
+                    geographiLevel: 2
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/newGeoObjectInstance:
+    post:
+      tags:
+        - Geo-Object
+      summary: Create an empty Geo-Object.
+      description: Create an empty Geo-Object.
+      operationId: createNewGeoObjectInstance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TypeCodeBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Feature'
+                  - $ref: '#/components/schemas/RevealGeoObject'
+                discriminator:
+                  propertyName: format
+                  mapping:
+                    JSON_CGR: '#/components/schemas/Feature'
+                    JSON_REVEAL: '#/components/schemas/RevealGeoObject'
+              examples:
+                JSON_CGR:
+                  summary: Standard CGR GeoObject response
+                  value:
+                    type: Feature
+                    id: 9975976c-1243-478c-850b-9176e2a7f57e
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                      displayLabel:
+                        localizedValue: Central Health Facility
+                        localeValues:
+                          - locale: defaultLocale
+                            value: Central Health Facility
+                      invalid: false
+                      exists: true
+                      writable: true
+                JSON_REVEAL:
+                  summary: Reveal format response
+                  value:
+                    type: Feature
+                    id: 9975976c-1243-478c-850b-9176e2a7f57e
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      status: Active
+                      name: Central Health Facility
+                      version: 0
+                      externalId: 999999
+                      parentId: 63160720-239c-4347-ae93-b89ab781602d
+                    geographiLevel: 2
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/get-code:
+    get:
+      tags:
+        - Geo-Object
+      summary: Get a Geo-Object by its code and type code.
+      description: Gets a single Geo-Object by code.
+      operationId: getGeoObjectByCode
+      parameters:
+        - name: code
+          in: query
+          description: The code of the Geo-Object to get.
+          required: true
+          schema:
+            type: string
+          example: TLK01
+        - name: typeCode
+          in: query
+          description: The code of the defining Geo-Object Type.
+          required: true
+          schema:
+            type: string
+          example: PRO
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Feature'
+                  - $ref: '#/components/schemas/RevealGeoObject'
+                discriminator:
+                  propertyName: format
+                  mapping:
+                    JSON_CGR: '#/components/schemas/Feature'
+                    JSON_REVEAL: '#/components/schemas/RevealGeoObject'
+              examples:
+                JSON_CGR:
+                  summary: Standard CGR GeoObject response
+                  value:
+                    type: Feature
+                    id: 9975976c-1243-478c-850b-9176e2a7f57e
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                      displayLabel:
+                        localizedValue: Central Health Facility
+                        localeValues:
+                          - locale: defaultLocale
+                            value: Central Health Facility
+                      invalid: false
+                      exists: true
+                      writable: true
+                JSON_REVEAL:
+                  summary: Reveal format response
+                  value:
+                    type: Feature
+                    id: 9975976c-1243-478c-850b-9176e2a7f57e
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      status: Active
+                      name: Central Health Facility
+                      version: 0
+                      externalId: 999999
+                      parentId: 63160720-239c-4347-ae93-b89ab781602d
+                    geographiLevel: 2
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/getchildren:
+    get:
+      tags:
+        - Geo-Object
+      summary: Get child Geo-Objects of a Geo-Object.
+      description: Get child Geo-Objects of a Geo-Object.
+      operationId: getChildGeoObjects
+      parameters:
+        - name: parentCode
+          in: query
+          description: The code of the Geo-Object for which the children will be requested.
+          required: true
+          schema:
+            type: string
+          example: PRO_1
+        - name: parentTypeCode
+          in: query
+          description: The code of the Geo-Object Type that the Geo-Object belongs to.
+          required: true
+          schema:
+            type: string
+          example: PRO
+        - name: date
+          in: query
+          description: >-
+            The temporal date to check against. Must in the the format of
+            YYYY-MM-DD.
+          required: false
+          schema:
+            type: string
+          example: '2021-02-20'
+        - name: childrenTypes
+          in: query
+          description: >-
+            A serialized JSON array of Geo-Object Type codes of the Geo-Object
+            Types that the child Geo-Objects must belongs to. Example is HTTP
+            URL encoded.
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+          example: '%5B%22CTY%22%5D'
+        - name: recursive
+          in: query
+          description: >-
+            TRUE to return all child Geo-Objects for all specified childrenTypes
+            at all levels below the parent Geo-Object.
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ChildTreeNode'
+              example:
+                - geoObject:
+                    type: Feature
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
+                  hierarchyType: PRO
+                  children: []
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/get-parent-geoobjects:
+    get:
+      tags:
+        - Geo-Object
+      summary: Get parent Geo-Objects of a Geo-Object.
+      description: Get parent Geo-Objects of a Geo-Object.
+      operationId: getParentGeoObjects
+      parameters:
+        - name: childCode
+          in: query
+          description: The code of the Geo-Object for which the parents will be requested.
+          required: true
+          schema:
+            type: string
+          example: PRO_1
+        - name: childTypeCode
+          in: query
+          description: The code of the Geo-Object Type that the Geo-Object belongs to.
+          required: true
+          schema:
+            type: string
+          example: PRO
+        - name: date
+          in: query
+          description: >-
+            The temporal date to check against. Must in the the format of
+            YYYY-MM-DD.
+          required: false
+          schema:
+            type: string
+          example: '2021-02-20'
+        - name: parentTypes
+          in: query
+          description: >-
+            A serialized JSON array of Geo-Object Type codes of the Geo-Object
+            Types that the parent Geo-Objects must belongs to. Example is HTTP
+            URL encoded.
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+          example: '%5B%22REG%22%5D'
+        - name: recursive
+          in: query
+          description: >-
+            TRUE to return all parent Geo-Objects for all specified parentTypes
+            at all levels above the child Geo-Object.
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ParentTreeNode'
+              example:
+                - geoObject:
+                    type: Feature
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
+                  hierarchyType: PRO
+                  parents: []
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/addchild:
+    post:
+      tags:
+        - Geo-Object
+      summary: Add child Geo-Object.
+      description: Add child Geo-Object.
+      operationId: addChildGeoObject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddChildBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentTreeNode'
+              example:
+                geoObject:
+                  type: Feature
+                  geometry:
+                    type: MultiPoint
+                    coordinates:
+                      - 113.56111706249908
+                      - 0.0657243021884568
+                  properties:
+                    uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                    code: sflsjdflldsfj
+                    type: health_facilities
+                    lastUpdateDate: '1592514228000'
+                    createDate: '1592426785000'
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
+                hierarchyType: Test_HF
+                parents:
+                  - geoObject: ...
+                    hierarchyType: Test_HF
+                    parents: []
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/post-remove-child:
+    post:
+      tags:
+        - Geo-Object
+      summary: Remove child Geo-Object.
+      description: Remove child Geo-Object.
+      operationId: removeChildGeoObject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveChildBody'
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject/get-uids:
+    get:
+      tags:
+        - Geo-Object
+      summary: Get UIDs that can be used as UIDs for new Geo-Object creation.
+      description: Get UIDs that can be used as UIDs for new Geo-Object creation.
+      operationId: getUIDS
+      parameters:
+        - name: amount
+          in: query
+          description: The amount of UIDs to return.
+          required: true
+          schema:
+            type: integer
+          example: 5
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoObjectIDs'
+              example:
+                - 9975976c-1243-478c-850b-9176e2a7f57e
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject-time/get-code:
+    get:
+      tags:
+        - Geo-Object-Over-Time
+      summary: Get a Geo-Object Over Time by code for a given Geo-Object Type.
+      description: Get a Geo-Object Over Time by code for a given Geo-Object Type.
+      operationId: getGeoObjectOverTimeByCode
+      parameters:
+        - name: code
+          in: query
+          description: The code of the Geo-Object to get.
+          required: true
+          schema:
+            type: string
+          example: TLK01
+        - name: typeCode
+          in: query
+          description: The code of the Geo-Object Type the Geo-Object belongs to.
+          required: true
+          schema:
+            type: string
+          example: PRO
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoObjectOverTime'
+              example:
+                attributes:
+                  displayLabel:
+                    name: displayLabel
+                    type: local
+                    values:
+                      - startDate: '2000-01-01'
+                        endDate: '2020-10-31'
+                        value:
+                          localizedValue: older label
+                          localeValues:
+                            - locale: defaultLocale
+                              value: older label
+                            - locale: km_KH
+                              value: ជាំ សាងុំា
+                      - startDate: '2020-11-01'
+                        endDate: '5000-12-31'
+                        value:
+                          localizedValue: new label
+                          localeValues:
+                            - locale: defaultLocale
+                              value: new label
+                            - locale: km_KH
+                              value: ជាំ សាងុំា
+                  geometry:
+                    name: geometry
+                    type: geometry
+                    values:
+                      - oid: 0f6c55d0-ea59-4c65-8027-68f463f43500
+                        startDate: '2000-01-01'
+                        endDate: '2007-04-19'
+                        value:
+                          type: MultiPoint
+                          coordinates:
+                            - - 121.0128899725
+                              - 14.42262481649999
+                            - - 121.01288997250037
+                              - 14.42262481649999
+                      - oid: 0f6c55d0-ea59-4c65-8027-68f463f43593
+                        startDate: '2007-04-20'
+                        endDate: '5000-12-31'
+                        value:
+                          type: MultiPoint
+                          coordinates:
+                            - - 121.0128899725
+                              - 14.42262481649999
+                            - - 121.01288997250037
+                              - 14.42262481649999
+                  exists:
+                    name: exists
+                    type: boolean
+                    values:
+                      - oid: 505ddd70-4bca-46ed-8868-32337f5c1b16
+                        startDate: '2000-01-01'
+                        endDate: '5000-12-31'
+                        value: true
+                  uid: 838c1d75-eb9f-47e8-b4ea-38e5b7a5b456
+                  code: newtest
+                  lastUpdateDate: 1605852438290
+                  type: zambia_hf_catchment_area
+                  createDate: 1605837803809
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject-time/post-create-geo-object:
+    post:
+      tags:
+        - Geo-Object-Over-Time
+      summary: Create a Geo-Object Over Time or a corresponding Change Request
+      description: >-
+        Create a Geo-Object Over Time or a corresponding Change Request
+        depending on the users role and permissions.  If the user does not have
+        permissions to directly create the GeoObject then a Change Request will
+        be created instead.
+      operationId: createGeoObjectOverTimeOrChangeRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                geoObject:
+                  $ref: '#/components/schemas/GeoObjectOverTime'
+                isNew:
+                  type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  geoObject:
+                    $ref: '#/components/schemas/GeoObjectOverTime'
+                  isChangeRequest:
+                    type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject-time/post-create:
+    post:
+      tags:
+        - Geo-Object-Over-Time
+      summary: Create a Geo-Object Over Time.
+      description: Create a Geo-Object Over Time.
+      operationId: createGeoObjectOverTime
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeoObjectOverTime'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoObjectOverTime'
+              example:
+                attributes:
+                  displayLabel:
+                    name: displayLabel
+                    type: local
+                    values:
+                      - startDate: '2000-01-01'
+                        endDate: '2020-10-31'
+                        value:
+                          localizedValue: older label
+                          localeValues:
+                            - locale: defaultLocale
+                              value: older label
+                            - locale: km_KH
+                              value: ជាំ សាងុំា
+                      - startDate: '2020-11-01'
+                        endDate: '5000-12-31'
+                        value:
+                          localizedValue: new label
+                          localeValues:
+                            - locale: defaultLocale
+                              value: new label
+                            - locale: km_KH
+                              value: ជាំ សាងុំា
+                  geometry:
+                    name: geometry
+                    type: geometry
+                    values:
+                      - oid: 0f6c55d0-ea59-4c65-8027-68f463f43500
+                        startDate: '2000-01-01'
+                        endDate: '2007-04-19'
+                        value:
+                          type: MultiPoint
+                          coordinates:
+                            - - 121.0128899725
+                              - 14.42262481649999
+                            - - 121.01288997250037
+                              - 14.42262481649999
+                      - oid: 0f6c55d0-ea59-4c65-8027-68f463f43593
+                        startDate: '2007-04-20'
+                        endDate: '5000-12-31'
+                        value:
+                          type: MultiPoint
+                          coordinates:
+                            - - 121.0128899725
+                              - 14.42262481649999
+                            - - 121.01288997250037
+                              - 14.42262481649999
+                  exists:
+                    name: exists
+                    type: boolean
+                    values:
+                      - oid: 505ddd70-4bca-46ed-8868-32337f5c1b16
+                        startDate: '2000-01-01'
+                        endDate: '5000-12-31'
+                        value: true
+                  uid: 838c1d75-eb9f-47e8-b4ea-38e5b7a5b456
+                  code: newtest
+                  lastUpdateDate: 1605852438290
+                  type: zambia_hf_catchment_area
+                  createDate: 1605837803809
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject-time/update:
+    post:
+      tags:
+        - Geo-Object-Over-Time
+      summary: Update a Geo-Object Over Time.
+      description: Update a Geo-Object Over Time.
+      operationId: updateGeoObjectOverTime
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeoObjectOverTime'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoObjectOverTime'
+              example:
+                attributes:
+                  displayLabel:
+                    name: displayLabel
+                    type: local
+                    values:
+                      - startDate: '2000-01-01'
+                        endDate: '2020-10-31'
+                        value:
+                          localizedValue: older label
+                          localeValues:
+                            - locale: defaultLocale
+                              value: older label
+                            - locale: km_KH
+                              value: ជាំ សាងុំា
+                      - startDate: '2020-11-01'
+                        endDate: '5000-12-31'
+                        value:
+                          localizedValue: new label
+                          localeValues:
+                            - locale: defaultLocale
+                              value: new label
+                            - locale: km_KH
+                              value: ជាំ សាងុំា
+                  geometry:
+                    name: geometry
+                    type: geometry
+                    values:
+                      - oid: 0f6c55d0-ea59-4c65-8027-68f463f43500
+                        startDate: '2000-01-01'
+                        endDate: '2007-04-19'
+                        value:
+                          type: MultiPoint
+                          coordinates:
+                            - - 121.0128899725
+                              - 14.42262481649999
+                            - - 121.01288997250037
+                              - 14.42262481649999
+                      - oid: 0f6c55d0-ea59-4c65-8027-68f463f43593
+                        startDate: '2007-04-20'
+                        endDate: '5000-12-31'
+                        value:
+                          type: MultiPoint
+                          coordinates:
+                            - - 121.0128899725
+                              - 14.42262481649999
+                            - - 121.01288997250037
+                              - 14.42262481649999
+                  exists:
+                    name: exists
+                    type: boolean
+                    values:
+                      - oid: 505ddd70-4bca-46ed-8868-32337f5c1b16
+                        startDate: '2000-01-01'
+                        endDate: '5000-12-31'
+                        value: true
+                  uid: 838c1d75-eb9f-47e8-b4ea-38e5b7a5b456
+                  code: newtest
+                  lastUpdateDate: 1605852438290
+                  type: zambia_hf_catchment_area
+                  createDate: 1605837803809
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobject-editor/createGeoObject:
+    post:
+      tags:
+        - Geo-Object-Over-Time
+      summary: Create a Geo-Object Over Time or a corresponding Change Request
+      description: >-
+        Create a Geo-Object Over Time or a corresponding Change Request
+        depending on the users role and permissions.  If the user does not have
+        permissions to directly create the GeoObject then a Change Request will
+        be created instead.
+      operationId: createGeoObjectOverTimeOrChangeRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                geoObject:
+                  $ref: '#/components/schemas/GeoObjectOverTime'
+                isNew:
+                  type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  geoObject:
+                    $ref: '#/components/schemas/GeoObjectOverTime'
+                  isChangeRequest:
+                    type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/geoobjecttype/get-all:
+    get:
+      tags:
+        - Geo-Object Type
+      summary: Return GeoOjectType objects that define the given list of types.
+      description: Return GeoOjectType objects that define the given list of types.
+      operationId: getGeoObjectTypes
+      parameters:
+        - name: types
+          in: query
+          description: >-
+            An array of Geo-Object Type codes. If blank then all Geo-Object Type
+            objects are returned. Example is encoded for easy texting in a web
+            browser.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: '%5B%22PRO%22%5D'
+        - name: hierarchies
+          in: query
+          description: >-
+            An array of Hierarchy codes. If blank then all Hierarchy objects are
+            returned. Example is encoded for easy texting in a web browser.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: '%5B%22ADM_H%22%5D'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeoObjectType'
+              example:
+                - code: health_facility
+                  label:
+                    localizedValue: Health Facility
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Health Facility
+                      - locale: km_KH
+                        value: មណ្ឌលសុខភាព
+                  description: Health facilities for ...
+                  geometryType: MultiPolygon
+                  isGeometryEditable: true
+                  organizationCode: moh
+                  superTypeCode: ''
+                  attributes:
+                    - code: uid
+                      type: character
+                      label:
+                        localizedValue: UID
+                        localValues:
+                          - null
+                      description:
+                        localizedValue: The internal globally unique identifier ID
+                        localeValues:
+                          - null
+                      isDefault: true
+                      required: false
+                      unique: false
+                      isChangeOverTime: false
+                    - code: displayLabel
+                      type: local
+                      label:
+                        localizedValue: Display Label
+                        localValues:
+                          - null
+                      description:
+                        localizedValue: Label of the location
+                        localeValues:
+                          - null
+                      isDefault: true
+                      required: false
+                      unique: false
+                      isChangeOverTime: false
+                    - code: code
+                      type: character
+                      label:
+                        localizedValue: Code
+                        localValues:
+                          - local: defaultLocale
+                            value: Code
+                      description:
+                        localizedValue: Human readable unique identified
+                        localeValues:
+                          - locale: defaultLocale
+                            value: Human readable unique identified
+                      isDefault: true
+                      required: false
+                      unique: false
+                      isChangeOverTime: false
+                    - code: lastUpdateDate
+                      type: date
+                      label:
+                        localizedValue: Date Last Updated
+                        localValues:
+                          - null
+                      description:
+                        localizedValue: The date the object was updated
+                        localeValues:
+                          - null
+                      isDefault: true
+                      required: false
+                      unique: false
+                      isChangeOverTime: false
+                    - code: createDate
+                      type: date
+                      label:
+                        localizedValue: Date Created
+                        localValues:
+                          - null
+                      description:
+                        localizedValue: The date the object was created
+                        localeValues:
+                          - null
+                      isDefault: true
+                      required: false
+                      unique: false
+                      isChangeOverTime: false
+                    - code: type
+                      type: character
+                      label:
+                        localizedValue: Type
+                        localValues:
+                          - null
+                      description:
+                        localizedValue: The type of the Geo-Object
+                        localeValues:
+                          - null
+                      isDefault: true
+                      required: false
+                      isChangeOverTime: false
+                    - code: sequence
+                      type: integer
+                      label:
+                        localizedValue: Sequence
+                        localValues:
+                          - null
+                      description:
+                        localizedValue: >-
+                          The sequence number of the Geo-Object that is
+                          incremented when the object is updated
+                        localeValues:
+                          - null
+                      isDefault: true
+                      required: false
+                      unique: false
+                      isChangeOverTime: false
+                  permissions:
+                    - CREATE
+                    - READ
+                    - DELETE
+                    - WRITE
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/cgr/import-types:
+    post:
+      tags:
+        - Geo-Object Type
+      summary: >-
+        Import GeoObject-Type, Hierarchy Type, Directed Acyclic Graph Type,
+        Undirect Graph Type definitions from an XML file.
+      description: >-
+        Import GeoObject-Type, Hierarchy Type, Directed Acyclic Graph Type,
+        Undirect Graph Type definitions from an XML file.
+      operationId: importTypes
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  type: string
+                  format: binary
+                orgCode:
+                  type: string
+                  example: MOHA
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/hierarchytype/get-all:
+    get:
+      tags:
+        - Hierarchy
+      summary: Get all Hierarchies.
+      description: Get all Hierarchies.
+      operationId: getHierarchies
+      parameters:
+        - name: types
+          in: query
+          description: >-
+            A serialized JSON array of hierarchy codes. This example is HTTP URL
+            encoded.
+          required: false
+          schema:
+            type: string
+          example: '%5B%22ADM_H%22%2C%22Health_geo%22%5D'
+        - name: context
+          in: query
+          description: >-
+            Can be either 'READ' or 'WRITE'. If set to WRITE, the system will
+            only return hierarchies for which you have permission to write. READ
+            context will return all hierarchies that you have permission to
+            read.
+          required: true
+          schema:
+            type: string
+            enum:
+              - READ
+              - WRITE
+          example: READ
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HierarchyType'
+              example:
+                - code: Test_HF
+                  label:
+                    localizedValue: 'Health hierarchy '
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Health hierarchy
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: ''
+                  organizationCode: MOH
+                  abstractDescription: ''
+                  progress: ''
+                  acknowledgement: ''
+                  contact: ''
+                  phoneNumber: ''
+                  email: ''
+                  accessConstraints: ''
+                  useConstraints: ''
+                  rootGeoObjectTypes:
+                    code: health_facility
+                    label:
+                      localizedValue: Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Health Facility
+                        - locale: km_KH
+                          value: មណ្ឌលសុខភាព
+                    description: Health facilities for ...
+                    geometryType: Polygon
+                    isGeometryEditable: true
+                    organizationCode: moh
+                    attributes:
+                      - code: uid
+                        type: character
+                        label:
+                          localizedValue: UID
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: The internal globally unique identifier ID
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: true
+                        isChangeOverTime: false
+                      - code: displayLabel
+                        type: local
+                        label:
+                          localizedValue: Display Label
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: Label of the location
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: true
+                        isChangeOverTime: false
+                      - code: code
+                        type: character
+                        label:
+                          localizedValue: Code
+                          localValues:
+                            - local: defaultLocale
+                              value: Code
+                        description:
+                          localizedValue: Human readable unique identified
+                          localeValues:
+                            - locale: defaultLocale
+                              value: Human readable unique identified
+                        isDefault: true
+                        required: true
+                        isChangeOverTime: false
+                      - code: lastUpdateDate
+                        type: date
+                        label:
+                          localizedValue: Date Last Updated
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: The date the object was updated
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: false
+                        isChangeOverTime: false
+                      - code: createDate
+                        type: date
+                        label:
+                          localizedValue: Date Created
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: The date the object was created
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: false
+                        isChangeOverTime: false
+                      - code: type
+                        type: character
+                        label:
+                          localizedValue: Type
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: The type of the Geo-Object
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: false
+                        isChangeOverTime: false
+                      - code: sequence
+                        type: integer
+                        label:
+                          localizedValue: Sequence
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: >-
+                            The sequence number of the Geo-Object that is
+                            incremented when the object is updated
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: false
+                        isChangeOverTime: false
+                      - code: status
+                        type: term
+                        label:
+                          localizedValue: Status
+                          localValues:
+                            - local: defaultLocale
+                              value: Status
+                        description:
+                          localizedValue: The status of the Geo-Object
+                          localeValues:
+                            - local: defaultLocale
+                              value: The status of the Geo-Object
+                        isDefault: true
+                        required: true
+                        isChangeOverTime: true
+                        rootTerm:
+                          code: CGR:Status-Root
+                          label:
+                            localizedValue: Geo-Object Status
+                            localeValues:
+                              - null
+                          description:
+                            localizedValue: >-
+                              The status of a Geo-Object changes during the
+                              governance lifecycle.
+                            localValues:
+                              - null
+                          children:
+                            - code: CGR:Status-New
+                              label:
+                                localizedValue: New
+                                localeValues:
+                                  - null
+                              description:
+                                localizedValue: >-
+                                  A newly created Geo-Object that has not been
+                                  submitted for approval.
+                                localValues:
+                                  - null
+                                  - code: CGR:Status-Active
+                                    label:
+                                      localizedValue: Active
+                                      localeValues:
+                                        - null
+                                    description:
+                                      localizedValue: >-
+                                        The Geo-Object is a part of the master
+                                        list.
+                                      localValues:
+                                        - null
+                                        - code: CGR:Status-Pending
+                                          label:
+                                            localizedValue: Pending
+                                            localeValues:
+                                              - null
+                                          description:
+                                            localizedValue: >-
+                                              Edits to the GeoObject are pending
+                                              approval.
+                                            localValues:
+                                              - null
+                                              - code: CGR:Status-Inactive
+                                                label:
+                                                  localizedValue: Inactive
+                                                  localeValues:
+                                                    - null
+                                                description:
+                                                  localizedValue: >-
+                                                    The object is not considered a source of
+                                                    truth.
+                                                  localValues:
+                                                    - null
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/list-type/data:
+    get:
+      tags:
+        - List
+      summary: Get list data in list format.
+      description: >-
+        Return list data in list format where an array contans one object per
+        row of the List. Each attribute (column value) in the array is a key
+        value pair where the key is the name of the column and the value is the
+        value.
+      operationId: data
+      parameters:
+        - name: oid
+          in: query
+          description: OID of the list.
+          required: true
+          schema:
+            type: string
+          example: 11fa9757-d887-461e-93f0-044be80005f1
+        - name: criteria
+          in: query
+          description: Filtering criteria of the data.
+          required: true
+          schema:
+            type: object
+            properties:
+              first:
+                type: integer
+                description: Row number to start the response from. Used with pagination.
+              rows:
+                type: integer
+                description: >-
+                  How many rows to include in the response. Used with
+                  pagination.
+              sortField:
+                type: string
+                description: >-
+                  Field to sort on. You can use multiSortOrder instead of this
+                  parameter.
+              sortOrder:
+                type: integer
+                description: >-
+                  Sort oder for the sortField. 1 is ascending and -1 is
+                  descending. You can use multiSortOrder instead of this
+                  parameter.
+              multiSortMeta:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                      description: code of the field to sort on.
+                    order:
+                      type: integer
+                      description: >-
+                        Sort oder for the sortField. 1 is ascending and -1 is
+                        descending.
+              filters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    matchMode:
+                      type: string
+                      description: >-
+                        Strategy for matching field values. Options for Text
+                        types can utilize "contains" or "equals". Options for
+                        Boolean types must use "". Options for number types
+                        (integer or decimal) must use "equals". Options for Date
+                        types must use "{startDate:string, endDate:string}".
+                    value:
+                      type: string
+                      description: Value to filter on.
+          example: >-
+            {filters: {code: {matchMode: "equals", value: "02"}}, first: 0,
+            multiSortMeta: [{field: "code", order: -1}], rows: 30, sortOrder: 1}
+        - name: showInvalid
+          in: query
+          description: Option to include invalid Geo-Objects.
+          required: true
+          schema:
+            type: boolean
+            default: false
+          example: true
+        - name: includeGeometries
+          in: query
+          description: Option to include geometries for each row (when they exist).
+          required: false
+          schema:
+            type: boolean
+            default: false
+          example: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/List'
+              example:
+                - geometry:
+                    type: MultiPoint
+                    coordinates:
+                      - - 120.99056
+                        - 14.39887
+                  originalOid: 24a0cb9e-8d6b-4387-bd3b-dcbd05c8aea2
+                  education_geocty: TLK0401
+                  HD_NA_EN: Nataly Vasquez
+                  code: SC0001
+                  SC_TDefaultLocale: University
+                  COOR_ACU: COA4
+                  education_georeg: TLK
+                  education_geoproDefaultLocale: Mittalmar
+                  education_geoshrDefaultLocale: Centro
+                  SC_T: ST2
+                  education_geoshr: TLK0401002
+                  LD_NBR_G: +99 96 98765432
+                  education_geopro: TLK04
+                  displayLabelDefaultLocale: Tolkien University
+                  COOR_ACUDefaultLocale: High
+                  invalid: false
+                  education_georegDefaultLocale: Tolkien Region
+                  SC_OWNDefaultLocale: Ministry of Education
+                  education_geoctyDefaultLocale: Armenelos
+                  HD_PS_EN: Director
+                  SC_OWN: SO2
+                  SOUR_COORDefaultLocale: MOE (GPS)
+                  SOUR_COOR: SOC2
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/list-type/list-for-type:
+    get:
+      tags:
+        - List
+      summary: Get all the list configurations for the list type.
+      description: >-
+        Return all the list configurations for the list type. List
+        configurations contain list entries which contain list versions.
+      operationId: list-for-type
+      parameters:
+        - name: typeCode
+          in: query
+          description: Code of the List Type.
+          required: true
+          schema:
+            type: string
+          example: Health_facility
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListTypeConfiguration'
+              example:
+                orgCode: MOH
+                orgLabel: Ministry of Health
+                typeCode: Health_facility
+                typeLabel: Health facility (MOH)
+                geometryType: MULTIPOINT
+                write: false
+                lists:
+                  oid: 117cca3c-bb8c-467d-bba0-bada110007de
+                  organization: MOH
+                  write: false
+                  read: false
+                  exploratory: false
+                  typeLabel: Health facility (MOH)
+                  typePrivate: false
+                  typeCode: Health_facility
+                  displayLabel:
+                    localizedValue: Health facility master list and geographic coordinates
+                    localeValue:
+                      locale: defaultLocale
+                      value: Health facility master list and geographic coordinates
+                  description:
+                    localizedValue: >-
+                      Master list and geographic coordinates for the health
+                      facilities located within the Tolkien Region
+                    localeValue:
+                      locale: defaultLocale
+                      value: >-
+                        Master list and geographic coordinates for the health
+                        facilities located within the Tolkien Region
+                  code: Health_facility_Set
+                  hierarchies: null
+                  subtypeHierarchies: null
+                  includeLatLong: true
+                  listMetadata:
+                    label:
+                      localizedValue": null
+                      localeValues":
+                        - locale: defaultLocale
+                          value: null
+                    description:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    process:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    progress:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    accessConstraints:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    useConstraints:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    acknowledgements:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    disclaimer:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    collectionDate: null
+                    organization: null
+                    contactName: null
+                    telephoneNumber: null
+                    email: null
+                    originator: null
+                  geospatialMetadata:
+                    label:
+                      localizedValue": null
+                      localeValues":
+                        - locale: defaultLocale
+                          value: null
+                    description:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    process:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    progress:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    accessConstraints:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    useConstraints:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    acknowledgements:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    disclaimer:
+                      localizedValue: null
+                      localeValue:
+                        locale: defaultLocale
+                        value: ''
+                    collectionDate: null
+                    organization: null
+                    contactName: null
+                    telephoneNumber: null
+                    email: null
+                    originator: null
+                    topicCategories: null
+                    placeKeywords: null
+                    updateFrequency: null
+                    lineage: null
+                    languages: null
+                    scaleResolution: null
+                    spatialRepresentation: null
+                    referenceSystem: null
+                    reportSpecification: null
+                    distributionFormat: null
+                  frequency: ANNUAL
+                  publishingStartDate: '2000-01-01'
+                  listType: incremental
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/list-type/entries:
+    get:
+      tags:
+        - List
+      summary: Get all the list type entries for a list type configurations.
+      description: >-
+        Get all the list type entries for a list type configurations. List
+        configurations contain list entries which contain list versions.
+      operationId: entries
+      parameters:
+        - name: oid
+          in: query
+          description: Object ID of the List Type configuration.
+          required: true
+          schema:
+            type: string
+          example: 117cca3c-bb8c-467d-bba0-bada110007de
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListTypeEntry'
+              example:
+                oid: 117cca3c-bb8c-467d-bba0-bada110007de
+                code: Health_facility_Set
+                organization: MOH
+                write: false
+                read: false
+                exploratory: false
+                typeLabel: Health facility (MOH)
+                typePrivate: false
+                typeCode: Health_facility
+                displayLabel:
+                  - localizedValue: Health facility master list and geographic coordinates
+                    localeValue:
+                      locale: defaultLocale
+                      value: Health facility master list and geographic coordinates
+                description:
+                  - localizedValue: An example description.
+                    localeValue:
+                      locale: defaultLocale
+                      value: An example description.
+                hierarchies:
+                  - null
+                subtypeHierarchies:
+                  - code: CHW_HP
+                    label: CHW - Health post hierarchy (MOH)
+                    selected: true
+                includeLatLong: true
+                listMetadata:
+                  label:
+                    localizedValue": null
+                    localeValues":
+                      - locale: defaultLocale
+                        value: null
+                  description:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  process:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  progress:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  accessConstraints:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  useConstraints:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  acknowledgements:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  disclaimer:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  collectionDate: null
+                  organization: null
+                  contactName: null
+                  telephoneNumber: null
+                  email: null
+                  originator: null
+                geospatialMetadata:
+                  label:
+                    localizedValue": null
+                    localeValues":
+                      - locale: defaultLocale
+                        value: null
+                  description:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  process:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  progress:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  accessConstraints:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  useConstraints:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  acknowledgements:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  disclaimer:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  collectionDate: null
+                  organization: null
+                  contactName: null
+                  telephoneNumber: null
+                  email: null
+                  originator: null
+                  topicCategories: null
+                  placeKeywords: null
+                  updateFrequency: null
+                  lineage: null
+                  languages: null
+                  scaleResolution: null
+                  spatialRepresentation: null
+                  referenceSystem: null
+                  reportSpecification: null
+                  distributionFormat: null
+                entries:
+                  - oid: 792754ce-3640-4fa9-9213-98ccbb0007cb
+                    displayLabel: Health facility master list and geographic coordinates
+                    typeCode: Health_facility
+                    orgCode: MOH
+                    listType: 117cca3c-bb8c-467d-bba0-bada110007de
+                    forDate: '2022-01-01'
+                    createDate: '2022-07-27'
+                    period:
+                      type: date
+                      value: '2022-01-01'
+                    versions:
+                      - oid: df63be86-f4ba-4616-83de-ee6df70007cc
+                        displayLabel: Health facility master list and geographic coordinates
+                        typeCode: Health_facility
+                        orgCode: MOH
+                        listType: 117cca3c-bb8c-467d-bba0-bada110007de
+                        forDate: '2022-01-01'
+                        createDate: '2022-11-09'
+                        versionNumber: 1
+                        working: false
+                        geometryType: MULTIPOINT
+                        isGeometryEditable: true
+                        isAbstract: true
+                        shapefile: false
+                        isMember: false
+                        period:
+                          type: date
+                          value: '2022-01-01'
+                        listMetadata:
+                          label:
+                            localizedValue": null
+                            localeValues":
+                              - locale: defaultLocale
+                                value: null
+                          description:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          process:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          progress:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          accessConstraints:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          useConstraints:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          acknowledgements:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          disclaimer:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          collectionDate: null
+                          organization: null
+                          contactName: null
+                          telephoneNumber: null
+                          email: null
+                          originator: null
+                        geospatialMetadata:
+                          label:
+                            localizedValue": null
+                            localeValues":
+                              - locale: defaultLocale
+                                value: null
+                          description:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          process:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          progress:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          accessConstraints:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          useConstraints:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          acknowledgements:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          disclaimer:
+                            localizedValue: null
+                            localeValue:
+                              locale: defaultLocale
+                              value: ''
+                          collectionDate: null
+                          organization: ''
+                          contactName: Ariela Antonio
+                          telephoneNumber: +99 877-0000
+                          email: a.antonio@moh.gov.tlk
+                          originator: Ministry of Health (MOH)
+                          topicCategories: Health infrastructure
+                          placeKeywords: Tolkien Region
+                          updateFrequency: Annual
+                          lineage: >-
+                            Geographic coordinates are collected by the MOH
+                            county officer each time a new health facility opens
+                          languages: English
+                          scaleResolution: 1:50,000
+                          spatialRepresentation: vector
+                          referenceSystem: EPSG4326
+                          reportSpecification: >-
+                            Quality checks are performed during field data
+                            collection as well as after it using high resolution
+                            imagery as ground reference. The method used to
+                            collect the coordinates as well a qualitative
+                            indication of the coordinates accuracy are provided
+                            in the list
+                          distributionFormat: SHAPEFILE
+                        subtypes:
+                          - code: Health_post
+                            label: Health Post (MOH)
+                        publishDate: '2022-11-09'
+                        curation: null
+                frequency: ANNUAL
+                publishingStartDate: '2000-01-01'
+                listType: incremental
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/list-type/version:
+    get:
+      tags:
+        - List
+      summary: Get the list type version for a list type entry.
+      description: >-
+        Get the list type version for a list type entry. A list type version
+        contains all the metadata for a list. See list-type/data for an endpoint
+        that returns the instance data of a list. List configurations contain
+        list entries which contain list versions.
+      operationId: version
+      parameters:
+        - name: oid
+          in: query
+          description: Object ID of the List Type version.
+          required: true
+          schema:
+            type: string
+          example: df63be86-f4ba-4616-83de-ee6df70007cc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListTypeVersion'
+              example:
+                oid: df63be86-f4ba-4616-83de-ee6df70007cc
+                displayLabel: Health facility master list and geographic coordinates
+                typeCode: Health_facility
+                orgCode: MOH
+                listType: 117cca3c-bb8c-467d-bba0-bada110007de
+                forDate: '2022-01-01'
+                createDate: '2022-11-09'
+                versionNumber: 1
+                working: false
+                geometryType: MULTIPOINT
+                isGeometryEditable: true
+                isAbstract: true
+                shapefile: false
+                isMember: false
+                period:
+                  type: date
+                  value: '2022-01-01'
+                listMetadata:
+                  label:
+                    localizedValue": null
+                    localeValues":
+                      - locale: defaultLocale
+                        value: null
+                  description:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  process:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  progress:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  accessConstraints:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  useConstraints:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  acknowledgements:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  disclaimer:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  collectionDate: null
+                  organization: null
+                  contactName: null
+                  telephoneNumber: null
+                  email: null
+                  originator: null
+                geospatialMetadata:
+                  label:
+                    localizedValue": null
+                    localeValues":
+                      - locale: defaultLocale
+                        value: null
+                  description:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  process:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  progress:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  accessConstraints:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  useConstraints:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  acknowledgements:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  disclaimer:
+                    localizedValue: null
+                    localeValue:
+                      locale: defaultLocale
+                      value: ''
+                  collectionDate: null
+                  organization: ''
+                  contactName: Ariela Antonio
+                  telephoneNumber: +99 877-0000
+                  email: a.antonio@moh.gov.tlk
+                  originator: Ministry of Health (MOH)
+                  topicCategories: Health infrastructure
+                  placeKeywords: Tolkien Region
+                  updateFrequency: Annual
+                  lineage: >-
+                    Geographic coordinates are collected by the MOH county
+                    officer each time a new health facility opens
+                  languages: English
+                  scaleResolution: 1:50,000
+                  spatialRepresentation: vector
+                  referenceSystem: EPSG4326
+                  reportSpecification: >-
+                    Quality checks are performed during field data collection as
+                    well as after it using high resolution imagery as ground
+                    reference. The method used to collect the coordinates as
+                    well a qualitative indication of the coordinates accuracy
+                    are provided in the list
+                  distributionFormat: SHAPEFILE
+                subtypes:
+                  - code: Health_post
+                    label: Health Post (MOH)
+                publishDate: '2022-11-09'
+                attributes:
+                  - label: Health Facility (MOH)
+                    colspan: 16
+                    rowspan: 1
+                    columns:
+                      - name: code
+                        label: Code
+                        type: list
+                        rowspan: 2
+                curation: null
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/etl/import-edge-json:
+    post:
+      tags:
+        - ETL
+      summary: >-
+        Create relationships between Geo-Objects for a specific relationship
+        type.
+      description: >-
+        Create relationships between Geo-Objects for a specific relationship
+        type.
+      operationId: importEdgeJson
+      security:
+        - Basic Authentication:
+            - Super Registry Administrator
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                startDate:
+                  type: string
+                endDate:
+                  type: string
+                file:
+                  type: string
+                  format: binary
+                  description: |
+                    Schema Example:
+
+                    {graphTypes": [ 
+                      {
+                        "graphTypeClass": "net.geoprism.registry.UndirectedGraphType",
+                        "code": "AdjacentTo",
+                        "edges": [
+                          {
+                            "source": "06S4",
+                            "sourceType": "Structure",
+                            "target": "11PS",
+                            "targetType": "Structure"
+                          }
+                        ]
+                      }
+                    ]}
+            example:
+              startDate: '2000-10-31'
+              endDate: '2020-10-31'
+              file: <binary>
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/directed-graph-type/get-all:
+    get:
+      tags:
+        - Directed Acyclic Graph
+      summary: Get all Directed Acyclic Graph Type definitions.
+      description: Get Directed Acyclic Graph Type definitions.
+      operationId: getDirectedGraphTypes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DirectedGraphType'
+              example:
+                - code: Test_DAG
+                  label:
+                    localizedValue: Flows into
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Flows into
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Denotes bodies of water which flow into one another
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/directed-graph-type/create:
+    post:
+      tags:
+        - Directed Acyclic Graph
+      summary: Create a Directed Acyclic Graph Type.
+      description: Create a Directed Acyclic Graph Type.
+      operationId: createDag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectedGraphType'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectedGraphType'
+              example:
+                - code: Test_DAG
+                  label:
+                    localizedValue: Flows into
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Flows into
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Denotes bodies of water which flow into one another
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/directed-graph-type/update:
+    post:
+      tags:
+        - Directed Acyclic Graph
+      summary: Update an existing Directed Acyclic Graph Type.
+      description: Update an existing Directed Acyclic Graph Type.
+      operationId: updateDag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectedGraphType'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectedGraphType'
+              example:
+                - code: Test_DAG
+                  label:
+                    localizedValue: Flows into
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Flows into
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Denotes bodies of water which flow into one another
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/directed-graph-type/remove:
+    post:
+      tags:
+        - Directed Acyclic Graph
+      summary: Delete existing Directed Acyclic Graph Type.
+      description: Delete existing Directed Acyclic Graph Type.
+      operationId: removeDag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Removes a directed graph relationship.
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/directed-graph-type/get:
+    get:
+      tags:
+        - Directed Acyclic Graph
+      summary: Get a Directed Acyclic Graph Type definition.
+      description: Get a Directed Acyclic Graph Type definition.
+      operationId: getDirectedGraphType
+      parameters:
+        - name: code
+          in: query
+          description: The code of the Directed Acyclic Graph Type to get.
+          required: true
+          schema:
+            type: string
+          example: TLK01
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/DirectedGraphType'
+              example:
+                - code: Test_DAG
+                  label:
+                    localizedValue: Flows into
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Flows into
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Denotes bodies of water which flow into one another
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/dag/get-graph-children:
+    get:
+      tags:
+        - Geo-Object
+      summary: >-
+        Get child Geo-Objects of a Geo-Object as defined by a Directed Acyclic
+        Graph.
+      description: >-
+        Get child Geo-Objects of a Geo-Object as defined by a Directed Acyclic
+        Graph.
+      operationId: getGraphChildren
+      parameters:
+        - name: parentCode
+          in: query
+          description: The code of the Geo-Object for which the children will be requested.
+          required: true
+          schema:
+            type: string
+          example: b011c739-7c8f-45ec-8963-a4b61f7edaae
+        - name: parentTypeCode
+          in: query
+          description: The code of the Geo-Object Type that the Geo-Object belongs to.
+          required: true
+          schema:
+            type: string
+          example: PRO
+        - name: directedGraphCode
+          in: query
+          description: The code of the Directed Graph Relationship.
+          required: true
+          schema:
+            type: string
+          example: CTY
+        - name: date
+          in: query
+          description: >-
+            The temporal date to check against. Must in the the format of
+            YYYY-MM-DD.
+          required: false
+          schema:
+            type: string
+          example: '2021-02-20'
+        - name: recursive
+          in: query
+          description: >-
+            TRUE to return all child Geo-Objects for the specified graph type at
+            all levels below the parent Geo-Object.
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ChildTreeNode'
+              example:
+                - geoObject:
+                    type: Feature
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
+                  hierarchyType: PRO
+                  children: []
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/dag/get-parents:
+    get:
+      tags:
+        - Geo-Object
+      summary: >-
+        Get parent Geo-Objects of a Geo-Object as defined by a Directed Acyclic
+        Graph.
+      description: >-
+        Get parent Geo-Objects of a Geo-Object as defined by a Directed Acyclic
+        Graph.
+      operationId: getGraphParent
+      parameters:
+        - name: childCode
+          in: query
+          description: The code of the Geo-Object for which the parents will be requested.
+          required: true
+          schema:
+            type: string
+          example: b011c739-7c8f-45ec-8963-a4b61f7edaae
+        - name: childTypeCode
+          in: query
+          description: The code of the Geo-Object Type that the Geo-Object belongs to.
+          required: true
+          schema:
+            type: string
+          example: PRO
+        - name: directedGraphCode
+          in: query
+          description: The code of the Directed Graph Relationship.
+          required: true
+          schema:
+            type: string
+          example: CTY
+        - name: date
+          in: query
+          description: >-
+            The temporal date to check against. Must in the the format of
+            YYYY-MM-DD.
+          required: false
+          schema:
+            type: string
+          example: '2021-02-20'
+        - name: recursive
+          in: query
+          description: >-
+            TRUE to return all parent Geo-Objects for all specified parentTypes
+            at all levels above the child Geo-Object.
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ParentTreeNode'
+              example:
+                - geoObject:
+                    type: Feature
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
+                  hierarchyType: PRO
+                  parents: []
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/dag/add-child:
+    post:
+      tags:
+        - Geo-Object
+      summary: Add child Geo-Object to a Directed Acyclic Graph.
+      description: Add child Geo-Object to a Directed Acyclic Graph.
+      operationId: addGraphChild
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddGraphChildBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentTreeNode'
+              example:
+                geoObject:
+                  type: Feature
+                  geometry:
+                    type: MultiPoint
+                    coordinates:
+                      - 113.56111706249908
+                      - 0.0657243021884568
+                  properties:
+                    uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                    code: sflsjdflldsfj
+                    type: health_facilities
+                    lastUpdateDate: 1592514228000
+                    createDate: 1592426785000
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
+                hierarchyType:
+                  code: Test_HF
+                  label:
+                    localizedValue: 'Health hierarchy '
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Health hierarchy
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: ''
+                  organizationCode: MOH
+                  abstractDescription: ''
+                  progress: ''
+                  acknowledgement: ''
+                  contact: ''
+                  rootGeoObjectTypes:
+                    code: health_facility
+                    label:
+                      localizedValue: Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Health Facility
+                        - locale: km_KH
+                          value: មណ្ឌលសុខភាព
+                    description: Health facilities for ...
+                    geometryType: Polygon
+                    isGeometryEditable: true
+                    organizationCode: moh
+                    attributes:
+                      - code: uid
+                        type: character
+                        label:
+                          localizedValue: UID
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: The internal globally unique identifier ID
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: true
+                        isChangeOverTime: false
+                      - code: displayLabel
+                        type: local
+                        label:
+                          localizedValue: Display Label
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: Label of the location
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: true
+                        isChangeOverTime: false
+                      - code: code
+                        type: character
+                        label:
+                          localizedValue: Code
+                          localValues:
+                            - local: defaultLocale
+                              value: Code
+                        description:
+                          localizedValue: Human readable unique identified
+                          localeValues:
+                            - locale: defaultLocale
+                              value: Human readable unique identified
+                        isDefault: true
+                        required: true
+                        isChangeOverTime: false
+                      - code: lastUpdateDate
+                        type: date
+                        label:
+                          localizedValue: Date Last Updated
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: The date the object was updated
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: false
+                        isChangeOverTime: false
+                      - code: createDate
+                        type: date
+                        label:
+                          localizedValue: Date Created
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: The date the object was created
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: false
+                        isChangeOverTime: false
+                      - code: type
+                        type: character
+                        label:
+                          localizedValue: Type
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: The type of the Geo-Object
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: false
+                        isChangeOverTime: false
+                      - code: sequence
+                        type: integer
+                        label:
+                          localizedValue: Sequence
+                          localValues:
+                            - null
+                        description:
+                          localizedValue: >-
+                            The sequence number of the Geo-Object that is
+                            incremented when the object is updated
+                          localeValues:
+                            - null
+                        isDefault: true
+                        required: false
+                        isChangeOverTime: false
+                      - code: status
+                        type: term
+                        label:
+                          localizedValue: Status
+                          localValues:
+                            - local: defaultLocale
+                              value: Status
+                        description:
+                          localizedValue: The status of the Geo-Object
+                          localeValues:
+                            - local: defaultLocale
+                              value: The status of the Geo-Object
+                        isDefault: true
+                        required: true
+                        isChangeOverTime: true
+                        rootTerm:
+                          code: CGR:Status-Root
+                          label:
+                            localizedValue: Geo-Object Status
+                            localeValues:
+                              - null
+                          description:
+                            localizedValue: >-
+                              The status of a Geo-Object changes during the
+                              governance lifecycle.
+                            localValues:
+                              - null
+                          children:
+                            - code: CGR:Status-New
+                              label:
+                                localizedValue: New
+                                localeValues:
+                                  - null
+                              description:
+                                localizedValue: >-
+                                  A newly created Geo-Object that has not been
+                                  submitted for approval.
+                                localValues:
+                                  - null
+                                  - code: CGR:Status-Active
+                                    label:
+                                      localizedValue: Active
+                                      localeValues:
+                                        - null
+                                    description:
+                                      localizedValue: >-
+                                        The Geo-Object is a part of the master
+                                        list.
+                                      localValues:
+                                        - null
+                                        - code: CGR:Status-Pending
+                                          label:
+                                            localizedValue: Pending
+                                            localeValues:
+                                              - null
+                                          description:
+                                            localizedValue: >-
+                                              Edits to the GeoObject are pending
+                                              approval.
+                                            localValues:
+                                              - null
+                                              - code: CGR:Status-Inactive
+                                                label:
+                                                  localizedValue: Inactive
+                                                  localeValues:
+                                                    - null
+                                                description:
+                                                  localizedValue: >-
+                                                    The object is not considered a source of
+                                                    truth.
+                                                  localValues:
+                                                    - null
+                parent:
+                  - TODO: Example ParentTreeNode
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/dag/remove-child:
+    post:
+      tags:
+        - Geo-Object
+      summary: Remove a child Geo-Object from a Directed Acyclic Graph.
+      description: Remove a child Geo-Object from a Directed Acyclic Graph.
+      operationId: removeGraphChild
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveGraphChildBody'
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/undirected-graph-type/get-all:
+    get:
+      tags:
+        - Undirected Graph
+      summary: Get all Undirected Graph Type definitions.
+      description: Get all Undirected Graph Type definitions.
+      operationId: getUndirectedRelationshipTypes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelatedType'
+              example:
+                - code: Test_UND
+                  label:
+                    localizedValue: Adjacent To
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Adjacent To
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: ''
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/undirected-graph-type/create:
+    post:
+      tags:
+        - Undirected Graph
+      summary: Create a Undirected Graph Type.
+      description: Create a Undirected Graph Type.
+      operationId: createUndirectedRelationshipType
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelatedType'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelatedType'
+              example:
+                - code: Test_UND
+                  label:
+                    localizedValue: Adjacent To
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Adjacent To
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: ''
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/undirected-graph-type/update:
+    post:
+      tags:
+        - Undirected Graph
+      summary: Update an existing Undirected Graph Type.
+      description: Update an existing Undirected Graph Type.
+      operationId: updateUndirectedRelationshipType
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelatedType'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelatedType'
+              example:
+                - code: Test_UND
+                  label:
+                    localizedValue: Adjacent To
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Adjacent To
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: ''
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/undirected-graph-type/remove:
+    post:
+      tags:
+        - Undirected Graph
+      summary: Delete existing Undirected Graph Type.
+      description: Delete existing Undirected Graph Type.
+      operationId: removeUndirectedRelationshipType
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Deletes an existing undirected graph relationship.
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/undirected-graph-type/get:
+    get:
+      tags:
+        - Undirected Graph
+      summary: Get a Undirected Graph Type definition.
+      description: Get a Undirected Graph Type definition.
+      operationId: getUndirectedRelationshipType
+      parameters:
+        - name: code
+          in: query
+          description: The code of the Undirected Graph Type to get.
+          required: true
+          schema:
+            type: string
+          example: TLK01
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/RelatedType'
+              example:
+                - code: Test_UND
+                  label:
+                    localizedValue: Adjacent To
+                    localeValues:
+                      - locale: defaultLocale
+                        value: Adjacent To
+                  description:
+                    localizedValue: ''
+                    localeValues:
+                      - locale: defaultLocale
+                        value: ''
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/undirected/get-related-geo-objects:
+    get:
+      tags:
+        - Geo-Object
+      summary: >-
+        Get the related Geo-Objects of a Geo-Object as defined by an Undirected
+        Graph.
+      description: Get child Geo-Objects of a Geo-Object as defined by an Undirected Graph.
+      operationId: getRelatedGeoObjects
+      parameters:
+        - name: sourceCode
+          in: query
+          description: The code of the source Geo-Object.
+          required: true
+          schema:
+            type: string
+          example: b011c739-7c8f-45ec-8963-a4b61f7edaae
+        - name: sourceTypeCode
+          in: query
+          description: >-
+            The code of the Geo-Object Type that the source Geo-Object belongs
+            to.
+          required: true
+          schema:
+            type: string
+          example: PRO
+        - name: undirectedRelationshipCode
+          in: query
+          description: The type code of the Undirected Relationship.
+          required: true
+          schema:
+            type: string
+          example: CTY
+        - name: date
+          in: query
+          description: >-
+            The temporal date to check against. Must in the the format of
+            YYYY-MM-DD.
+          required: false
+          schema:
+            type: string
+          example: '2021-02-20'
+        - name: recursive
+          in: query
+          description: >-
+            TRUE to return all child Geo-Objects for the specified graph type at
+            all levels below the parent Geo-Object.
+          required: true
+          schema:
+            type: boolean
+          example: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ParentTreeNode'
+              example:
+                - geoObject:
+                    type: Feature
+                    geometry:
+                      type: MultiPoint
+                      coordinates:
+                        - 113.56111706249908
+                        - 0.0657243021884568
+                    properties:
+                      uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                      code: sflsjdflldsfj
+                      type: health_facilities
+                      lastUpdateDate: 1592514228000
+                      createDate: 1592426785000
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
+                  hierarchyType: PRO
+                  parents: []
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/undirected/add-target:
+    post:
+      tags:
+        - Geo-Object
+      summary: Add Geo-Object to a Undirected Graph.
+      description: Add Geo-Object to a Undirected Graph.
+      operationId: addRelatedGeoObject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRelatedGeoObjectBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentTreeNode'
+              example:
+                geoObject:
+                  type: Feature
+                  geometry:
+                    type: MultiPoint
+                    coordinates:
+                      - 113.56111706249908
+                      - 0.0657243021884568
+                  properties:
+                    uid: 9975976c-1243-478c-850b-9176e2a7f57e
+                    code: sflsjdflldsfj
+                    type: health_facilities
+                    lastUpdateDate: 1592514228000
+                    createDate: 1592426785000
+                    displayLabel:
+                      localizedValue: Central Health Facility
+                      localeValues:
+                        - locale: defaultLocale
+                          value: Central Health Facility
+                        - locale: km_KH
+                          value: ជាំ សាងុំា
+                    invalid: false
+                    exists: true
+                    writable: true
+                hierarchyType: Test_HF
+                parents:
+                  - geoObject: ...
+                    hierarchyType: Test_HF
+                    parents: []
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/undirected/remove-target:
+    post:
+      tags:
+        - Geo-Object
+      summary: Remove a child Geo-Object from an Undirected Graph.
+      description: Remove a child Geo-Object from an Undirected Graph.
+      operationId: removeRelatedGeoObject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveRelatedGeoObjectBody'
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/organization/get-all:
+    get:
+      tags:
+        - Organization
+      summary: Get all Organizations
+      description: Get all Organizations
+      operationId: getAllOrganizations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+              example:
+                code: MOHA
+                label:
+                  localizedValue: Ministry of Home Affairs
+                contactInfo:
+                  localizedValue: Moha Ra (Director, Land Affairs)
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/orgainization/create:
+    post:
+      tags:
+        - Organization
+      summary: Create an Organization
+      description: Create an Organization
+      operationId: createOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              example:
+                code: MOHA
+                label:
+                  localizedValue: Ministry of Home Affairs
+                contactInfo:
+                  localizedValue: Moha Ra (Director, Land Affairs)
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/orgainization/update:
+    post:
+      tags:
+        - Organization
+      summary: Updates an existing Organization
+      description: Updates an existing Organization
+      operationId: updateOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              example:
+                code: MOHA
+                label:
+                  localizedValue: Ministry of Home Affairs
+                contactInfo:
+                  localizedValue: Moha Ra (Director, Land Affairs)
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/orgainization/delete:
+    post:
+      tags:
+        - Organization
+      summary: Deletes an Organization
+      description: Deletes an Organization
+      operationId: deleteOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/publish/create:
+    post:
+      tags:
+        - Publish Graph
+      summary: Publish a graph
+      description: >-
+        Publish the events and metadata corresponding to a sub set of the data
+        in the graph repository.
+      operationId: publish-create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publish'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publish'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/publish/create-new-version:
+    post:
+      tags:
+        - Publish Graph
+      summary: Generate a new commit
+      description: >-
+        Creates a new commit of an existing published graph with the events
+        starting from the previous commit.
+      operationId: publish-create-new-version
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uid:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commit'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/publish/post-get-conflicts:
+    post:
+      tags:
+        - Publish Graph
+      summary: Get conflicting types
+      description: >-
+        Returns a list of (type, code) pairings of the repository types which
+        have already been imported into the system for the same period of
+        validity and will conflict with the pulled graph
+      operationId: publish-get-conflicts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+                  description: Source URL of the server to pull the graph data from
+                publishId:
+                  type: string
+                  description: uid of the publish to pull
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TypeAndCode'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/publish/pull:
+    post:
+      tags:
+        - Publish Graph
+      summary: Pull a remote graph
+      description: Pull a remote graph into the local graph repository
+      operationId: publish-pull
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+                  description: Source URL of the server to pull the graph data from
+                publishId:
+                  type: string
+                  description: uid of the publish to pull
+                exclusions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TypeAndCode'
+                  description: >-
+                    List of (type, code) pairings of the repository types to
+                    exclude from the published graph.  This can only be used
+                    when the types in the graph overlap with the types in a
+                    different graph with the same period of validity.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commit'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/publish/get-all:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get a list of all the publish configurations
+      description: Get a list of all the publish configurations
+      operationId: publish-get-all
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publish'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/publish/get:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get the details of a published graph.
+      description: Get the details of a published graph
+      operationId: publish-get
+      parameters:
+        - name: uid
+          in: query
+          description: The uid of the publish graph
+          required: true
+          schema:
+            type: string
+          example: f356acf7-63cd-4874-82db-c32dc42d4874
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Publish'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/commit/get-all:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get a list of all the publish configurations
+      description: Get a list of all the publish configurations
+      operationId: publish-get-all
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publish'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/commit/get-latest:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get latest commit
+      description: Get the latest commit of the published graph
+      operationId: commit-get-latest
+      parameters:
+        - name: publishId
+          in: query
+          description: The uid of the publish graph
+          required: true
+          schema:
+            type: string
+          example: f356acf7-63cd-4874-82db-c32dc42d4874
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Commit'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/commit/get-dependencies:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get the dependencies of a commit
+      description: >-
+        Get a list of all the commits upon which the given commit has a
+        dependency
+      operationId: commit-get-dependencies
+      parameters:
+        - name: uid
+          in: query
+          description: The uid of the commit
+          required: true
+          schema:
+            type: string
+          example: f356acf7-63cd-4874-82db-c32dc42d4874
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Commit'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/commit/business-types:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get the business type metadata of a commit
+      description: >-
+        Get a list of all the business type metadata defined by published graph
+        for this commit
+      operationId: commit-get-business-types
+      parameters:
+        - name: uid
+          in: query
+          description: The uid of the commit
+          required: true
+          schema:
+            type: string
+          example: f356acf7-63cd-4874-82db-c32dc42d4874
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BusinessTypeSnapshot'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/commit/geo-object-types:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get the geo object type metadata of a commit
+      description: >-
+        Get a list of all the geo object type metadata defined by published
+        graph for this commit
+      operationId: commit-get-geo-object-types
+      parameters:
+        - name: uid
+          in: query
+          description: The uid of the commit
+          required: true
+          schema:
+            type: string
+          example: f356acf7-63cd-4874-82db-c32dc42d4874
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeoObjectTypeSnapshot'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/commit/hierarchy-types:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get the hierarchy type metadata of a commit
+      description: >-
+        Get a list of all the hierarhcy type metadata defined by published graph
+        for this commit
+      operationId: commit-get-hierarchy-types
+      parameters:
+        - name: uid
+          in: query
+          description: The uid of the commit
+          required: true
+          schema:
+            type: string
+          example: f356acf7-63cd-4874-82db-c32dc42d4874
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HierarchyTypeSnapshot'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/commit/directed-acyclic-graph-types:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get the directed acyclic graph type metadata of a commit
+      description: >-
+        Get a list of all the directed acyclic graph type metadata defined by
+        published graph for this commit
+      operationId: commit-get-directed-acyclic-graph-types
+      parameters:
+        - name: uid
+          in: query
+          description: The uid of the commit
+          required: true
+          schema:
+            type: string
+          example: f356acf7-63cd-4874-82db-c32dc42d4874
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DirectedAcyclicGraphTypeSnapshot'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  /api/commit/undirected-graph-types:
+    get:
+      tags:
+        - Publish Graph
+      summary: Get the undirected graph type metadata of a commit
+      description: >-
+        Get a list of all the undirected graph type metadata defined by
+        published graph for this commit
+      operationId: commit-get-undirected-graph-types
+      parameters:
+        - name: uid
+          in: query
+          description: The uid of the commit
+          required: true
+          schema:
+            type: string
+          example: f356acf7-63cd-4874-82db-c32dc42d4874
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UndirectedGraphTypeSnapshot'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+components:
+  securitySchemes:
+    Basic Authentication:
+      type: http
+      scheme: basic
+      description: >-
+        GeoPrism Registry uses basic authentication over HTTPS. To authenticate
+        against the API you must include a base64 encoded hash in the request
+        header. A simple way to create the hash is to encode the username and
+        password of an existing user as username:password using a tool like
+        https://www.base64encode.org/.
+  schemas:
+    MultiPoint:
+      type: array
+      required:
+        - type
+      externalDocs:
+        url: http://geojson.org/geojson-spec.html#geometry-objects
+      items:
+        type: array
+        items:
+          type: number
+    MultiPolygon:
+      type: array
+      required:
+        - type
+      externalDocs:
+        url: http://geojson.org/geojson-spec.html#geometry-objects
+      items:
+        type: array
+        items:
+          type: number
+    MultiLine:
+      type: array
+      required:
+        - type
+      externalDocs:
+        url: http://geojson.org/geojson-spec.html#geometry-objects
+      items:
+        type: array
+        items:
+          type: number
+    Geometry:
+      type: object
+      description: GeoJson geometry
+      required:
+        - type
+      externalDocs:
+        url: http://geojson.org/geojson-spec.html#geometry-objects
+      properties:
+        type:
+          type: string
+          enum:
+            - MultiPoint
+            - MultiLineString
+            - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/MultiPoint'
+              - $ref: '#/components/schemas/MultiPolygon'
+              - $ref: '#/components/schemas/MultiLine'
+    LocalizedLabel:
+      type: object
+      properties:
+        localizedValue:
+          type: string
+          example: Object Label
+        localeValues:
+          type: array
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                example: en
+              value:
+                type: string
+                example: Object Label
+    AttributeType:
+      type: object
+      properties:
+        code:
+          type: string
+        localizedLabel:
+          type: string
+        type:
+          type: string
+        description:
+          $ref: '#/components/schemas/LocalizedLabel'
+    GeoObjectType:
+      type: object
+      properties:
+        code:
+          type: string
+        label:
+          $ref: '#/components/schemas/LocalizedLabel'
+        geometryType:
+          type: string
+        isGeometryEditable:
+          type: boolean
+        isPrivate:
+          type: boolean
+        organizationCode:
+          type: string
+        superTypeCode:
+          type: string
+        description:
+          $ref: '#/components/schemas/LocalizedLabel'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeType'
+        permissions:
+          type: array
+          items:
+            type: string
+    DisplayLabel:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              startDate:
+                type: string
+              endDate:
+                type: string
+              value:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocalizedLabel'
+    Feature:
+      type: object
+      description: >-
+        GeoJSON Feature. Reference -
+        https://tools.ietf.org/html/rfc7946#section-3.2
+      required:
+        - type
+        - id
+        - geometry
+        - properties
+      externalDocs:
+        url: https://tools.ietf.org/html/rfc7946
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        id:
+          type: string
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          type: object
+          required:
+            - uid
+            - code
+            - type
+            - status
+          properties:
+            uid:
+              type: string
+            code:
+              type: string
+            type:
+              $ref: '#/components/schemas/GeoObjectType'
+            invalid:
+              type: boolean
+            exists:
+              type: boolean
+            writable:
+              type: boolean
+            displayLabel:
+              $ref: '#/components/schemas/DisplayLabel'
+            lastUpdateDate:
+              type: string
+            createDate:
+              type: string
+            status:
+              type: string
+    RevealGeoObject:
+      type: object
+      description: >-
+        GeoJSon Feature. Reference -
+        https://tools.ietf.org/html/rfc7946#section-3.2
+      required:
+        - type
+        - id
+        - geometry
+        - properties
+      externalDocs:
+        url: https://tools.ietf.org/html/rfc7946
+      properties:
+        type:
+          type: string
+          enum:
+            - Feature
+        id:
+          type: string
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          type: object
+          required:
+            - uid
+            - code
+            - type
+            - status
+          properties:
+            status:
+              type: string
+            name:
+              type: string
+            version:
+              type: integer
+            OpenMRS_Id:
+              type: integer
+            externalId:
+              type: string
+            name_en:
+              type: string
+            geographiLevel:
+              type: integer
+            parentId:
+              type: string
+    TypeCodeBody:
+      type: object
+      description: Geo-Object Type code.
+      properties:
+        typeCode:
+          type: string
+    ChildTreeNode:
+      type: object
+      description: Add child params.
+      properties:
+        geoObject:
+          $ref: '#/components/schemas/Feature'
+        hierarchyType:
+          type: string
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChildTreeNode'
+    ParentTreeNode:
+      type: object
+      description: Add child params.
+      properties:
+        geoObject:
+          $ref: '#/components/schemas/Feature'
+        hierarchyType:
+          type: string
+        parents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParentTreeNode'
+    AddChildBody:
+      type: object
+      description: Add child params.
+      properties:
+        parentCode:
+          type: string
+        parentTypeCode:
+          type: string
+        childCode:
+          type: string
+        childTypeCode:
+          type: string
+        hierarchyCode:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+    RemoveChildBody:
+      type: object
+      description: Remove child params.
+      properties:
+        parentCode:
+          type: string
+        parentTypeCode:
+          type: string
+        childCode:
+          type: string
+        childTypeCode:
+          type: string
+        hierarchyCode:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+    GeoObjectIDs:
+      type: array
+      items:
+        type: string
+    AttributeGeometryTypeOverTime:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              oid:
+                type: string
+              startDate:
+                type: string
+              endDate:
+                type: string
+              value:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Geometry'
+    GeoObjectOverTime:
+      type: object
+      properties:
+        attributes:
+          type: object
+          properties:
+            displayLabel:
+              $ref: '#/components/schemas/DisplayLabel'
+            geometry:
+              $ref: '#/components/schemas/AttributeGeometryTypeOverTime'
+            uid:
+              type: string
+            code:
+              type: string
+            lastUpdateDate:
+              type: integer
+            type:
+              type: string
+            createDate:
+              type: integer
+            exists:
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: boolean
+                values:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      oid:
+                        type: string
+                      startDate:
+                        type: string
+                      endDate:
+                        type: string
+                      value:
+                        type: boolean
+    HierarchyNode:
+      type: object
+      description: >-
+        A HierarchyNode is an object used by HierarchyType that models the tree
+        of GeoObjectTypes that participate in the hierarchy.
+      properties:
+        geoObjectType:
+          type: string
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/HierarchyNode'
+    HierarchyType:
+      type: object
+      description: >-
+        Defines a hierarchy type and specifies which GeoObjectTypes participate
+        in that hierarchy.
+      properties:
+        code:
+          type: string
+        label:
+          $ref: '#/components/schemas/LocalizedLabel'
+        localizedDescription:
+          type: string
+        rootGeoObjectTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/HierarchyNode'
+    List:
+      type: object
+      description: Core List schema
+      properties:
+        code:
+          type: string
+        originalOid:
+          type: string
+        displayLabelDefaultLocale:
+          type: string
+        invalid:
+          type: boolean
+    ListTypeConfiguration:
+      type: object
+      description: Core List Type configuration schema.
+      properties:
+        orgCode:
+          type: string
+        orgLabel:
+          type: string
+        typeCode:
+          type: string
+        typeLabel:
+          type: string
+        geometryType:
+          type: string
+        write:
+          type: boolean
+        lists:
+          type: array
+          items:
+            type: object
+            properties:
+              oid:
+                type: string
+              organization:
+                type: string
+              write:
+                type: boolean
+              read:
+                type: boolean
+              exploratory:
+                type: boolean
+              typeLabel:
+                type: string
+              typePrivate:
+                type: boolean
+              typeCode:
+                type: string
+              displayLabel:
+                $ref: '#/components/schemas/DisplayLabel'
+              description:
+                $ref: '#/components/schemas/DisplayLabel'
+              code:
+                type: string
+              hierarchies:
+                type: array
+              subtypeHierarchies:
+                type: array
+              includeLatLong:
+                type: boolean
+              listMetadata:
+                type: object
+                properties:
+                  label:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  description:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  process:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  progress:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  accessConstraints:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  useConstraints:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  acknowledgements:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  disclaimer:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  collectionDate:
+                    type: string
+                  organization:
+                    type: string
+                  contactName:
+                    type: string
+                  telephoneNumber:
+                    type: string
+                  email:
+                    type: string
+                  originator:
+                    type: string
+              geospatialMetadata:
+                type: object
+                properties:
+                  label:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  description:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  process:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  progress:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  accessConstraints:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  useConstraints:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  acknowledgements:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  disclaimer:
+                    $ref: '#/components/schemas/DisplayLabel'
+                  collectionDate:
+                    type: string
+                  organization:
+                    type: string
+                  contactName:
+                    type: string
+                  telephoneNumber:
+                    type: string
+                  email:
+                    type: string
+                  originator:
+                    type: string
+                  topicCategories:
+                    type: string
+                  placeKeywords:
+                    type: string
+                  updateFrequency:
+                    type: string
+                  lineage:
+                    type: string
+                  languages:
+                    type: string
+                  scaleResolution:
+                    type: string
+                  spatialRepresentation:
+                    type: string
+                  referenceSystem:
+                    type: string
+                  reportSpecification:
+                    type: string
+                  distributionFormat:
+                    type: string
+              frequency:
+                type: string
+              publishingStartDate:
+                type: string
+              listType:
+                type: string
+    ListTypeEntry:
+      type: object
+      description: Core List Type entry schema.
+      properties:
+        oid:
+          type: string
+        code:
+          type: string
+        organization:
+          type: string
+        write:
+          type: boolean
+        read:
+          type: boolean
+        exploratory:
+          type: boolean
+        typeLabel:
+          type: string
+        typePrivate:
+          type: boolean
+        typeCode:
+          type: string
+        displayLabel:
+          $ref: '#/components/schemas/DisplayLabel'
+        description:
+          $ref: '#/components/schemas/DisplayLabel'
+        hierarchies:
+          type: array
+        subtypeHierarchies:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              label:
+                type: string
+              selected:
+                type: boolean
+        includeLatLong:
+          type: boolean
+        listMetadata:
+          type: object
+          properties:
+            label:
+              $ref: '#/components/schemas/DisplayLabel'
+            description:
+              $ref: '#/components/schemas/DisplayLabel'
+            process:
+              $ref: '#/components/schemas/DisplayLabel'
+            progress:
+              $ref: '#/components/schemas/DisplayLabel'
+            accessConstraints:
+              $ref: '#/components/schemas/DisplayLabel'
+            useConstraints:
+              $ref: '#/components/schemas/DisplayLabel'
+            acknowledgements:
+              $ref: '#/components/schemas/DisplayLabel'
+            disclaimer:
+              $ref: '#/components/schemas/DisplayLabel'
+            collectionDate:
+              type: string
+            organization:
+              type: string
+            contactName:
+              type: string
+            telephoneNumber:
+              type: string
+            email:
+              type: string
+            originator:
+              type: string
+        geospatialMetadata:
+          type: object
+          properties:
+            label:
+              $ref: '#/components/schemas/DisplayLabel'
+            description:
+              $ref: '#/components/schemas/DisplayLabel'
+            process:
+              $ref: '#/components/schemas/DisplayLabel'
+            progress:
+              $ref: '#/components/schemas/DisplayLabel'
+            accessConstraints:
+              $ref: '#/components/schemas/DisplayLabel'
+            useConstraints:
+              $ref: '#/components/schemas/DisplayLabel'
+            acknowledgements:
+              $ref: '#/components/schemas/DisplayLabel'
+            disclaimer:
+              $ref: '#/components/schemas/DisplayLabel'
+            collectionDate:
+              type: string
+            organization:
+              type: string
+            contactName:
+              type: string
+            telephoneNumber:
+              type: string
+            email:
+              type: string
+            originator:
+              type: string
+            topicCategories:
+              type: string
+            placeKeywords:
+              type: string
+            updateFrequency:
+              type: string
+            lineage:
+              type: string
+            languages:
+              type: string
+            scaleResolution:
+              type: string
+            spatialRepresentation:
+              type: string
+            referenceSystem:
+              type: string
+            reportSpecification:
+              type: string
+            distributionFormat:
+              type: string
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              oid:
+                type: string
+              displayLabel:
+                type: string
+              typeCode:
+                type: string
+              orgCode:
+                type: string
+              listType:
+                type: string
+              forDate:
+                type: string
+              createDate:
+                type: string
+              period:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    type: string
+              versions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    oid:
+                      type: string
+                    displayLabel:
+                      type: string
+                    typeCode:
+                      type: string
+                    orgCode:
+                      type: string
+                    listType:
+                      type: string
+                    forDate:
+                      type: string
+                    createDate:
+                      type: string
+                    versionNumber:
+                      type: integer
+                    working:
+                      type: boolean
+                    geometryType:
+                      type: string
+                    isGeometryEditable:
+                      type: boolean
+                    isAbstract:
+                      type: boolean
+                    shapefile:
+                      type: boolean
+                    isMember:
+                      type: boolean
+                    period:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
+                    listMetadata:
+                      type: object
+                      properties:
+                        label:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        description:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        process:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        progress:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        accessConstraints:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        useConstraints:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        acknowledgements:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        disclaimer:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        collectionDate:
+                          type: string
+                        organization:
+                          type: string
+                        contactName:
+                          type: string
+                        telephoneNumber:
+                          type: string
+                        email:
+                          type: string
+                        originator:
+                          type: string
+                    geospatialMetadata:
+                      type: object
+                      properties:
+                        label:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        description:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        process:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        progress:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        accessConstraints:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        useConstraints:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        acknowledgements:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        disclaimer:
+                          $ref: '#/components/schemas/DisplayLabel'
+                        collectionDate:
+                          type: string
+                        organization:
+                          type: string
+                        contactName:
+                          type: string
+                        telephoneNumber:
+                          type: string
+                        email:
+                          type: string
+                        originator:
+                          type: string
+                        topicCategories:
+                          type: string
+                        placeKeywords:
+                          type: string
+                        updateFrequency:
+                          type: string
+                        lineage:
+                          type: string
+                        languages:
+                          type: string
+                        scaleResolution:
+                          type: string
+                        spatialRepresentation:
+                          type: string
+                        referenceSystem:
+                          type: string
+                        reportSpecification:
+                          type: string
+                        distributionFormat:
+                          type: string
+                    subtypes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          label:
+                            type: string
+                    publishDate:
+                      type: string
+                    curation:
+                      type: boolean
+        frequency:
+          type: string
+        publishingStartDate:
+          type: string
+        listType:
+          type: string
+    ListTypeVersion:
+      type: object
+      description: Core List Type entry schema.
+      properties:
+        oid:
+          type: string
+        displayLabel:
+          type: string
+        typeCode:
+          type: string
+        orgCode:
+          type: string
+        listType:
+          type: string
+        forDate:
+          type: string
+        createDate:
+          type: string
+        versionNumber:
+          type: integer
+        working:
+          type: boolean
+        geometryType:
+          type: string
+        isGeometryEditable:
+          type: boolean
+        isAbstract:
+          type: boolean
+        shapefile:
+          type: boolean
+        isMember:
+          type: boolean
+        period:
+          type: object
+          properties:
+            type:
+              type: string
+            value:
+              type: string
+        listMetadata:
+          type: object
+          properties:
+            label:
+              $ref: '#/components/schemas/DisplayLabel'
+            description:
+              $ref: '#/components/schemas/DisplayLabel'
+            process:
+              $ref: '#/components/schemas/DisplayLabel'
+            progress:
+              $ref: '#/components/schemas/DisplayLabel'
+            accessConstraints:
+              $ref: '#/components/schemas/DisplayLabel'
+            useConstraints:
+              $ref: '#/components/schemas/DisplayLabel'
+            acknowledgements:
+              $ref: '#/components/schemas/DisplayLabel'
+            disclaimer:
+              $ref: '#/components/schemas/DisplayLabel'
+            collectionDate:
+              type: string
+            organization:
+              type: string
+            contactName:
+              type: string
+            telephoneNumber:
+              type: string
+            email:
+              type: string
+            originator:
+              type: string
+        geospatialMetadata:
+          type: object
+          properties:
+            label:
+              $ref: '#/components/schemas/DisplayLabel'
+            description:
+              $ref: '#/components/schemas/DisplayLabel'
+            process:
+              $ref: '#/components/schemas/DisplayLabel'
+            progress:
+              $ref: '#/components/schemas/DisplayLabel'
+            accessConstraints:
+              $ref: '#/components/schemas/DisplayLabel'
+            useConstraints:
+              $ref: '#/components/schemas/DisplayLabel'
+            acknowledgements:
+              $ref: '#/components/schemas/DisplayLabel'
+            disclaimer:
+              $ref: '#/components/schemas/DisplayLabel'
+            collectionDate:
+              type: string
+            organization:
+              type: string
+            contactName:
+              type: string
+            telephoneNumber:
+              type: string
+            email:
+              type: string
+            originator:
+              type: string
+            topicCategories:
+              type: string
+            placeKeywords:
+              type: string
+            updateFrequency:
+              type: string
+            lineage:
+              type: string
+            languages:
+              type: string
+            scaleResolution:
+              type: string
+            spatialRepresentation:
+              type: string
+            referenceSystem:
+              type: string
+            reportSpecification:
+              type: string
+            distributionFormat:
+              type: string
+        subtypes:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              label:
+                type: string
+        publishDate:
+          type: string
+        attributes:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              colspan:
+                type: integer
+              rowspan:
+                type: integer
+              columns:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    label:
+                      type: string
+                    type:
+                      type: string
+                    rowspan:
+                      type: integer
+        curation:
+          type: boolean
+    DirectedGraphType:
+      type: object
+      description: Defines a directed graph relationship.
+      properties:
+        code:
+          type: string
+        label:
+          $ref: '#/components/schemas/LocalizedLabel'
+        description:
+          $ref: '#/components/schemas/LocalizedLabel'
+    AddGraphChildBody:
+      type: object
+      description: Add child params.
+      properties:
+        parentCode:
+          type: string
+        parentTypeCode:
+          type: string
+        childCode:
+          type: string
+        childTypeCode:
+          type: string
+        directedGraphCode:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+    RemoveGraphChildBody:
+      type: object
+      description: Remove Directed Graph Relationship child params.
+      properties:
+        parentCode:
+          type: string
+        parentTypeCode:
+          type: string
+        childCode:
+          type: string
+        childTypeCode:
+          type: string
+        directedGraphCode:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+    RelatedType:
+      type: object
+      description: Defines a undirected relationship type.
+      properties:
+        code:
+          type: string
+        label:
+          $ref: '#/components/schemas/LocalizedLabel'
+        description:
+          $ref: '#/components/schemas/LocalizedLabel'
+        organizationCode:
+          type: string
+    AddRelatedGeoObjectBody:
+      type: object
+      description: Add child params.
+      properties:
+        sourceCode:
+          type: string
+        sourceTypeCode:
+          type: string
+        targetCode:
+          type: string
+        targetTypeCode:
+          type: string
+        undirectedRelationshipCode:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+    RemoveRelatedGeoObjectBody:
+      type: object
+      description: Remove related Geo-Object params.
+      properties:
+        sourceCode:
+          type: string
+        sourceTypeCode:
+          type: string
+        targetCode:
+          type: string
+        targetTypeCode:
+          type: string
+        undirectedRelationshipCode:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+    Organization:
+      type: object
+      properties:
+        code:
+          type: string
+        label:
+          $ref: '#/components/schemas/LocalizedLabel'
+        contactInfo:
+          $ref: '#/components/schemas/LocalizedLabel'
+    TypeAndCode:
+      type: object
+      description: Add child params.
+      properties:
+        type:
+          type: string
+          enum:
+            - GEO_OBJECT
+            - HIERARCHY
+            - DAG
+            - UNDIRECTED
+            - BUSINESS
+            - BUSINESS_EDGE
+          example: GEO_OBJECT
+        code:
+          type: string
+          example: USATestDataCountry
+    Publish:
+      type: object
+      description: Defines data to publish.
+      properties:
+        uid:
+          type: string
+          description: Globally unique uid of the published graph
+          example: a15afe34-d789-407e-8aba-5055149c439e
+        date:
+          type: string
+          format: date
+          description: The date to use when determing values of the published graph
+          example: '2020-04-04'
+        startDate:
+          type: string
+          format: date
+          description: The start date of the period of validity for the published graph
+          example: '2020-04-04'
+        endDate:
+          type: string
+          format: date
+          description: The end date of the period of validity for the published graph
+          example: '2021-04-04'
+        origin:
+          type: string
+          example: https://demo-georegistry.geoprism.net/
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeAndCode'
+          description: >-
+            List of (type, code) pairings of the repository types to include in
+            the published graph
+        exclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeAndCode'
+          description: >-
+            List of (type, code) pairings of the repository types to exclude
+            from the published graph.  This can only be used when the types in
+            the graph overlap with the types in a different graph with the same
+            period of validity.
+    Commit:
+      type: object
+      description: Defines data to publish.
+      properties:
+        uid:
+          type: string
+          example: d02047a4-72e2-4e0d-b447-1b64d2b125c7
+        publishId:
+          type: string
+          example: a15afe34-d789-407e-8aba-5055149c439e
+        versionNumber:
+          type: integer
+          format: int32
+          example: 1
+        lastOriginGlobalIndex:
+          type: integer
+          format: int32
+          example: 8806
+    AttributeTypeSnapshot:
+      type: object
+      description: Attribute metadata snapshot
+      properties:
+        code:
+          type: string
+          example: code
+          description: Unique identifier/name of the attribute
+        type:
+          type: string
+          example: character
+          description: Attribute type
+        label:
+          $ref: '#/components/schemas/LocalizedLabel'
+        description:
+          $ref: '#/components/schemas/LocalizedLabel'
+        isDefault:
+          type: boolean
+          example: true
+          description: Flag indicating if the attribute is a default attribute of the GPR
+        required:
+          type: boolean
+          example: false
+          description: Flag indicating is the attribute value is required
+        unique:
+          type: boolean
+          example: false
+          description: Flag indicating is the attribute value must be unique
+        isChangeOverTime:
+          type: boolean
+          example: true
+          description: Flag indicating is the attribute value will change over time
+    BusinessTypeSnapshot:
+      type: object
+      description: Business type metadata snapshot
+      properties:
+        code:
+          type: string
+          example: POPULATION
+          description: Globally unique identifier of the business type metadata
+        orgCode:
+          type: string
+          example: MOHA
+          description: Organization responsible for the metadata definition
+        origin:
+          type: string
+          example: https://demo-georegistry.geoprism.net/
+          description: Origin of the metadata
+        sequence:
+          type: integer
+          format: int32
+          example: 0
+          description: Change sequence number of the metadata
+        labelAttribute:
+          type: string
+          example: null
+          description: >-
+            Default attribute to use when displaying a label of an instance
+            business object
+        displayLabel:
+          $ref: '#/components/schemas/LocalizedLabel'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeTypeSnapshot'
+          description: List of attribute metadata
+    GeoObjectTypeSnapshot:
+      type: object
+      description: Geo object type metadata snapshot
+      properties:
+        code:
+          type: string
+          example: HealthCenter
+          description: Globally unique identifier of the geo object type metadata
+        orgCode:
+          type: string
+          example: MOHA
+          description: Organization responsible for the metadata definition
+        origin:
+          type: string
+          example: https://demo-georegistry.geoprism.net/
+          description: Origin of the metadata
+        sequence:
+          type: integer
+          format: int32
+          example: 0
+          description: Change sequence number of the metadata
+        displayLabel:
+          $ref: '#/components/schemas/LocalizedLabel'
+        geometryType:
+          type: string
+          example: MULTIPOLYGON
+          description: Geometry type
+        isAbstract:
+          type: boolean
+          description: Flag indicating if the type is abstract
+        isRoot:
+          type: boolean
+          description: >-
+            Flag indicating if the type is the root type placeholder of the
+            graph
+        isPrivate:
+          type: boolean
+          description: Flag indicating if the type is private to the organization
+        parent:
+          type: string
+          example: HealthFacility
+          description: Optional code of the parent type from which this type inherits
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeTypeSnapshot'
+          description: List of attribute metadata
+    HierarchyTypeNodeSnapshot:
+      type: object
+      description: >-
+        A tree node describing the structure of Geo Object Types participating
+        in the hierarchy
+      properties:
+        code:
+          type: string
+          example: HealthCenter
+          description: Code of a Geo Object Type
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/HierarchyTypeNodeSnapshot'
+    HierarchyTypeSnapshot:
+      type: object
+      description: Snapshot of Hierarchy Type metadata
+      properties:
+        code:
+          type: string
+          example: ReportsTo
+          description: Globally unique identifier of the Hierarchy type metadata
+        orgCode:
+          type: string
+          example: MOHA
+          description: Organization responsible for the metadata definition
+        origin:
+          type: string
+          example: https://demo-georegistry.geoprism.net/
+          description: Origin of the metadata
+        sequence:
+          type: integer
+          format: int32
+          example: 0
+          description: Change sequence number of the metadata
+        displayLabel:
+          $ref: '#/components/schemas/LocalizedLabel'
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/HierarchyTypeNodeSnapshot'
+          description: List of Geo Object types in the hierarchy
+    DirectedAcyclicGraphTypeSnapshot:
+      type: object
+      description: Snapshot of Directed Acyclic Graph Type metadata
+      properties:
+        code:
+          type: string
+          example: FlowsInto
+          description: Globally unique identifier of the DAG type metadata
+        orgCode:
+          type: string
+          example: MOHA
+          description: Organization responsible for the metadata definition
+        origin:
+          type: string
+          example: https://demo-georegistry.geoprism.net/
+          description: Origin of the metadata
+        sequence:
+          type: integer
+          format: int32
+          example: 0
+          description: Change sequence number of the metadata
+        displayLabel:
+          $ref: '#/components/schemas/LocalizedLabel'
+    UndirectedGraphTypeSnapshot:
+      type: object
+      description: Snapshot of Undirected Graph Type metadata
+      properties:
+        code:
+          type: string
+          example: FlowsThrough
+          description: Globally unique identifier of the Undirected graph type metadata
+        orgCode:
+          type: string
+          example: MOHA
+          description: Organization responsible for the metadata definition
+        origin:
+          type: string
+          example: https://demo-georegistry.geoprism.net/
+          description: Origin of the metadata
+        sequence:
+          type: integer
+          format: int32
+          example: 0
+          description: Change sequence number of the metadata
+        displayLabel:
+          $ref: '#/components/schemas/LocalizedLabel'
+security:
+  - Basic Authentication:
+      - Super Registry Administrator
+      - (organization) Registry Administrator
+      - (geoobjecttype) Registry Maintainer
+      - (geoobjecttype) Registry Contributor
